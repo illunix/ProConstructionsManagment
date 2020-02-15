@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="ProConstructionsManagment.Desktop.Views.Main.MainNavigation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.Main"
+             mc:Ignorable="d"
+             d:DesignHeight="809" d:DesignWidth="230">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" />
+            <ListView FontSize="15">
+                <ListViewItem Padding="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding HomeCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Home" Margin="15" />
+                        <TextBlock Text="Home" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <TextBlock Text="CRM" Margin="15" FontWeight="DemiBold" />
+            <ListView FontSize="15" Background="Transparent">
+                <ListViewItem Padding="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding EmployeesCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AccountMultiple" Margin="15" />
+                        <TextBlock Text="Pracownicy" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <TextBlock Text="System" Margin="15" FontWeight="DemiBold" />
+            <ListViewItem Padding="1">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding NewsCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="MessageOutline" Margin="15" />
+                    <TextBlock Text="Nowości" FontSize="15" VerticalAlignment="Center" />
+                </StackPanel>
+            </ListViewItem>
+        </StackPanel>
+    </Grid>
+</UserControl>

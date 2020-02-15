@@ -1,0 +1,93 @@
+﻿<Window x:Class="ProConstructionsManagment.Desktop.Views.Shell.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:main="clr-namespace:ProConstructionsManagment.Desktop.Views.Main"
+        xmlns:employee="clr-namespace:ProConstructionsManagment.Desktop.Views.Employee"
+        xmlns:employees="clr-namespace:ProConstructionsManagment.Desktop.Views.Employees"
+        xmlns:employeesForHire="clr-namespace:ProConstructionsManagment.Desktop.Views.EmployeesForHire"
+        xmlns:hiredEmployees="clr-namespace:ProConstructionsManagment.Desktop.Views.HiredEmployees"
+        xmlns:addEmployee="clr-namespace:ProConstructionsManagment.Desktop.Views.AddEmployee"
+        xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.Shell"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="811" Width="1309" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        d:DataContext="{d:DesignInstance local:ShellViewModel}">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type main:MainViewModel}">
+            <main:Main />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type main:MainNavigationViewModel}">
+            <main:MainNavigation />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type employee:EmployeeViewModel}">
+            <employee:Employee/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type employees:EmployeesViewModel}">
+            <employees:Employees />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type employees:EmployeesNavigationViewModel}">
+            <employees:EmployeesNavigation />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type employeesForHire:EmployeesForHireViewModel}">
+            <employeesForHire:EmployeesForHire />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type hiredEmployees:HiredEmployeesViewModel}">
+            <hiredEmployees:HiredEmployees />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type addEmployee:AddEmployeeViewModel}">
+            <addEmployee:AddEmployee/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="#F9F9F9">
+            <ContentControl Content="{Binding CurrentNavigationViewModel}" />
+        </Grid>
+
+        <Grid Grid.Column="1" Background="White">
+            <ContentControl Content="{Binding CurrentViewModel}" />
+
+            <Grid Grid.Row="0">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility"
+                                Value="Collapsed" />
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="White"
+                                                 Opacity="0.99" />
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsLoadingData}"
+                                         Value="True">
+                                <Setter Property="Visibility"
+                                        Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="5">
+                    <mah:ProgressRing Foreground="{DynamicResource IdealForegroundColorBrush}"
+                                      Margin="5"
+                                      Width="55" />
+
+                    <TextBlock Text="Ładuje..."
+                               Foreground="{DynamicResource IdealForegroundColorBrush}"
+                               Margin="10"
+                               FontWeight="DemiBold"
+                               TextAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
