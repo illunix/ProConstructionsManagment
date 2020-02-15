@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProConstructionsManagment.Infrastructure.Data.Repositories
 {
-    public class EmployeesRepository : IEmployeesRepository
+    public class EmployeesRepository : IBaseRepository<Employee, EmployeeStatus>
     {
         private readonly EmployeeContext _context;
 

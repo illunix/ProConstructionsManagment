@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace ProConstructionsManagment.Web.Controllers
 {
     [Route("api/v1/")]
-    public class EmployeeController : Controller
+    public class EmployeesController : Controller
     {
-        private readonly IEmployeesRepository _employeesRepository;
+        private readonly IBaseRepository<Employee, EmployeeStatus> _employeesRepository;
 
-        public EmployeeController(IEmployeesRepository employeesRepository)
+        public EmployeesController(IBaseRepository<Employee, EmployeeStatus> employeesRepository)
         {
             _employeesRepository = employeesRepository;
         }
