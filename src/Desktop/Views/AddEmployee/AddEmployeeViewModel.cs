@@ -1,17 +1,12 @@
-﻿using ProConstructionsManagment.Desktop.Commands;
-using ProConstructionsManagment.Desktop.DTO;
-using ProConstructionsManagment.Desktop.Enums;
-using ProConstructionsManagment.Desktop.Managers;
-using ProConstructionsManagment.Desktop.Messages;
-using ProConstructionsManagment.Desktop.Services;
-using ProConstructionsManagment.Desktop.Views.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ProConstructionsManagment.Desktop.Commands;
+using ProConstructionsManagment.Desktop.Models;
+using ProConstructionsManagment.Desktop.Managers;
+using ProConstructionsManagment.Desktop.Services;
+using ProConstructionsManagment.Desktop.Views.Base;
 
 namespace ProConstructionsManagment.Desktop.Views.AddEmployee
 {
@@ -19,18 +14,16 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
     {
         private readonly IEmployeesService _employeesService;
         private readonly IShellManager _shellManager;
+        private string _employeeLastName;
+
+        private string _employeeName;
+        private bool _employeeReadDrawings;
 
         public AddEmployeeViewModel(IEmployeesService employeesService, IShellManager shellManager)
         {
             _employeesService = employeesService;
             _shellManager = shellManager;
         }
-
-        private string _employeeName;
-        private string _employeeLastName;
-        private string _employeeDateOfBirth;
-        private bool _employeeIsForeman;
-        private bool _employeeReadDrawings;
 
         public string EmployeeName
         {
@@ -44,17 +37,9 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
             set => Set(ref _employeeLastName, value);
         }
 
-        public string EmployeeDateOfBirth
-        {
-            get => _employeeDateOfBirth;
-            set => _employeeDateOfBirth = value;
-        }
+        public string EmployeeDateOfBirth { get; set; }
 
-        public bool EmployeeIsForeman
-        {
-            get => _employeeIsForeman;
-            set => _employeeIsForeman = value;
-        }
+        public bool EmployeeIsForeman { get; set; }
 
         public bool EmployeeReadDrawings
         {
@@ -68,7 +53,7 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
         {
             _shellManager.SetLoadingData(true);
 
-            var data = new Datum
+            var data = new Models.Employee
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = EmployeeName,

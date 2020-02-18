@@ -1,13 +1,8 @@
-﻿using ProConstructionsManagment.Desktop.Messages;
+﻿using System.Threading.Tasks;
+using System.Windows;
+using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace ProConstructionsManagment.Desktop.Views.Employee
 {

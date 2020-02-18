@@ -6,6 +6,5 @@
              xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.HiredEmployees"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-    </Grid>
+    <Grid />
 </UserControl>

@@ -1,18 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProConstructionsManagment.Infrastructure.Data.Models;
-using ProConstructionsManagment.Infrastructure.Data.Repositories;
-using ProConstructionsManagment.Infrastructure.Enums;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using ProConstructionsManagment.Core.Enums;
+using ProConstructionsManagment.Core.Interfaces;
+using ProConstructionsManagment.Infrastructure.Data.Entities;
 
 namespace ProConstructionsManagment.Web.Controllers
 {
     [Route("api/v1/")]
     public class EmployeesController : Controller
     {
-        private readonly IBaseRepository<Employee, EmployeeStatus> _employeesRepository;
+        private readonly IAsyncRepository<Employee, EmployeeStatus> _employeesRepository;
 
-        public EmployeesController(IBaseRepository<Employee, EmployeeStatus> employeesRepository)
+        public EmployeesController(IAsyncRepository<Employee, EmployeeStatus> employeesRepository)
         {
             _employeesRepository = employeesRepository;
         }
@@ -94,7 +94,10 @@ namespace ProConstructionsManagment.Web.Controllers
             {
                 var result = await _employeesRepository.GetById(employeeId);
 
-                return Ok(result);
+                return Ok(new
+                {
+                    data = result,
+                });
             }
             catch
             {
@@ -104,11 +107,11 @@ namespace ProConstructionsManagment.Web.Controllers
 
         [HttpPost]
         [Route("employee/add")]
-        public async Task<IActionResult> AddEmployee([FromBody] Employee model)
+        public async Task<IActionResult> AddEmployee([FromBody] Employee entity)
         {
             try
             {
-                var result = await _employeesRepository.Add(model);
+                var result = await _employeesRepository.Add(entity);
 
                 return Ok(result);
             }
@@ -120,11 +123,11 @@ namespace ProConstructionsManagment.Web.Controllers
 
         [HttpPost]
         [Route("employees/{employeeId}/update")]
-        public async Task<IActionResult> UpdateEmployee([FromBody] Employee model, Guid employeeId)
+        public async Task<IActionResult> UpdateEmployee([FromBody] Employee entity, Guid employeeId)
         {
             try
             {
-                var result = await _employeesRepository.Update(model, employeeId);
+                var result = await _employeesRepository.Update(entity, employeeId);
 
                 return Ok(result);
             }

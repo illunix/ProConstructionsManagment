@@ -1,10 +1,11 @@
-﻿namespace ProConstructionsManagment.Infrastructure.Enums
+﻿namespace ProConstructionsManagment.Core.Enums
 {
     public enum ProjectStatus
     {
         WaitingForStart,
         Started,
         ForSettlement,
-        Settled
+        Settled,
+        Ended
     }
 }

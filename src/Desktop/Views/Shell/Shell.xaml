@@ -10,6 +10,11 @@
         xmlns:employeesForHire="clr-namespace:ProConstructionsManagment.Desktop.Views.EmployeesForHire"
         xmlns:hiredEmployees="clr-namespace:ProConstructionsManagment.Desktop.Views.HiredEmployees"
         xmlns:addEmployee="clr-namespace:ProConstructionsManagment.Desktop.Views.AddEmployee"
+        xmlns:projects="clr-namespace:ProConstructionsManagment.Desktop.Views.Projects"
+        xmlns:openedProjects="clr-namespace:ProConstructionsManagment.Desktop.Views.OpenedProjects"
+        xmlns:projectsToStart="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectsToStart"
+        xmlns:projectSettlements="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectSettlements"
+        xmlns:endedProjects="clr-namespace:ProConstructionsManagment.Desktop.Views.EndedProjects"
         xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.Shell"
         mc:Ignorable="d"
         Title="MainWindow" Height="811" Width="1309" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
@@ -22,7 +27,7 @@
             <main:MainNavigation />
         </DataTemplate>
         <DataTemplate DataType="{x:Type employee:EmployeeViewModel}">
-            <employee:Employee/>
+            <employee:Employee />
         </DataTemplate>
         <DataTemplate DataType="{x:Type employees:EmployeesViewModel}">
             <employees:Employees />
@@ -37,7 +42,25 @@
             <hiredEmployees:HiredEmployees />
         </DataTemplate>
         <DataTemplate DataType="{x:Type addEmployee:AddEmployeeViewModel}">
-            <addEmployee:AddEmployee/>
+            <addEmployee:AddEmployee />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type projects:ProjectsViewModel}">
+            <projects:Projects />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type projects:ProjectsNavigationViewModel}">
+            <projects:ProjectsNavigation/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type openedProjects:OpenedProjectsViewModel}">
+            <openedProjects:OpenedProjects/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type projectsToStart:ProjectsToStartViewModel}">
+            <projectsToStart:ProjectsToStart/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type projectSettlements:ProjectSettlementsViewModel}">
+            <projectSettlements:ProjectSettlements/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type endedProjects:EndedProjectsViewModel}">
+            <endedProjects:EndedProjects/>
         </DataTemplate>
     </Window.Resources>
     <Grid>

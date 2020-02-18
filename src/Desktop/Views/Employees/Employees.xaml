@@ -26,7 +26,7 @@
                     <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="Imię"
-                                                  Foreground="#131313"/>
+                                                  Foreground="#131313" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -36,68 +36,67 @@
                                         FontWeight="DemiBold"
                                         Command="{Binding DataContext.NavigateToEmployeeViewCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                         CommandParameter="{Binding Id}"
-                                        Background="{x:Null}">
-                                </Button>
+                                        Background="{x:Null}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="Nazwisko"
-                                                  Foreground="#131313"/>
+                                                  Foreground="#131313" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label Content="{Binding LastName}"
-                                       Foreground="#131313"/>
+                                       Foreground="#131313" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="Projekt"
-                                                  Foreground="#131313"/>
+                                                  Foreground="#131313" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label Content="{Binding Project}"
-                                       Foreground="#131313"/>
+                                       Foreground="#131313" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="Stanowisko"
-                                                  Foreground="#131313"/>
+                                                  Foreground="#131313" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label Content="{Binding Position}"
-                                       Foreground="#131313"/>
+                                       Foreground="#131313" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="Brygadzista"
-                                                  Foreground="#131313"/>
+                                                  Foreground="#131313" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label Content="{Binding IsForeman}"
-                                       Foreground="#131313"/>
+                                       Foreground="#131313" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Content="Czyta rysunki"
-                                                  Foreground="#131313"/>
+                                                  Foreground="#131313" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Label Content="{Binding ReadDrawings}"
-                                       Foreground="#131313"/>
+                                       Foreground="#131313" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

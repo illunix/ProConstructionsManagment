@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProConstructionsManagment.Core.Enums;
+using ProConstructionsManagment.Core.Interfaces;
 using ProConstructionsManagment.Infrastructure.Data;
-using ProConstructionsManagment.Infrastructure.Data.Models;
+using ProConstructionsManagment.Infrastructure.Data.Entities;
 using ProConstructionsManagment.Infrastructure.Data.Repositories;
-using ProConstructionsManagment.Infrastructure.Enums;
 
 namespace Web
 {
@@ -25,14 +26,14 @@ namespace Web
         {
             services.AddDbContext<EmployeeContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionString"]));
-            
+
             services.AddDbContext<ProjectContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionString"]));
 
-            services.AddScoped<IBaseRepository<Employee, EmployeeStatus>, EmployeesRepository>();
+            services.AddScoped<IAsyncRepository<Employee, EmployeeStatus>, EmployeesRepository>();
 
-            services.AddScoped<IBaseRepository<Project, ProjectStatus>, ProjectsRepository>();
-            
+            services.AddScoped<IAsyncRepository<Project, ProjectStatus>, ProjectsRepository>();
+
             services.AddControllers();
         }
 

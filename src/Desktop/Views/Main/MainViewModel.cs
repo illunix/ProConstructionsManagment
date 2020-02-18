@@ -1,6 +1,6 @@
-﻿using ProConstructionsManagment.Desktop.Managers;
+﻿using System.Threading.Tasks;
+using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Views.Base;
-using System.Threading.Tasks;
 
 namespace ProConstructionsManagment.Desktop.Views.Main
 {

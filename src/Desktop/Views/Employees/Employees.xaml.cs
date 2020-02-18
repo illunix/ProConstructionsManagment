@@ -1,5 +1,5 @@
-﻿using ProConstructionsManagment.Desktop.Views.Base;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using ProConstructionsManagment.Desktop.Views.Base;
 
 namespace ProConstructionsManagment.Desktop.Views.Employees
 {

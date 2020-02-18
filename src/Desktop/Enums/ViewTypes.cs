@@ -9,6 +9,13 @@
         EmployeesNavigation,
         EmployeesForHire,
         HiredEmployees,
-        AddEmployee
+        AddEmployee,
+        Project,
+        Projects,
+        ProjectsNavigation,
+        OpenedProjects,
+        ProjectsToStart,
+        ProjectSettlements,
+        EndedProjects
     }
 }

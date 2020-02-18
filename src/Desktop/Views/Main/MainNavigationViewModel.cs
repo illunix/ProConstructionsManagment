@@ -1,10 +1,10 @@
-﻿using ProConstructionsManagment.Desktop.Commands;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
+using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Enums;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace ProConstructionsManagment.Desktop.Views.Main
 {
@@ -17,7 +17,15 @@ namespace ProConstructionsManagment.Desktop.Views.Main
             _messengerService = messengerService;
         }
 
-        public ICommand EmployeesCommand => new AsyncRelayCommand(NavigateToEmployeesView);
+        public ICommand NavigateToProjectsViewCommand => new AsyncRelayCommand(NavigateToProjectsView);
+
+        private async Task NavigateToProjectsView()
+        {
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.Projects));
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.ProjectsNavigation));
+        }
+        
+        public ICommand NavigateToEmployeesViewCommand => new AsyncRelayCommand(NavigateToEmployeesView);
 
         private async Task NavigateToEmployeesView()
         {

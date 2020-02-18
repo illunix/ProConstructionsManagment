@@ -1,11 +1,10 @@
-﻿using ProConstructionsManagment.Infrastructure.Enums;
-using System;
+﻿using System.Collections.ObjectModel;
 
-namespace ProConstructionsManagment.Infrastructure.Data.Models
+namespace ProConstructionsManagment.Desktop.Models
 {
     public class Employee
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string SecondName { get; set; }
         public string LastName { get; set; }
@@ -13,6 +12,6 @@ namespace ProConstructionsManagment.Infrastructure.Data.Models
         public string Nationality { get; set; }
         public bool IsForeman { get; set; }
         public bool ReadDrawings { get; set; }
-        public EmployeeStatus Status { get; set; }
+        public int Status { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ProConstructionsManagment.Infrastructure.Enums
+﻿namespace ProConstructionsManagment.Core.Enums
 {
     public enum EmployeeStatus
     {

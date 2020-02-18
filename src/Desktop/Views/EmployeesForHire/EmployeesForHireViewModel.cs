@@ -1,9 +1,10 @@
-﻿using ProConstructionsManagment.Desktop.DTO;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+using ProConstructionsManagment.Desktop.Models;
 
 namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
 {
@@ -14,7 +15,7 @@ namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
 
         private string _employeeForHireCount;
 
-        private ObservableCollection<Datum> _employeesForHire;
+        private ObservableCollection<Models.Employee> _employeesForHire;
 
         private bool _showNoDataAboutEmployeesForHire;
 
@@ -30,7 +31,7 @@ namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
             set => Set(ref _employeeForHireCount, value);
         }
 
-        public ObservableCollection<Datum> EmployeesForHire
+        public ObservableCollection<Models.Employee> EmployeesForHire
         {
             get => _employeesForHire;
             set => Set(ref _employeesForHire, value);
@@ -51,13 +52,9 @@ namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
             EmployeeForHireCount = $"Łącznie {EmployeesForHire.Count} rekordów";
 
             if (EmployeesForHire.Count == 0)
-            {
                 ShowNoDataAboutEmployeesForHire = true;
-            }
             else
-            {
                 ShowNoDataAboutEmployeesForHire = false;
-            }
 
             _shellManager.SetLoadingData(false);
         }

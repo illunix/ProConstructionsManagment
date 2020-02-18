@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="ProConstructionsManagment.Desktop.Views.ProjectSettlements.ProjectSettlements"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectSettlements"
+             mc:Ignorable="d"
+             d:DesignHeight="808.6" d:DesignWidth="1259"
+             d:DataContext="{d:DesignInstance local:ProjectSettlementsViewModel}">
+    <Grid>
+        <Label Content="Wszyscy pracownicy"
+               FontSize="25"
+               Foreground="#131313"
+               Margin="24,10,215,301" />
+
+        <Label Content="{Binding ProjectForSettlementCount}"
+               FontSize="10"
+               Opacity="50"
+               Margin="26,42,492,412" />
+
+        <ListView ItemsSource="{Binding ProjectsForSettlement}"
+                  Margin="25,53,10,10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Nazwa projektu"
+                                                  Foreground="#131313" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Name}"
+                                        Foreground="#131313"
+                                        BorderBrush="{x:Null}"
+                                        FontWeight="DemiBold"
+                                        Command="{Binding DataContext.NavigateToProjectViewCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                        CommandParameter="{Binding Id}"
+                                        Background="{x:Null}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Liczba godzin"
+                                                  Foreground="#131313" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding NumberOfHours}"
+                                       Foreground="#131313" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Protokół"
+                                                  Foreground="#131313" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding PaymentProtocol}"
+                                       Foreground="#131313" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Kwota brutto wszystkich kosztów"
+                                                  Foreground="#131313" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding NumberOfEmployees}"
+                                       Foreground="#131313" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Data doręczenia"
+                                                  Foreground="#131313" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding DateOfPaymentDelivery}"
+                                       Foreground="#131313" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="Termin Płatności"
+                                                  Foreground="#131313" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding DateOfPayment}"
+                                       Foreground="#131313" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

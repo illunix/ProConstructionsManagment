@@ -1,9 +1,8 @@
-﻿using ProConstructionsManagment.Desktop.DTO;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 
 namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
 {
@@ -14,7 +13,7 @@ namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
 
         private string _hiredEmployeeCount;
 
-        private ObservableCollection<Datum> _hiredEmployees;
+        private ObservableCollection<Models.Employee> _hiredEmployees;
 
         private bool _showNoDataAboutHiredEmployees;
 
@@ -30,7 +29,7 @@ namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
             set => Set(ref _hiredEmployeeCount, value);
         }
 
-        public ObservableCollection<Datum> HiredEmployees
+        public ObservableCollection<Models.Employee> HiredEmployees
         {
             get => _hiredEmployees;
             set => Set(ref _hiredEmployees, value);
@@ -51,13 +50,9 @@ namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
             HiredEmployeeCount = $"Łącznie {HiredEmployees.Count}";
 
             if (HiredEmployees.Count == 0)
-            {
                 ShowNoDataAboutHiredEmployees = true;
-            }
             else
-            {
                 ShowNoDataAboutHiredEmployees = false;
-            }
 
             _shellManager.SetLoadingData(false);
         }

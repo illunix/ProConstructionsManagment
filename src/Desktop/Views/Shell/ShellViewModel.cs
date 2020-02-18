@@ -1,4 +1,5 @@
-﻿using ProConstructionsManagment.Desktop.Enums;
+﻿using System.Threading.Tasks;
+using ProConstructionsManagment.Desktop.Enums;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
@@ -7,9 +8,13 @@ using ProConstructionsManagment.Desktop.Views.Base;
 using ProConstructionsManagment.Desktop.Views.Employee;
 using ProConstructionsManagment.Desktop.Views.Employees;
 using ProConstructionsManagment.Desktop.Views.EmployeesForHire;
+using ProConstructionsManagment.Desktop.Views.EndedProjects;
 using ProConstructionsManagment.Desktop.Views.HiredEmployees;
 using ProConstructionsManagment.Desktop.Views.Main;
-using System.Threading.Tasks;
+using ProConstructionsManagment.Desktop.Views.OpenedProjects;
+using ProConstructionsManagment.Desktop.Views.Projects;
+using ProConstructionsManagment.Desktop.Views.ProjectSettlements;
+using ProConstructionsManagment.Desktop.Views.ProjectsToStart;
 
 namespace ProConstructionsManagment.Desktop.Views.Shell
 {
@@ -102,6 +107,30 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
                     var addEmployeeViewModel = _viewModelLocator.Get<AddEmployeeViewModel>();
                     CurrentViewModel = addEmployeeViewModel;
                     _shellManager.SetLoadingData(false);
+                    break;
+                case ViewTypes.Projects:
+                    var projectViewModel = _viewModelLocator.Get<ProjectsViewModel>();
+                    CurrentViewModel = projectViewModel;
+                    break;
+                case ViewTypes.ProjectsNavigation:
+                    var projectNavigationViewModel = _viewModelLocator.Get<ProjectsNavigationViewModel>();
+                    CurrentNavigationViewModel = projectNavigationViewModel;
+                    break;
+                case ViewTypes.OpenedProjects:
+                    var openedProjectsViewModel = _viewModelLocator.Get<OpenedProjectsViewModel>();
+                    CurrentViewModel = openedProjectsViewModel;
+                    break;
+                case ViewTypes.ProjectsToStart:
+                    var projectsToStartViewModel = _viewModelLocator.Get<ProjectsToStartViewModel>();
+                    CurrentViewModel = projectsToStartViewModel;
+                    break;
+                case ViewTypes.ProjectSettlements:
+                    var projectSettlementsViewModel = _viewModelLocator.Get<ProjectSettlementsViewModel>();
+                    CurrentViewModel = projectSettlementsViewModel;
+                    break;
+                case ViewTypes.EndedProjects:
+                    var endedProjectsViewModel = _viewModelLocator.Get<EndedProjectsViewModel>();
+                    CurrentViewModel = endedProjectsViewModel;
                     break;
             }
         }

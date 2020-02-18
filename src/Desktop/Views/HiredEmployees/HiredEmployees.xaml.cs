@@ -1,10 +1,10 @@
-﻿using ProConstructionsManagment.Desktop.Views.Base;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using ProConstructionsManagment.Desktop.Views.Base;
 
 namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
 {
     /// <summary>
-    /// Interaction logic for HiredEmployees.xaml
+    ///     Interaction logic for HiredEmployees.xaml
     /// </summary>
     public partial class HiredEmployees : UserControl
     {

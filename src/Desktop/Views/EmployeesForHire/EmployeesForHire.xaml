@@ -13,7 +13,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <Label Content="Zatrudnieni pracownicy"
+        <Label Content="Pracownicy do zatrudnienia"
                FontSize="25"
                Foreground="#131313"
                Margin="24,10,215,301" />
@@ -29,9 +29,9 @@
                Foreground="#131313" />
 
         <Label Content="{Binding EmployeeForHireCount}"
-                FontSize="10"
-                Opacity="50"
-                Margin="26,42,492,412" />
+               FontSize="10"
+               Opacity="50"
+               Margin="26,42,492,412" />
 
         <ListView ItemsSource="{Binding EmployeesForHire}"
                   Margin="25,53,10,10">
@@ -50,8 +50,7 @@
                                         FontWeight="DemiBold"
                                         Command="{Binding DataContext.NavigateToEmployeeViewCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                         CommandParameter="{Binding Id}"
-                                        Background="{x:Null}">
-                                </Button>
+                                        Background="{x:Null}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

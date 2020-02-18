@@ -1,19 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProConstructionsManagment.Infrastructure.Data.Models;
-using ProConstructionsManagment.Infrastructure.Data.Repositories;
-using ProConstructionsManagment.Infrastructure.Enums;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using ProConstructionsManagment.Infrastructure.Data;
+using Microsoft.AspNetCore.Mvc;
+using ProConstructionsManagment.Core.Enums;
+using ProConstructionsManagment.Core.Interfaces;
+using ProConstructionsManagment.Infrastructure.Data.Entities;
 
 namespace ProConstructionsManagment.Web.Controllers
 {
     [Route("api/v1/")]
     public class ProjectsController : Controller
     {
-        private readonly IBaseRepository<Project, ProjectStatus> _projectsRepository;
+        private readonly IAsyncRepository<Project, ProjectStatus> _projectsRepository;
 
-        public ProjectsController(IBaseRepository<Project, ProjectStatus> projectsRepository)
+        public ProjectsController(IAsyncRepository<Project, ProjectStatus> projectsRepository)
         {
             _projectsRepository = projectsRepository;
         }
@@ -86,7 +85,7 @@ namespace ProConstructionsManagment.Web.Controllers
                 return NotFound();
             }
         }
-        
+
         [HttpGet]
         [Route("projects/settlement")]
         public async Task<IActionResult> GetProjectsForSettlement()
@@ -109,7 +108,7 @@ namespace ProConstructionsManagment.Web.Controllers
                 return NotFound();
             }
         }
-        
+
         [HttpGet]
         [Route("projects/settled")]
         public async Task<IActionResult> GetSettledProjects()
@@ -117,6 +116,29 @@ namespace ProConstructionsManagment.Web.Controllers
             try
             {
                 var result = await _projectsRepository.GetAllByStatus(ProjectStatus.Settled);
+
+                return Ok(new
+                {
+                    data = result,
+                    summaries = new
+                    {
+                        count = result.Count
+                    }
+                });
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        
+        [HttpGet]
+        [Route("projects/ended")]
+        public async Task<IActionResult> GetEndedProjects()
+        {
+            try
+            {
+                var result = await _projectsRepository.GetAllByStatus(ProjectStatus.Ended);
 
                 return Ok(new
                 {
@@ -141,7 +163,10 @@ namespace ProConstructionsManagment.Web.Controllers
             {
                 var result = await _projectsRepository.GetById(projectId);
 
-                return Ok(result);
+                return Ok(new
+                {
+                    data = result,
+                });
             }
             catch
             {
@@ -151,11 +176,11 @@ namespace ProConstructionsManagment.Web.Controllers
 
         [HttpPost]
         [Route("project/add")]
-        public async Task<IActionResult> AddEmployee([FromBody] Project model)
+        public async Task<IActionResult> AddProject([FromBody]Project entity)
         {
             try
             {
-                var result = await _projectsRepository.Add(model);
+                var result = await _projectsRepository.Add(entity);
 
                 return Ok(result);
             }
@@ -167,11 +192,11 @@ namespace ProConstructionsManagment.Web.Controllers
 
         [HttpPost]
         [Route("projects/{projectId}/update")]
-        public async Task<IActionResult> UpdateEmployee([FromBody] Project model, Guid projectId)
+        public async Task<IActionResult> UpdateProject([FromBody]Project entity, Guid projectId)
         {
             try
             {
-                var result = await _projectsRepository.Update(model, projectId);
+                var result = await _projectsRepository.Update(entity, projectId);
 
                 return Ok(result);
             }

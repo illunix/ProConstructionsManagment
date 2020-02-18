@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using ProConstructionsManagment.Infrastructure.Data.Models;
-using ProConstructionsManagment.Infrastructure.Enums;
+using ProConstructionsManagment.Core.Enums;
+using ProConstructionsManagment.Core.Interfaces;
+using ProConstructionsManagment.Infrastructure.Data.Entities;
 
 namespace ProConstructionsManagment.Infrastructure.Data.Repositories
 {
-    public class ProjectsRepository : IBaseRepository<Project, ProjectStatus>
+    public class ProjectsRepository : IAsyncRepository<Project, ProjectStatus>
     {
         private readonly ProjectContext _context;
 

@@ -1,14 +1,15 @@
-﻿using ProConstructionsManagment.Desktop.DTO;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Desktop.Configuration;
+using GalaSoft.MvvmLight;
+using ProConstructionsManagment.Desktop.Models;
+using ProConstructionsManagment.Desktop.Views.Employees;
 
 namespace ProConstructionsManagment.Desktop.Services
 {
     public class EmployeesService : IEmployeesService
     {
-        private const string ApiUrlBase = "https://a2513563.ngrok.io/api/v1";
-
         public readonly IRequestProvider _requestProvider;
 
         public EmployeesService(IRequestProvider requestProvider)
@@ -16,79 +17,81 @@ namespace ProConstructionsManagment.Desktop.Services
             _requestProvider = requestProvider;
         }
 
-        public async Task<ObservableCollection<Datum>> GetAllEmployees()
+        public async Task<ObservableCollection<Employee>> GetAllEmployees()
         {
-            var uri = $"{ApiUrlBase}/employees";
+            var uri = $"{Config.ApiUrlBase}/employees";
 
-            var json = await _requestProvider.GetAsync<Root>(uri);
+            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
 
-            return json.data;
+            return json.Data;
         }
 
         public async Task<int> GetAllEmployeesCount()
         {
-            var uri = $"{ApiUrlBase}/employees";
+            var uri = $"{Config.ApiUrlBase}/employees";
 
-            var json = await _requestProvider.GetAsync<Root>(uri);
+            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
 
             return json.Summaries.Count;
         }
 
-        public async Task<ObservableCollection<Datum>> GetAllHiredEmployees()
+        public async Task<ObservableCollection<Employee>> GetAllHiredEmployees()
         {
-            var uri = $"{ApiUrlBase}/employees/hired";
+            var uri = $"{Config.ApiUrlBase}/employees/hired";
 
-            var json = await _requestProvider.GetAsync<Root>(uri);
+            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
 
-            return json.data;
+            return json.Data;
         }
 
         public async Task<int> GetAllHiredEmployeesCount()
         {
-            var uri = $"{ApiUrlBase}/employees/hired";
+            var uri = $"{Config.ApiUrlBase}/employees/hired";
 
-            var json = await _requestProvider.GetAsync<Root>(uri);
+            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
 
             return json.Summaries.Count;
         }
 
-        public async Task<ObservableCollection<Datum>> GetAllEmployeesForHire()
+        public async Task<ObservableCollection<Employee>> GetAllEmployeesForHire()
         {
-            var uri = $"{ApiUrlBase}/employees/hire";
+            var uri = $"{Config.ApiUrlBase}/employees/hire";
 
-            var json = await _requestProvider.GetAsync<Root>(uri);
+            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
 
-            return json.data;
+            return json.Data;
         }
 
         public async Task<int> GetAllEmployeesForHireCount()
         {
-            var uri = $"{ApiUrlBase}/employees/hire";
+            var uri = $"{Config.ApiUrlBase}/employees/hire";
 
-            var json = await _requestProvider.GetAsync<Root>(uri);
+            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
 
             return json.Summaries.Count;
         }
 
-        public async Task<Datum> GetEmployeeById(Guid employeeId)
+        public async Task<ObservableCollection<Employee>> GetEmployeeById(Guid employeeId)
         {
-            var uri = $"{ApiUrlBase}/employees/{employeeId}";
+            var uri = $"{Config.ApiUrlBase}/employees/{employeeId}";
 
-            return await _requestProvider.GetAsync<Datum>(uri);
+            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
+
+            return json.Data;
         }
 
-        public async Task<Datum> AddEmployee(Datum dto)
+        public async Task<Employee> AddEmployee(Employee model)
         {
-            var uri = $"{ApiUrlBase}/employee/add";
+            var uri = $"{Config.ApiUrlBase}/employee/add";
 
-            return await _requestProvider.PostAsync(uri, dto);
+            return await _requestProvider.PostAsync(uri, model);
         }
 
-        public async Task<Datum> UpdateEmployee(Datum dto, string employeeId)
+        public async Task<Employee> UpdateEmployee(Employee model, string employeeId)
         {
-            var uri = $"{ApiUrlBase}/employees/employeeId/update";
+            var uri = $"{Config.ApiUrlBase}/employees/{employeeId}/update";
 
-            return await _requestProvider.PostAsync(uri, dto);
+            return await _requestProvider.PostAsync(uri, model);
         }
     }
 }

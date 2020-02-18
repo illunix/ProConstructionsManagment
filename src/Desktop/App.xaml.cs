@@ -1,6 +1,6 @@
-﻿using ProConstructionsManagment.Desktop.Views.Base;
+﻿using System.Windows;
+using ProConstructionsManagment.Desktop.Views.Base;
 using ProConstructionsManagment.Desktop.Views.Shell;
-using System.Windows;
 
 namespace Desktop
 {

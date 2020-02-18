@@ -1,8 +1,10 @@
-﻿using Autofac;
+﻿using System;
+using System.Net.Http;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Modules;
-using System;
-using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
 
 namespace ProConstructionsManagment.Desktop.Views.Base
@@ -16,7 +18,13 @@ namespace ProConstructionsManagment.Desktop.Views.Base
             if (_container != null)
                 throw new InvalidOperationException($"Cannot initialize {nameof(ViewModelLocator)} multiple times");
 
+            var services = new ServiceCollection();
+
+            services.AddHttpClient();
+
             var builder = new ContainerBuilder();
+
+            builder.Populate(services);
 
             builder.RegisterModule(new AssemblyScanningModule());
 
@@ -25,6 +33,8 @@ namespace ProConstructionsManagment.Desktop.Views.Base
             builder.RegisterType<ShellManager>().As<IShellManager>();
 
             _container = builder.Build();
+
+            _container.Resolve<IHttpClientFactory>();
         }
 
         T IViewModelLocator.Get<T>()

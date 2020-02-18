@@ -1,15 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProConstructionsManagment.Infrastructure.Data.Models;
-using ProConstructionsManagment.Infrastructure.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using ProConstructionsManagment.Core.Enums;
+using ProConstructionsManagment.Core.Interfaces;
+using ProConstructionsManagment.Infrastructure.Data.Entities;
 
 namespace ProConstructionsManagment.Infrastructure.Data.Repositories
 {
-    public class EmployeesRepository : IBaseRepository<Employee, EmployeeStatus>
+    public class EmployeesRepository : IAsyncRepository<Employee, EmployeeStatus>
     {
         private readonly EmployeeContext _context;
 
@@ -38,20 +39,20 @@ namespace ProConstructionsManagment.Infrastructure.Data.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Employee> Add(Employee model)
+        public async Task<Employee> Add(Employee entity)
         {
             var source = new CancellationTokenSource();
             var token = source.Token;
 
             await _context.Employees
-                .AddAsync(model, token);
+                .AddAsync(entity, token);
 
             await _context.SaveChangesAsync(token);
 
-            return model;
+            return entity;
         }
 
-        public async Task<Employee> Update(Employee model, Guid employeeId)
+        public async Task<Employee> Update(Employee entity, Guid employeeId)
         {
             var source = new CancellationTokenSource();
             var token = source.Token;
@@ -59,14 +60,14 @@ namespace ProConstructionsManagment.Infrastructure.Data.Repositories
             var employee = await _context.Employees
                 .FindAsync(employeeId);
 
-            employee.Name = model.Name;
+            employee.Name = entity.Name;
 
             _context.Employees
                 .Update(employee);
 
             await _context.SaveChangesAsync(token);
 
-            return model;
+            return entity;
         }
     }
 }

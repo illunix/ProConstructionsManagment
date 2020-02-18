@@ -1,28 +1,28 @@
-﻿using ProConstructionsManagment.Desktop.DTO;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using ProConstructionsManagment.Desktop.Models;
 
 namespace ProConstructionsManagment.Desktop.Services
 {
     public interface IEmployeesService
     {
-        Task<ObservableCollection<Datum>> GetAllEmployees();
+        Task<ObservableCollection<Employee>> GetAllEmployees();
 
         Task<int> GetAllEmployeesCount();
 
-        Task<ObservableCollection<Datum>> GetAllHiredEmployees();
+        Task<ObservableCollection<Employee>> GetAllHiredEmployees();
 
         Task<int> GetAllHiredEmployeesCount();
 
-        Task<ObservableCollection<Datum>> GetAllEmployeesForHire();
+        Task<ObservableCollection<Employee>> GetAllEmployeesForHire();
 
         Task<int> GetAllEmployeesForHireCount();
 
-        Task<Datum> GetEmployeeById(Guid employeeId);
+        Task<ObservableCollection<Employee>> GetEmployeeById(Guid employeeId);
 
-        Task<Datum> AddEmployee(Datum dto);
+        Task<Employee> AddEmployee(Employee model);
 
-        Task<Datum> UpdateEmployee(Datum dto, string employeeId);
+        Task<Employee> UpdateEmployee(Employee model, string employeeId);
     }
 }
