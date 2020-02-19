@@ -16,5 +16,10 @@ namespace ProConstructionsManagment.Desktop.Managers
         {
             _messengerService.Send(new LoadingDataMessage(isLoadingData));
         }
+
+        public void SetNoData(bool noData)
+        {
+            _messengerService.Send(new NoDataMessage(noData));
+        }
     }
 }

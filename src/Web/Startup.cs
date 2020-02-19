@@ -29,10 +29,15 @@ namespace Web
 
             services.AddDbContext<ProjectContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionString"]));
+            
+            services.AddDbContext<ClientContext>(options =>
+                options.UseSqlServer(Configuration["ConnectionString"]));
+            
+            services.AddScoped<IAsyncRepository<Project, ProjectStatus>, ProjectsRepository>();
+
+            services.AddScoped<IAsyncRepository<Client>, ClientsRepository>();
 
             services.AddScoped<IAsyncRepository<Employee, EmployeeStatus>, EmployeesRepository>();
-
-            services.AddScoped<IAsyncRepository<Project, ProjectStatus>, ProjectsRepository>();
 
             services.AddControllers();
         }

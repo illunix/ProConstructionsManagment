@@ -24,6 +24,14 @@ namespace ProConstructionsManagment.Desktop.Views.Main
             _messengerService.Send(new ChangeViewMessage(ViewTypes.Projects));
             _messengerService.Send(new ChangeViewMessage(ViewTypes.ProjectsNavigation));
         }
+
+        public ICommand NavigateToClientsViewCommand => new AsyncRelayCommand(NavigateToClientsView);
+
+        private async Task NavigateToClientsView()
+        {
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.ClientsNavigation));
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.Clients));
+        }
         
         public ICommand NavigateToEmployeesViewCommand => new AsyncRelayCommand(NavigateToEmployeesView);
 

@@ -40,11 +40,22 @@
                 <ListViewItem Padding="1">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding NavigateToEmployeesViewCommand}" />
+                            <i:InvokeCommandAction Command="{Binding NavigateToClientsViewCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="AccountMultiple" Margin="15" />
+                        <TextBlock Text="Klienci" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Padding="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavigateToEmployeesViewCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AccountGroup" Margin="15" />
                         <TextBlock Text="Pracownicy" VerticalAlignment="Center" />
                     </StackPanel>
                 </ListViewItem>

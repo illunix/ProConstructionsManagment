@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ProConstructionsManagment.Desktop.Managers;
+using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 
@@ -9,13 +10,12 @@ namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
     public class HiredEmployeesViewModel : ViewModelBase
     {
         private readonly IEmployeesService _employeesService;
+        private readonly IMessengerService _messengerService;
         private readonly IShellManager _shellManager;
 
         private string _hiredEmployeeCount;
 
         private ObservableCollection<Models.Employee> _hiredEmployees;
-
-        private bool _showNoDataAboutHiredEmployees;
 
         public HiredEmployeesViewModel(IEmployeesService employeesService, IShellManager shellManager)
         {
@@ -35,12 +35,6 @@ namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
             set => Set(ref _hiredEmployees, value);
         }
 
-        public bool ShowNoDataAboutHiredEmployees
-        {
-            get => _showNoDataAboutHiredEmployees;
-            set => Set(ref _showNoDataAboutHiredEmployees, value);
-        }
-
         public async Task Initialize()
         {
             _shellManager.SetLoadingData(true);
@@ -50,9 +44,9 @@ namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
             HiredEmployeeCount = $"Łącznie {HiredEmployees.Count}";
 
             if (HiredEmployees.Count == 0)
-                ShowNoDataAboutHiredEmployees = true;
-            else
-                ShowNoDataAboutHiredEmployees = false;
+            {
+                _messengerService.Send(new NoDataMessage(true));
+            }
 
             _shellManager.SetLoadingData(false);
         }

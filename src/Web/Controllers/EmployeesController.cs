@@ -10,11 +10,11 @@ namespace ProConstructionsManagment.Web.Controllers
     [Route("api/v1/")]
     public class EmployeesController : Controller
     {
-        private readonly IAsyncRepository<Employee, EmployeeStatus> _employeesRepository;
+        private readonly IAsyncRepository<Employee, EmployeeStatus> _asyncRepository;
 
-        public EmployeesController(IAsyncRepository<Employee, EmployeeStatus> employeesRepository)
+        public EmployeesController(IAsyncRepository<Employee, EmployeeStatus> asyncRepository)
         {
-            _employeesRepository = employeesRepository;
+            _asyncRepository = asyncRepository;
         }
 
         [HttpGet]
@@ -23,7 +23,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _employeesRepository.GetAll();
+                var result = await _asyncRepository.GetAll();
 
                 return Ok(new
                 {
@@ -46,7 +46,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _employeesRepository.GetAllByStatus(EmployeeStatus.Hired);
+                var result = await _asyncRepository.GetAllByStatus(EmployeeStatus.Hired);
 
                 return Ok(new
                 {
@@ -69,7 +69,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _employeesRepository.GetAllByStatus(EmployeeStatus.WaitingForHire);
+                var result = await _asyncRepository.GetAllByStatus(EmployeeStatus.WaitingForHire);
 
                 return Ok(new
                 {
@@ -92,7 +92,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _employeesRepository.GetById(employeeId);
+                var result = await _asyncRepository.GetById(employeeId);
 
                 return Ok(new
                 {
@@ -111,7 +111,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _employeesRepository.Add(entity);
+                var result = await _asyncRepository.Add(entity);
 
                 return Ok(result);
             }
@@ -127,7 +127,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _employeesRepository.Update(entity, employeeId);
+                var result = await _asyncRepository.Update(entity, employeeId);
 
                 return Ok(result);
             }

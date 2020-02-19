@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ProConstructionsManagment.Desktop.Managers;
+using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
@@ -44,6 +45,11 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectsToStart
 
             ProjectsToStartCount = $"Łącznie {ProjectsToStart.Count} rekordów";
             
+            if (ProjectsToStart.Count == 0)
+            {
+                _messengerService.Send(new NoDataMessage(true));
+            }
+
             _shellManager.SetLoadingData(false);
         }
     }

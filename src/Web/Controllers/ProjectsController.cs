@@ -10,11 +10,11 @@ namespace ProConstructionsManagment.Web.Controllers
     [Route("api/v1/")]
     public class ProjectsController : Controller
     {
-        private readonly IAsyncRepository<Project, ProjectStatus> _projectsRepository;
+        private readonly IAsyncRepository<Project, ProjectStatus> _asyncRepository;
 
-        public ProjectsController(IAsyncRepository<Project, ProjectStatus> projectsRepository)
+        public ProjectsController(IAsyncRepository<Project, ProjectStatus> asyncRepository)
         {
-            _projectsRepository = projectsRepository;
+            _asyncRepository = asyncRepository;
         }
 
         [HttpGet]
@@ -23,7 +23,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _projectsRepository.GetAll();
+                var result = await _asyncRepository.GetAll();
 
                 return Ok(new
                 {
@@ -46,7 +46,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _projectsRepository.GetAllByStatus(ProjectStatus.Started);
+                var result = await _asyncRepository.GetAllByStatus(ProjectStatus.Started);
 
                 return Ok(new
                 {
@@ -69,7 +69,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _projectsRepository.GetAllByStatus(ProjectStatus.WaitingForStart);
+                var result = await _asyncRepository.GetAllByStatus(ProjectStatus.WaitingForStart);
 
                 return Ok(new
                 {
@@ -92,7 +92,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _projectsRepository.GetAllByStatus(ProjectStatus.ForSettlement);
+                var result = await _asyncRepository.GetAllByStatus(ProjectStatus.ForSettlement);
 
                 return Ok(new
                 {
@@ -115,7 +115,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _projectsRepository.GetAllByStatus(ProjectStatus.Settled);
+                var result = await _asyncRepository.GetAllByStatus(ProjectStatus.Settled);
 
                 return Ok(new
                 {
@@ -138,7 +138,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _projectsRepository.GetAllByStatus(ProjectStatus.Ended);
+                var result = await _asyncRepository.GetAllByStatus(ProjectStatus.Ended);
 
                 return Ok(new
                 {
@@ -161,7 +161,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _projectsRepository.GetById(projectId);
+                var result = await _asyncRepository.GetById(projectId);
 
                 return Ok(new
                 {
@@ -180,7 +180,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _projectsRepository.Add(entity);
+                var result = await _asyncRepository.Add(entity);
 
                 return Ok(result);
             }
@@ -196,7 +196,7 @@ namespace ProConstructionsManagment.Web.Controllers
         {
             try
             {
-                var result = await _projectsRepository.Update(entity, projectId);
+                var result = await _asyncRepository.Update(entity, projectId);
 
                 return Ok(result);
             }

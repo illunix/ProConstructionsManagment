@@ -5,23 +5,24 @@ using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using ProConstructionsManagment.Desktop.Models;
+using ProConstructionsManagment.Desktop.Messages;
 
 namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
 {
     public class EmployeesForHireViewModel : ViewModelBase
     {
         private readonly IEmployeesService _employeesService;
+        private readonly IMessengerService _messengerService;
         private readonly IShellManager _shellManager;
 
         private string _employeeForHireCount;
 
         private ObservableCollection<Models.Employee> _employeesForHire;
 
-        private bool _showNoDataAboutEmployeesForHire;
-
-        public EmployeesForHireViewModel(IEmployeesService employeesService, IShellManager shellManager)
+        public EmployeesForHireViewModel(IEmployeesService employeesService, IMessengerService messengerService, IShellManager shellManager)
         {
             _employeesService = employeesService;
+            _messengerService = messengerService;
             _shellManager = shellManager;
         }
 
@@ -37,12 +38,6 @@ namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
             set => Set(ref _employeesForHire, value);
         }
 
-        public bool ShowNoDataAboutEmployeesForHire
-        {
-            get => _showNoDataAboutEmployeesForHire;
-            set => Set(ref _showNoDataAboutEmployeesForHire, value);
-        }
-
         public async Task Initialize()
         {
             _shellManager.SetLoadingData(true);
@@ -52,9 +47,9 @@ namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
             EmployeeForHireCount = $"Łącznie {EmployeesForHire.Count} rekordów";
 
             if (EmployeesForHire.Count == 0)
-                ShowNoDataAboutEmployeesForHire = true;
-            else
-                ShowNoDataAboutEmployeesForHire = false;
+            {
+                _messengerService.Send(new NoDataMessage(true));
+            }
 
             _shellManager.SetLoadingData(false);
         }

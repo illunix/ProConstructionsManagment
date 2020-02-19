@@ -15,11 +15,14 @@
         xmlns:projectsToStart="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectsToStart"
         xmlns:projectSettlements="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectSettlements"
         xmlns:endedProjects="clr-namespace:ProConstructionsManagment.Desktop.Views.EndedProjects"
+        xmlns:clients="clr-namespace:ProConstructionsManagment.Desktop.Views.Clients"
         xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.Shell"
+        xmlns:converters="clr-namespace:ProConstructionsManagment.Desktop.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="811" Width="1309" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance local:ShellViewModel}">
     <Window.Resources>
+        <converters:VisibilityConverter x:Key="VisibilityConverter" />
         <DataTemplate DataType="{x:Type main:MainViewModel}">
             <main:Main />
         </DataTemplate>
@@ -62,6 +65,12 @@
         <DataTemplate DataType="{x:Type endedProjects:EndedProjectsViewModel}">
             <endedProjects:EndedProjects/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type clients:ClientsViewModel}">
+            <clients:Clients/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type clients:ClientsNavigationViewModel}">
+            <clients:ClientsNavigation/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -72,9 +81,19 @@
         <Grid Background="#F9F9F9">
             <ContentControl Content="{Binding CurrentNavigationViewModel}" />
         </Grid>
-
+        
         <Grid Grid.Column="1" Background="White">
             <ContentControl Content="{Binding CurrentViewModel}" />
+
+            <Label Content="Brak danych"
+                       FontSize="20"
+                       Visibility="{Binding NoData, Converter={StaticResource VisibilityConverter}}"
+                       HorizontalContentAlignment="Center"
+                       Width="Auto"
+                       Height="300"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="#131313" />
 
             <Grid Grid.Row="0">
                 <Grid.Style>

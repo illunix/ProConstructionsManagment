@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ProConstructionsManagment.Desktop.Managers;
+using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
@@ -43,7 +44,12 @@ namespace ProConstructionsManagment.Desktop.Views.OpenedProjects
             OpenedProjects = await _projectsService.GetStartedProjects();
 
             OpenedProjectCount = $"Łącznie {OpenedProjects.Count} rekordów";
-            
+
+            if (OpenedProjects.Count == 0)
+            {
+                _messengerService.Send(new NoDataMessage(true));
+            }
+
             _shellManager.SetLoadingData(false);
         }
     }

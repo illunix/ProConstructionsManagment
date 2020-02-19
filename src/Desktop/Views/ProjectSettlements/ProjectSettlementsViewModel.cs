@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ProConstructionsManagment.Desktop.Managers;
+using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
@@ -15,6 +16,8 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectSettlements
         
         private string _projectForSettlementCount;
 
+        private bool _showNoData;
+        
         private ObservableCollection<Models.Project> _projectsForSettlement;
         
         public ProjectSettlementsViewModel(IProjectsService projectsService, IMessengerService messengerService, IShellManager shellManager)
@@ -29,7 +32,7 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectSettlements
             get => _projectForSettlementCount;
             set => Set(ref _projectForSettlementCount, value);
         }
-
+        
         public ObservableCollection<Project> ProjectsForSettlement
         {
             get => _projectsForSettlement;
@@ -44,6 +47,11 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectSettlements
 
             ProjectForSettlementCount = $"Łącznie {ProjectsForSettlement.Count} rekordów";
             
+            if (ProjectsForSettlement.Count == 0)
+            {
+                _messengerService.Send(new NoDataMessage(true));
+            }
+
             _shellManager.SetLoadingData(false);
         }
     }

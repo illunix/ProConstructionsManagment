@@ -44,6 +44,13 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
 
         public ICommand NavigateToEmployeeViewCommand => new AsyncRelayCommand<object>(NavigateToEmployeeView);
 
+        private async Task NavigateToEmployeeView(object obj)
+        {
+            if (obj is string employeeId) _messengerService.Send(new EmployeeIdMessage(employeeId));
+
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.Employee));
+        }
+
         public async Task Initialize()
         {
             _shellManager.SetLoadingData(true);
@@ -52,14 +59,12 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
 
             EmployeeCount = $"Łącznie {Employees.Count} rekordów";
 
+            if (Employees.Count == 0)
+            {
+                _messengerService.Send(new NoDataMessage(true));
+            }
+
             _shellManager.SetLoadingData(false);
-        }
-
-        private async Task NavigateToEmployeeView(object obj)
-        {
-            if (obj is string employeeId) _messengerService.Send(new EmployeeIdMessage(employeeId));
-
-            _messengerService.Send(new ChangeViewMessage(ViewTypes.Employee));
         }
     }
 }

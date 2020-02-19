@@ -16,6 +16,8 @@
         OpenedProjects,
         ProjectsToStart,
         ProjectSettlements,
-        EndedProjects
+        EndedProjects,
+        Clients,
+        ClientsNavigation
     }
 }

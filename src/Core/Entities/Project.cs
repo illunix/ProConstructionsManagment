@@ -1,16 +1,12 @@
 ﻿using System;
 using ProConstructionsManagment.Core.Enums;
+using ProConstructionsManagment.Infrastructure.Data.Entities.Base;
 
 namespace ProConstructionsManagment.Infrastructure.Data.Entities
 {
-    public class Project
+    public class Project : BaseEntity
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
-        public string ContactName { get; set; }
-        public string ContactLastName { get; set; }
-        public string ContactPhoneNumber { get; set; }
-        public string ContactEmail { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         public string PlaceOfPerformance { get; set; }

@@ -1,15 +1,11 @@
 ﻿using System.Collections.ObjectModel;
+using ProConstructionsManagment.Desktop.Models.Base;
 
 namespace ProConstructionsManagment.Desktop.Models
 {
-    public class Project
+    public class Project : BaseModel
     {
-        public string Id { get; set; }
         public string Name { get; set; }
-        public string ContactName { get; set; }
-        public string ContactLastName { get; set; }
-        public string ContactPhoneNumber { get; set; }
-        public string ContactEmail { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         public string PlaceOfPerformance { get; set; }

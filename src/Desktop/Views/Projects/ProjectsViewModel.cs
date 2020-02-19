@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ProConstructionsManagment.Desktop.Managers;
+using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
@@ -14,7 +15,7 @@ namespace ProConstructionsManagment.Desktop.Views.Projects
         private readonly IShellManager _shellManager;
         
         private string _projectCount;
-
+        
         private ObservableCollection<Models.Project> _projects;
         
         public ProjectsViewModel(IProjectsService projectsService, IMessengerService messengerService, IShellManager shellManager)
@@ -43,6 +44,11 @@ namespace ProConstructionsManagment.Desktop.Views.Projects
             Projects = await _projectsService.GetAllProjects();
 
             ProjectCount = $"Łącznie {Projects.Count} rekordów";
+
+            if (Projects.Count == 0)
+            {
+                _messengerService.Send(new NoDataMessage(true));
+            }
             
             _shellManager.SetLoadingData(false);
         }

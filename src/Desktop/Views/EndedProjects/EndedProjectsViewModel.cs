@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ProConstructionsManagment.Desktop.Managers;
+using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 
@@ -9,15 +10,17 @@ namespace ProConstructionsManagment.Desktop.Views.EndedProjects
     public class EndedProjectsViewModel : ViewModelBase
     {
         private readonly IProjectsService _projectsService;
+        private readonly IMessengerService _messengerService;
         private readonly IShellManager _shellManager;
 
         private string _endedProjectCount;
 
         private ObservableCollection<Models.Project> _endedProjects;
         
-        public EndedProjectsViewModel(IProjectsService projectsService, IShellManager shellManager)
+        public EndedProjectsViewModel(IProjectsService projectsService, IMessengerService messengerService, IShellManager shellManager)
         {
             _projectsService = projectsService;
+            _messengerService = messengerService;
             _shellManager = shellManager;
         }
 
@@ -40,7 +43,12 @@ namespace ProConstructionsManagment.Desktop.Views.EndedProjects
             EndedProjects = await _projectsService.GetEndedProjects();
 
             EndedProjectCount = $"Łącznie {EndedProjects.Count} rekordów";
-            
+
+            if (EndedProjects.Count == 0)
+            {
+                _messengerService.Send(new NoDataMessage(true));
+            }
+
             _shellManager.SetLoadingData(false);
         }
     }
