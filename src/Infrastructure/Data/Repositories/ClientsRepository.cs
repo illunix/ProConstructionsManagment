@@ -17,7 +17,7 @@ namespace ProConstructionsManagment.Infrastructure.Data.Repositories
         {
             _context = context;
         }
-        
+
         public async Task<IReadOnlyCollection<Client>> GetAll()
         {
             return await _context.Clients

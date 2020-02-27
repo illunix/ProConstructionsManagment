@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using ProConstructionsManagment.Desktop.Models.Base;
+﻿using ProConstructionsManagment.Desktop.Models.Base;
 
 namespace ProConstructionsManagment.Desktop.Models
 {

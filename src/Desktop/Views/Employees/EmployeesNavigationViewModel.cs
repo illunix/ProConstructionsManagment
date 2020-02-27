@@ -22,7 +22,15 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
         private ViewTypes CurrentViewType { get; set; }
 
         public ICommand NavigateToMainViewCommand => new AsyncRelayCommand(NavigateToMainView);
-        
+
+        public ICommand NavigateToEmployeesViewCommand => new AsyncRelayCommand(NavigateToEmployeesView);
+
+        public ICommand NavigateToHiredEmployeesViewCommand => new AsyncRelayCommand(NavigateToHiredEmployeesView);
+
+        public ICommand NavigateToEmployeesForHireViewCommand => new AsyncRelayCommand(NavigateToEmployeesForHireView);
+
+        public ICommand NavigateToAddEmployeeViewCommand => new AsyncRelayCommand(NavigateToAddEmployeeView);
+
         private void CurrentViewTypeMessageNotify(CurrentViewTypeMessage obj)
         {
             CurrentViewType = obj.ViewType;
@@ -34,28 +42,20 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
             _messengerService.Send(new ChangeViewMessage(ViewTypes.MainNavigation));
         }
 
-        public ICommand NavigateToEmployeesViewCommand => new AsyncRelayCommand(NavigateToEmployeesView);
-
         private async Task NavigateToEmployeesView()
         {
             _messengerService.Send(new ChangeViewMessage(ViewTypes.Employees));
         }
-
-        public ICommand NavigateToHiredEmployeesViewCommand => new AsyncRelayCommand(NavigateToHiredEmployeesView);
 
         private async Task NavigateToHiredEmployeesView()
         {
             _messengerService.Send(new ChangeViewMessage(ViewTypes.HiredEmployees));
         }
 
-        public ICommand NavigateToEmployeesForHireViewCommand => new AsyncRelayCommand(NavigateToEmployeesForHireView);
-
         private async Task NavigateToEmployeesForHireView()
         {
             _messengerService.Send(new ChangeViewMessage(ViewTypes.EmployeesForHire));
         }
-
-        public ICommand NavigateToAddEmployeeViewCommand => new AsyncRelayCommand(NavigateToAddEmployeeView);
 
         private async Task NavigateToAddEmployeeView()
         {

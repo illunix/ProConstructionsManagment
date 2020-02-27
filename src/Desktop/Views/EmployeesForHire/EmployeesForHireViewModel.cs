@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Managers;
+using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
-using ProConstructionsManagment.Desktop.Models;
-using ProConstructionsManagment.Desktop.Messages;
+using Serilog;
 
 namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
 {
@@ -19,7 +19,8 @@ namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
 
         private ObservableCollection<Models.Employee> _employeesForHire;
 
-        public EmployeesForHireViewModel(IEmployeesService employeesService, IMessengerService messengerService, IShellManager shellManager)
+        public EmployeesForHireViewModel(IEmployeesService employeesService, IMessengerService messengerService,
+            IShellManager shellManager)
         {
             _employeesService = employeesService;
             _messengerService = messengerService;
@@ -40,18 +41,24 @@ namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
 
         public async Task Initialize()
         {
-            _shellManager.SetLoadingData(true);
-
-            EmployeesForHire = await _employeesService.GetAllEmployeesForHire();
-
-            EmployeeForHireCount = $"Łącznie {EmployeesForHire.Count} rekordów";
-
-            if (EmployeesForHire.Count == 0)
+            try
             {
-                _messengerService.Send(new NoDataMessage(true));
-            }
+                _shellManager.SetLoadingData(true);
 
-            _shellManager.SetLoadingData(false);
+                EmployeesForHire = await _employeesService.GetAllEmployeesForHire();
+
+                EmployeeForHireCount = $"Łącznie {EmployeesForHire.Count} rekordów";
+
+                if (EmployeesForHire.Count == 0) _messengerService.Send(new NoDataMessage(true));
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Failed loading employees for hire view");
+            }
+            finally
+            {
+                _shellManager.SetLoadingData(false);
+            }
         }
     }
 }

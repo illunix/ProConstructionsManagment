@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ProConstructionsManagment.Desktop.Models.Base
+﻿namespace ProConstructionsManagment.Desktop.Models.Base
 {
     public class BaseModel
     {

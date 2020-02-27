@@ -2,9 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Desktop.Configuration;
-using GalaSoft.MvvmLight;
 using ProConstructionsManagment.Desktop.Models;
-using ProConstructionsManagment.Desktop.Views.Employees;
 
 namespace ProConstructionsManagment.Desktop.Services
 {
@@ -21,7 +19,7 @@ namespace ProConstructionsManagment.Desktop.Services
         {
             var uri = $"{Config.ApiUrlBase}/employees";
 
-            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Employee>>(uri);
 
             return json.Data;
         }
@@ -30,7 +28,7 @@ namespace ProConstructionsManagment.Desktop.Services
         {
             var uri = $"{Config.ApiUrlBase}/employees";
 
-            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Employee>>(uri);
 
             return json.Summaries.Count;
         }
@@ -39,59 +37,81 @@ namespace ProConstructionsManagment.Desktop.Services
         {
             var uri = $"{Config.ApiUrlBase}/employees/hired";
 
-            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Employee>>(uri);
 
             return json.Data;
-        }
-
-        public async Task<int> GetAllHiredEmployeesCount()
-        {
-            var uri = $"{Config.ApiUrlBase}/employees/hired";
-
-            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
-
-            return json.Summaries.Count;
         }
 
         public async Task<ObservableCollection<Employee>> GetAllEmployeesForHire()
         {
             var uri = $"{Config.ApiUrlBase}/employees/hire";
 
-            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Employee>>(uri);
 
             return json.Data;
         }
+        
 
-        public async Task<int> GetAllEmployeesForHireCount()
-        {
-            var uri = $"{Config.ApiUrlBase}/employees/hire";
-
-            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
-
-            return json.Summaries.Count;
-        }
-
-        public async Task<ObservableCollection<Employee>> GetEmployeeById(Guid employeeId)
+        public async Task<Employee> GetEmployeeById(string employeeId)
         {
             var uri = $"{Config.ApiUrlBase}/employees/{employeeId}";
 
-            var json = await _requestProvider.GetAsync<Root<Employee>>(uri);
+            var json = await _requestProvider.GetAsync<RootSingle<Employee>>(uri);
 
             return json.Data;
         }
 
-        public async Task<Employee> AddEmployee(Employee model)
+        public RequestResult<Employee> AddEmployee(Employee model)
         {
-            var uri = $"{Config.ApiUrlBase}/employee/add";
 
-            return await _requestProvider.PostAsync(uri, model);
+            try
+            {
+                var uri = $"{Config.ApiUrlBase}/employee/add";
+
+                _requestProvider.PostAsync(uri, model);
+            }
+            catch 
+            {
+                return new RequestResult<Employee>(false);
+            }
+            
+            return new RequestResult<Employee>(true);
         }
 
-        public async Task<Employee> UpdateEmployee(Employee model, string employeeId)
+        public RequestResult<Employee> UpdateEmployee(Employee model, string employeeId)
         {
-            var uri = $"{Config.ApiUrlBase}/employees/{employeeId}/update";
+            if (string.IsNullOrWhiteSpace(model.Name))
+            {
+                throw new ArgumentNullException(nameof(model.Name));
+            }
+            
+            if (string.IsNullOrWhiteSpace(model.Name))
+            {
+                throw new ArgumentNullException(nameof(model.SecondName));
+            }
+            
+            if (string.IsNullOrWhiteSpace(model.DateOfBirth))
+            {
+                throw new ArgumentNullException(nameof(model.DateOfBirth));
+            }
+            
+            if (string.IsNullOrWhiteSpace(model.Nationality))
+            {
+                throw new ArgumentNullException(nameof(model.Nationality));
+            }
 
-            return await _requestProvider.PostAsync(uri, model);
+            try
+            {
+                var uri = $"{Config.ApiUrlBase}/employees/{employeeId}/update";
+
+                _requestProvider.PostAsync(uri, model);
+            }
+            catch 
+            {
+                return new RequestResult<Employee>(false);
+            }
+            
+            return new RequestResult<Employee>(true);
         }
     }
 }

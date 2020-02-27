@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Enums;
@@ -7,6 +9,7 @@ using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
+using Serilog;
 
 namespace ProConstructionsManagment.Desktop.Views.Employees
 {
@@ -46,25 +49,32 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
 
         private async Task NavigateToEmployeeView(object obj)
         {
-            if (obj is string employeeId) _messengerService.Send(new EmployeeIdMessage(employeeId));
-
             _messengerService.Send(new ChangeViewMessage(ViewTypes.Employee));
+            
+            if (obj is string employeeId)
+            {
+                _messengerService.Send(new EmployeeIdMessage(employeeId));
+            }
         }
 
         public async Task Initialize()
         {
-            _shellManager.SetLoadingData(true);
-
-            Employees = await _employeesService.GetAllEmployees();
-
-            EmployeeCount = $"Łącznie {Employees.Count} rekordów";
-
-            if (Employees.Count == 0)
+            try
             {
-                _messengerService.Send(new NoDataMessage(true));
-            }
+                _shellManager.SetLoadingData(true);
+                
+                Employees = await _employeesService.GetAllEmployees();
 
-            _shellManager.SetLoadingData(false);
+                EmployeeCount = $"Łącznie {Employees.Count} rekordów";
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Failed loading employees view");
+            }
+            finally
+            {
+                _shellManager.SetLoadingData(false);
+            }
         }
     }
 }

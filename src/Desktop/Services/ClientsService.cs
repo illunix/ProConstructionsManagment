@@ -14,21 +14,21 @@ namespace ProConstructionsManagment.Desktop.Services
         {
             _requestProvider = requestProvider;
         }
-            
+
         public async Task<ObservableCollection<Client>> GetAllClients()
         {
             var uri = $"{Config.ApiUrlBase}/clients";
 
-            var json = await _requestProvider.GetAsync<Root<Client>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Client>>(uri);
 
             return json.Data;
         }
-        
+
         public async Task<ObservableCollection<Client>> GetClientById(Guid clientId)
         {
             var uri = $"{Config.ApiUrlBase}/clients/{clientId}";
 
-            var json = await _requestProvider.GetAsync<Root<Client>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Client>>(uri);
 
             return json.Data;
         }

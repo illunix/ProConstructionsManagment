@@ -8,7 +8,7 @@ namespace ProConstructionsManagment.Desktop.Views.EndedProjects
         public EndedProjects()
         {
             InitializeComponent();
-            
+
             var viewModel = ViewModelLocator.Get<EndedProjectsViewModel>();
 
             DataContext = viewModel;

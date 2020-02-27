@@ -1,5 +1,4 @@
-﻿using System;
-using ProConstructionsManagment.Core.Enums;
+﻿using ProConstructionsManagment.Core.Enums;
 using ProConstructionsManagment.Infrastructure.Data.Entities.Base;
 
 namespace ProConstructionsManagment.Infrastructure.Data.Entities

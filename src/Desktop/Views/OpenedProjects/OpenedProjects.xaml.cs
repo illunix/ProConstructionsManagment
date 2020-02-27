@@ -8,7 +8,7 @@ namespace ProConstructionsManagment.Desktop.Views.OpenedProjects
         public OpenedProjects()
         {
             InitializeComponent();
-            
+
             var viewModel = ViewModelLocator.Get<OpenedProjectsViewModel>();
 
             DataContext = viewModel;

@@ -15,18 +15,17 @@ namespace ProConstructionsManagment.Desktop.Views.Clients
         public ClientsNavigationViewModel(IMessengerService messengerService)
         {
             _messengerService = messengerService;
-
         }
 
         public ICommand NavigateToMainViewCommand => new AsyncRelayCommand(NavigateToMainView);
-        
+
+        public ICommand NavigateToEmployeesViewCommand => new AsyncRelayCommand(NavigateToEmployeesView);
+
         private async Task NavigateToMainView()
         {
             _messengerService.Send(new ChangeViewMessage(ViewTypes.Main));
             _messengerService.Send(new ChangeViewMessage(ViewTypes.MainNavigation));
         }
-
-        public ICommand NavigateToEmployeesViewCommand => new AsyncRelayCommand(NavigateToEmployeesView);
 
         private async Task NavigateToEmployeesView()
         {

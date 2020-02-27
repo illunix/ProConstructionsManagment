@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
@@ -10,15 +11,16 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectsToStart
 {
     public class ProjectsToStartViewModel : ViewModelBase
     {
-        private readonly IProjectsService _projectsService;
         private readonly IMessengerService _messengerService;
+        private readonly IProjectsService _projectsService;
         private readonly IShellManager _shellManager;
-        
-        private string _projectToStartCount;
 
         private ObservableCollection<Models.Project> _projectsToStart;
-        
-        public ProjectsToStartViewModel(IProjectsService projectsService, IMessengerService messengerService, IShellManager shellManager)
+
+        private string _projectToStartCount;
+
+        public ProjectsToStartViewModel(IProjectsService projectsService, IMessengerService messengerService,
+            IShellManager shellManager)
         {
             _projectsService = projectsService;
             _messengerService = messengerService;
@@ -31,7 +33,7 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectsToStart
             set => Set(ref _projectToStartCount, value);
         }
 
-        public ObservableCollection<Project> ProjectsToStart
+        public ObservableCollection<Models.Project> ProjectsToStart
         {
             get => _projectsToStart;
             set => Set(ref _projectsToStart, value);
@@ -39,18 +41,22 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectsToStart
 
         public async Task Initialize()
         {
-            _shellManager.SetLoadingData(true);
-
-            ProjectsToStart = await _projectsService.GetProjectsForStart();
-
-            ProjectsToStartCount = $"Łącznie {ProjectsToStart.Count} rekordów";
-            
-            if (ProjectsToStart.Count == 0)
+            try
             {
-                _messengerService.Send(new NoDataMessage(true));
+                _shellManager.SetLoadingData(true);
             }
+            catch (Exception e)
+            {
+                ProjectsToStart = await _projectsService.GetProjectsForStart();
 
-            _shellManager.SetLoadingData(false);
+                ProjectsToStartCount = $"Łącznie {ProjectsToStart.Count} rekordów";
+
+                if (ProjectsToStart.Count == 0) _messengerService.Send(new NoDataMessage(true));
+            }
+            finally
+            {
+                _shellManager.SetLoadingData(false);
+            }
         }
     }
 }

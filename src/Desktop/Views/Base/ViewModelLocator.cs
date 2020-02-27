@@ -5,7 +5,6 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Modules;
-using ProConstructionsManagment.Desktop.Services;
 
 namespace ProConstructionsManagment.Desktop.Views.Base
 {
@@ -46,7 +45,7 @@ namespace ProConstructionsManagment.Desktop.Views.Base
         {
             return Resolve<T>();
         }
-
+        
         private static T Resolve<T>()
         {
             if (_container == null)

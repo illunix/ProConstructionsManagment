@@ -6,18 +6,18 @@ using Microsoft.Win32.SafeHandles;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 
-namespace ProConstructionsManagment.Desktop.Views.Employee
+namespace ProConstructionsManagment.Desktop.Views.Project
 {
     /// <summary>
     ///     Interaction logic for Employee.xaml
     /// </summary>
-    public partial class Employee : UserControl
+    public partial class Project : UserControl
     {
-        public Employee()
+        public Project()
         {
             InitializeComponent();
 
-            var viewModel = ViewModelLocator.Get<EmployeeViewModel>();
+            var viewModel = ViewModelLocator.Get<ProjectViewModel>();
 
             DataContext = viewModel;
 

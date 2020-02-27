@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Messaging;
 using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
@@ -10,15 +10,14 @@ using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
 
-namespace ProConstructionsManagment.Desktop.Views.Employee
+namespace ProConstructionsManagment.Desktop.Views.Project
 {
-    public class EmployeeViewModel : ViewModelBase
+    public class ProjectViewModel : ViewModelBase
     {
         private readonly IEmployeesService _employeesService;
         private readonly IShellManager _shellManager;
         private readonly IMessengerService _messengerService;
 
-        private bool _employeeNameHighlight;
         private string _employeeId;
         private string _employeeName;
         private string _employeeSecondName;
@@ -29,8 +28,7 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
         private bool _employeeReadDrawings;
 
         public bool isRegistered;
-        
-        public EmployeeViewModel(IEmployeesService employeesService, IShellManager shellManager, IMessengerService messengerService)
+        public ProjectViewModel(IEmployeesService employeesService, IShellManager shellManager, IMessengerService messengerService)
         {
             _employeesService = employeesService;
             _shellManager = shellManager;
@@ -44,12 +42,6 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
         public void EmployeeIdMessageNotify(EmployeeIdMessage obj)
         {
             EmployeeId = obj.EmployeeId;
-        }
-
-        public bool EmployeeNameHighlight
-        {
-            get => _employeeNameHighlight;
-            set => Set(ref _employeeNameHighlight, value);
         }
 
         public string EmployeeId
@@ -99,21 +91,13 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
             get => _employeeReadDrawings;
             set => Set(ref _employeeReadDrawings, value);
         }
-        
-        private async Task BuildValidation()
-        {
-            if (string.IsNullOrWhiteSpace(EmployeeName) || string.IsNullOrWhiteSpace(EmployeeLastName) || string.IsNullOrWhiteSpace(EmployeeDateOfBirth) || string.IsNullOrWhiteSpace(EmployeeDateOfBirth))
-            {
-                MessageBox.Show("Uzupełnij wymagane pola");
-            }
-        }
 
         public async Task Initialize()
         {
             try
             {
                 _shellManager.SetLoadingData(true);
-
+                
                 var employee = await _employeesService.GetEmployeeById(EmployeeId);
                 
                 EmployeeName = employee.Name;
@@ -138,8 +122,6 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
 
         private async Task UpdateEmployee()
         {
-            BuildValidation();
-
             try
             {
                 _shellManager.SetLoadingData(true);
@@ -152,12 +134,7 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
                     IsForeman = EmployeeIsForeman,
                     ReadDrawings = EmployeeReadDrawings
                 };
-
-                var result = _employeesService.UpdateEmployee(data, EmployeeId);
-                if (result.IsSuccessful)
-                {
-                    MessageBox.Show("Pomyślnie zapisano zmiany");
-                }
+                
             }
             catch (Exception e)
             {

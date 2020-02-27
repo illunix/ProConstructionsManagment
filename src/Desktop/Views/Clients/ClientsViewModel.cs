@@ -1,23 +1,29 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
+using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
+using Serilog;
 
 namespace ProConstructionsManagment.Desktop.Views.Clients
 {
     public class ClientsViewModel : ViewModelBase
     {
         private readonly IClientsService _clientsService;
+        private readonly IShellManager _shellManager;
         private readonly IMessengerService _messengerService;
 
         private string _clientCount;
-        
-        private ObservableCollection<Models.Client> _clients;
-        
-        public ClientsViewModel(IClientsService clientsService, IMessengerService messengerService)
+
+        private ObservableCollection<Client> _clients;
+
+        public ClientsViewModel(IClientsService clientsService, IShellManager shellManager, IMessengerService messengerService)
         {
             _clientsService = clientsService;
+            _shellManager = shellManager;
             _messengerService = messengerService;
         }
 
@@ -27,7 +33,7 @@ namespace ProConstructionsManagment.Desktop.Views.Clients
             set => Set(ref _clientCount, value);
         }
 
-        public ObservableCollection<Models.Client> Clients
+        public ObservableCollection<Client> Clients
         {
             get => _clients;
             set => Set(ref _clients, value);
@@ -35,13 +41,23 @@ namespace ProConstructionsManagment.Desktop.Views.Clients
 
         public async Task Initialize()
         {
-            Clients = await _clientsService.GetAllClients();
-
-            ClientCount = $"Łącznie {Clients.Count} rekordów";
-
-            if (Clients.Count == 0)
+            try
             {
-                _messengerService.Send(new NoDataMessage(true));
+                _shellManager.SetLoadingData(true);
+
+                Clients = await _clientsService.GetAllClients();
+
+                ClientCount = $"Łącznie {Clients.Count} rekordów";
+
+                if (Clients.Count == 0) _messengerService.Send(new NoDataMessage(true));
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Failed loading clients view");
+            }
+            finally
+            {
+                _shellManager.SetLoadingData(false);
             }
         }
     }

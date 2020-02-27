@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using ProConstructionsManagment.Desktop.Views.Base;
 
 namespace ProConstructionsManagment.Desktop.Views.AddEmployee
 {
@@ -10,6 +11,10 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
         public AddEmployee()
         {
             InitializeComponent();
+            
+            var viewModel = ViewModelLocator.Get<AddEmployeeViewModel>();
+
+            DataContext = viewModel;
         }
     }
 }

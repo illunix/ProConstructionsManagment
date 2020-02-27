@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Desktop.Configuration;
-using GalaSoft.MvvmLight;
 using ProConstructionsManagment.Desktop.Models;
 
 namespace ProConstructionsManagment.Desktop.Services
@@ -15,12 +14,12 @@ namespace ProConstructionsManagment.Desktop.Services
         {
             _requestProvider = requestProvider;
         }
-        
+
         public async Task<ObservableCollection<Project>> GetAllProjects()
         {
             var uri = $"{Config.ApiUrlBase}/projects";
 
-            var json = await _requestProvider.GetAsync<Root<Project>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Project>>(uri);
 
             return json.Data;
         }
@@ -29,16 +28,25 @@ namespace ProConstructionsManagment.Desktop.Services
         {
             var uri = $"{Config.ApiUrlBase}/projects/started";
 
-            var json = await _requestProvider.GetAsync<Root<Project>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Project>>(uri);
 
             return json.Data;
+        }
+
+        public async Task<int> GetStartedProjectsCount()
+        {
+            var uri = $"{Config.ApiUrlBase}/projects/started";
+            
+            var json = await _requestProvider.GetAsync<RootMultiple<Project>>(uri);
+
+            return json.Summaries.Count;
         }
 
         public async Task<ObservableCollection<Project>> GetProjectsForStart()
         {
             var uri = $"{Config.ApiUrlBase}/projects/started";
 
-            var json = await _requestProvider.GetAsync<Root<Project>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Project>>(uri);
 
             return json.Data;
         }
@@ -47,7 +55,7 @@ namespace ProConstructionsManagment.Desktop.Services
         {
             var uri = $"{Config.ApiUrlBase}/projects/settlement";
 
-            var json = await _requestProvider.GetAsync<Root<Project>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Project>>(uri);
 
             return json.Data;
         }
@@ -56,7 +64,7 @@ namespace ProConstructionsManagment.Desktop.Services
         {
             var uri = $"{Config.ApiUrlBase}/projects/settled";
 
-            var json = await _requestProvider.GetAsync<Root<Project>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Project>>(uri);
 
             return json.Data;
         }
@@ -65,7 +73,7 @@ namespace ProConstructionsManagment.Desktop.Services
         {
             var uri = $"{Config.ApiUrlBase}/projects/ended";
 
-            var json = await _requestProvider.GetAsync<Root<Project>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Project>>(uri);
 
             return json.Data;
         }
@@ -74,7 +82,7 @@ namespace ProConstructionsManagment.Desktop.Services
         {
             var uri = $"{Config.ApiUrlBase}/projects/{projectId}";
 
-            var json = await _requestProvider.GetAsync<Root<Project>>(uri);
+            var json = await _requestProvider.GetAsync<RootMultiple<Project>>(uri);
 
             return json.Data;
         }

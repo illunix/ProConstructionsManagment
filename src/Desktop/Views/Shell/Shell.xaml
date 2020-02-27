@@ -19,8 +19,12 @@
         xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.Shell"
         xmlns:converters="clr-namespace:ProConstructionsManagment.Desktop.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="811" Width="1309" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Title="ProConstructionsManagment"
+        Height="811" 
+        Width="1309" 
+        WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance local:ShellViewModel}">
+    
     <Window.Resources>
         <converters:VisibilityConverter x:Key="VisibilityConverter" />
         <DataTemplate DataType="{x:Type main:MainViewModel}">
@@ -51,25 +55,25 @@
             <projects:Projects />
         </DataTemplate>
         <DataTemplate DataType="{x:Type projects:ProjectsNavigationViewModel}">
-            <projects:ProjectsNavigation/>
+            <projects:ProjectsNavigation />
         </DataTemplate>
         <DataTemplate DataType="{x:Type openedProjects:OpenedProjectsViewModel}">
-            <openedProjects:OpenedProjects/>
+            <openedProjects:OpenedProjects />
         </DataTemplate>
         <DataTemplate DataType="{x:Type projectsToStart:ProjectsToStartViewModel}">
-            <projectsToStart:ProjectsToStart/>
+            <projectsToStart:ProjectsToStart />
         </DataTemplate>
         <DataTemplate DataType="{x:Type projectSettlements:ProjectSettlementsViewModel}">
-            <projectSettlements:ProjectSettlements/>
+            <projectSettlements:ProjectSettlements />
         </DataTemplate>
         <DataTemplate DataType="{x:Type endedProjects:EndedProjectsViewModel}">
-            <endedProjects:EndedProjects/>
+            <endedProjects:EndedProjects />
         </DataTemplate>
         <DataTemplate DataType="{x:Type clients:ClientsViewModel}">
-            <clients:Clients/>
+            <clients:Clients />
         </DataTemplate>
         <DataTemplate DataType="{x:Type clients:ClientsNavigationViewModel}">
-            <clients:ClientsNavigation/>
+            <clients:ClientsNavigation />
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -81,19 +85,19 @@
         <Grid Background="#F9F9F9">
             <ContentControl Content="{Binding CurrentNavigationViewModel}" />
         </Grid>
-        
+
         <Grid Grid.Column="1" Background="White">
             <ContentControl Content="{Binding CurrentViewModel}" />
 
             <Label Content="Brak danych"
-                       FontSize="20"
-                       Visibility="{Binding NoData, Converter={StaticResource VisibilityConverter}}"
-                       HorizontalContentAlignment="Center"
-                       Width="Auto"
-                       Height="300"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Foreground="#131313" />
+                   FontSize="20"
+                   Visibility="{Binding NoData, Converter={StaticResource VisibilityConverter}}"
+                   HorizontalContentAlignment="Center"
+                   Width="Auto"
+                   Height="300"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="#131313" />
 
             <Grid Grid.Row="0">
                 <Grid.Style>

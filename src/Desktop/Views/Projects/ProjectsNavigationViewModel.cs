@@ -16,8 +16,19 @@ namespace ProConstructionsManagment.Desktop.Views.Projects
         {
             _messengerService = messengerService;
         }
-        
+
         public ICommand NavigateToMainViewCommand => new AsyncRelayCommand(NavigateToMainView);
+
+        public ICommand NavigateToProjectsViewCommand => new AsyncRelayCommand(NavigateToProjectsView);
+
+        public ICommand NavigateToOpenedProjectsViewCommand => new AsyncRelayCommand(NavigateToOpenedProjectsView);
+
+        public ICommand NavigateToProjectsToStartViewCommand => new AsyncRelayCommand(NavigateToProjectsToStartView);
+
+        public ICommand NavigateToProjectSettlementsViewCommand =>
+            new AsyncRelayCommand(NavigateToProjectSettlementsView);
+
+        public ICommand NavigateToEndedProjectsViewCommand => new AsyncRelayCommand(NavigateToEndedProjectsView);
 
         private async Task NavigateToMainView()
         {
@@ -25,35 +36,25 @@ namespace ProConstructionsManagment.Desktop.Views.Projects
             _messengerService.Send(new ChangeViewMessage(ViewTypes.MainNavigation));
         }
 
-        public ICommand NavigateToProjectsViewCommand => new AsyncRelayCommand(NavigateToProjectsView);
-
         private async Task NavigateToProjectsView()
         {
             _messengerService.Send(new ChangeViewMessage(ViewTypes.Projects));
         }
-
-        public ICommand NavigateToOpenedProjectsViewCommand => new AsyncRelayCommand(NavigateToOpenedProjectsView);
 
         private async Task NavigateToOpenedProjectsView()
         {
             _messengerService.Send(new ChangeViewMessage(ViewTypes.OpenedProjects));
         }
 
-        public ICommand NavigateToProjectsToStartViewCommand => new AsyncRelayCommand(NavigateToProjectsToStartView);
-
         private async Task NavigateToProjectsToStartView()
         {
             _messengerService.Send(new ChangeViewMessage(ViewTypes.ProjectsToStart));
         }
 
-        public ICommand NavigateToProjectSettlementsViewCommand => new AsyncRelayCommand(NavigateToProjectSettlementsView);
-
         private async Task NavigateToProjectSettlementsView()
         {
             _messengerService.Send(new ChangeViewMessage(ViewTypes.ProjectSettlements));
         }
-        
-        public ICommand NavigateToEndedProjectsViewCommand => new AsyncRelayCommand(NavigateToEndedProjectsView);
 
         private async Task NavigateToEndedProjectsView()
         {

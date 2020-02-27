@@ -131,7 +131,7 @@ namespace ProConstructionsManagment.Web.Controllers
                 return NotFound();
             }
         }
-        
+
         [HttpGet]
         [Route("projects/ended")]
         public async Task<IActionResult> GetEndedProjects()
@@ -165,7 +165,7 @@ namespace ProConstructionsManagment.Web.Controllers
 
                 return Ok(new
                 {
-                    data = result,
+                    data = result
                 });
             }
             catch
@@ -176,7 +176,7 @@ namespace ProConstructionsManagment.Web.Controllers
 
         [HttpPost]
         [Route("project/add")]
-        public async Task<IActionResult> AddProject([FromBody]Project entity)
+        public async Task<IActionResult> AddProject([FromBody] Project entity)
         {
             try
             {
@@ -191,8 +191,8 @@ namespace ProConstructionsManagment.Web.Controllers
         }
 
         [HttpPost]
-        [Route("projects/{projectId}/update")]
-        public async Task<IActionResult> UpdateProject([FromBody]Project entity, Guid projectId)
+        [Route("projects/update/{projectId}")]
+        public async Task<IActionResult> UpdateProject([FromBody] Project entity, Guid projectId)
         {
             try
             {

@@ -8,10 +8,10 @@ namespace ProConstructionsManagment.Infrastructure.Migrations.Client
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Clients",
-                columns: table => new
+                "Clients",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(),
                     CompanyName = table.Column<string>(nullable: true),
                     NIP = table.Column<string>(nullable: true),
                     Website = table.Column<string>(nullable: true),
@@ -21,16 +21,13 @@ namespace ProConstructionsManagment.Infrastructure.Migrations.Client
                     ContactPhoneNumber = table.Column<string>(nullable: true),
                     ContactEmail = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Clients", x => x.Id); });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Clients");
+                "Clients");
         }
     }
 }

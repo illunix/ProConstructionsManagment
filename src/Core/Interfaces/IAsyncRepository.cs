@@ -11,7 +11,7 @@ namespace ProConstructionsManagment.Core.Interfaces
         Task<T> Add(T entity);
         Task<T> Update(T entity, Guid Id);
     }
-    
+
     public interface IAsyncRepository<T, E> where T : class where E : struct
     {
         Task<IReadOnlyCollection<T>> GetAll();

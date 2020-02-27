@@ -1,24 +1,27 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
+using Serilog;
 
 namespace ProConstructionsManagment.Desktop.Views.OpenedProjects
 {
     public class OpenedProjectsViewModel : ViewModelBase
     {
-        private readonly IProjectsService _projectsService;
         private readonly IMessengerService _messengerService;
+        private readonly IProjectsService _projectsService;
         private readonly IShellManager _shellManager;
-        
+
         private string _openedProjectCount;
 
         private ObservableCollection<Models.Project> _openedProjects;
-        
-        public OpenedProjectsViewModel(IProjectsService projectsService, IMessengerService messengerService, IShellManager shellManager)
+
+        public OpenedProjectsViewModel(IProjectsService projectsService, IMessengerService messengerService,
+            IShellManager shellManager)
         {
             _projectsService = projectsService;
             _messengerService = messengerService;
@@ -31,7 +34,7 @@ namespace ProConstructionsManagment.Desktop.Views.OpenedProjects
             set => Set(ref _openedProjectCount, value);
         }
 
-        public ObservableCollection<Project> OpenedProjects
+        public ObservableCollection<Models.Project> OpenedProjects
         {
             get => _openedProjects;
             set => Set(ref _openedProjects, value);
@@ -39,18 +42,24 @@ namespace ProConstructionsManagment.Desktop.Views.OpenedProjects
 
         public async Task Initialize()
         {
-            _shellManager.SetLoadingData(true);
-
-            OpenedProjects = await _projectsService.GetStartedProjects();
-
-            OpenedProjectCount = $"Łącznie {OpenedProjects.Count} rekordów";
-
-            if (OpenedProjects.Count == 0)
+            try
             {
-                _messengerService.Send(new NoDataMessage(true));
-            }
+                _shellManager.SetLoadingData(true);
 
-            _shellManager.SetLoadingData(false);
+                OpenedProjects = await _projectsService.GetStartedProjects();
+
+                OpenedProjectCount = $"Łącznie {OpenedProjects.Count} rekordów";
+
+                if (OpenedProjects.Count == 0) _messengerService.Send(new NoDataMessage(true));
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Failed loading opened projects view");
+            }
+            finally
+            {
+                _shellManager.SetLoadingData(false);
+            }
         }
     }
 }

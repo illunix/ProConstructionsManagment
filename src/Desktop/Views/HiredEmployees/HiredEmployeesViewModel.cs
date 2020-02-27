@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
+using Serilog;
 
 namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
 {
@@ -37,18 +39,24 @@ namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
 
         public async Task Initialize()
         {
-            _shellManager.SetLoadingData(true);
-
-            HiredEmployees = await _employeesService.GetAllHiredEmployees();
-
-            HiredEmployeeCount = $"Łącznie {HiredEmployees.Count}";
-
-            if (HiredEmployees.Count == 0)
+            try
             {
-                _messengerService.Send(new NoDataMessage(true));
-            }
+                _shellManager.SetLoadingData(true);
+                
+                HiredEmployees = await _employeesService.GetAllHiredEmployees();
 
-            _shellManager.SetLoadingData(false);
+                HiredEmployeeCount = $"Łącznie {HiredEmployees.Count}";
+
+                if (HiredEmployees.Count == 0) _messengerService.Send(new NoDataMessage(true));
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Failed loading hired employees view");
+            }
+            finally
+            {
+                _shellManager.SetLoadingData(false);
+            }
         }
     }
 }

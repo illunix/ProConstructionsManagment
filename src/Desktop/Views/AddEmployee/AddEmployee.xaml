@@ -4,9 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.AddEmployee"
+             xmlns:converters="clr-namespace:ProConstructionsManagment.Desktop.Converters"
              mc:Ignorable="d"
-             d:DesignHeight="808.6" d:DesignWidth="1259">
-    <Grid>
+             d:DesignHeight="808.6" d:DesignWidth="1259"
+             d:DataContext="{d:DesignInstance local:AddEmployeeViewModel}">
+
+       <UserControl.Resources>
+              <converters:VisibilityConverter x:Key="VisibilityConverter" />
+       </UserControl.Resources>
+       <Grid>
         <TextBox HorizontalAlignment="Left"
                  Height="35"
                  Margin="31,67,0,0"
@@ -18,13 +24,13 @@
                  BorderThickness="1, 1, 1, 1"
                  Foreground="Black"
                  Background="{x:Null}"
-                 SelectionBrush="{x:Null}" />
+                 SelectionBrush="{x:Null}"/>
 
         <Label Content="Imię" FontSize="15"
                HorizontalAlignment="Left"
                Margin="26,43,0,0"
                VerticalAlignment="Top"
-               Width="254" />
+               Width="254"/>
 
         <TextBox HorizontalAlignment="Left"
                  Height="35"
@@ -37,14 +43,14 @@
                  BorderThickness="1, 1, 1, 1"
                  Foreground="Black"
                  Background="{x:Null}"
-                 SelectionBrush="{x:Null}" />
-
-        <Label Content="Nazwisko"
-               FontSize="15"
-               HorizontalAlignment="Left"
-               Margin="349,43,0,0"
-               VerticalAlignment="Top"
-               Width="254" />
+                 SelectionBrush="{x:Null}"/>
+        
+               <Label Content="Nazwisko"
+                      FontSize="15"
+                      HorizontalAlignment="Left"
+                      Margin="349,43,0,0"
+                      VerticalAlignment="Top"
+                      Width="254" />
 
         <Label Content="Dane osobowe"
                FontSize="25"

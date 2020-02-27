@@ -17,7 +17,7 @@
                FontSize="25"
                Foreground="#131313"
                Margin="24,10,215,301" />
-        
+
         <Label Content="{Binding HiredEmployeeCount}"
                FontSize="10"
                Opacity="50"

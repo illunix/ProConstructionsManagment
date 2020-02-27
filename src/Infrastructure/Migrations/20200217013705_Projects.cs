@@ -8,10 +8,10 @@ namespace ProConstructionsManagment.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Projects",
-                columns: table => new
+                "Projects",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(),
                     Name = table.Column<string>(nullable: true),
                     ContactName = table.Column<string>(nullable: true),
                     ContactLastName = table.Column<string>(nullable: true),
@@ -20,28 +20,25 @@ namespace ProConstructionsManagment.Infrastructure.Migrations
                     StartDate = table.Column<string>(nullable: true),
                     EndDate = table.Column<string>(nullable: true),
                     PlaceOfPerformance = table.Column<string>(nullable: true),
-                    PercentageOfImplementation = table.Column<int>(nullable: false),
-                    RequiredNumberOfEmployees = table.Column<int>(nullable: false),
-                    NumberOfEmployees = table.Column<int>(nullable: false),
-                    NumerOfCandidates = table.Column<int>(nullable: false),
-                    NumberOfHours = table.Column<int>(nullable: false),
+                    PercentageOfImplementation = table.Column<int>(),
+                    RequiredNumberOfEmployees = table.Column<int>(),
+                    NumberOfEmployees = table.Column<int>(),
+                    NumerOfCandidates = table.Column<int>(),
+                    NumberOfHours = table.Column<int>(),
                     DateOfPaymentDelivery = table.Column<string>(nullable: true),
                     DateOfPayment = table.Column<string>(nullable: true),
-                    PaymentProtocol = table.Column<bool>(nullable: false),
-                    Agreement = table.Column<bool>(nullable: false),
-                    PaymentStatus = table.Column<int>(nullable: false),
-                    Status = table.Column<int>(nullable: false)
+                    PaymentProtocol = table.Column<bool>(),
+                    Agreement = table.Column<bool>(),
+                    PaymentStatus = table.Column<int>(),
+                    Status = table.Column<int>()
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Projects", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Projects", x => x.Id); });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Projects");
+                "Projects");
         }
     }
 }

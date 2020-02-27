@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using GalaSoft.MvvmLight;
 using ProConstructionsManagment.Desktop.Models;
 
 namespace ProConstructionsManagment.Desktop.Services
@@ -13,6 +11,7 @@ namespace ProConstructionsManagment.Desktop.Services
 
         Task<ObservableCollection<Project>> GetStartedProjects();
 
+        Task<int> GetStartedProjectsCount();
         Task<ObservableCollection<Project>> GetProjectsForStart();
 
         Task<ObservableCollection<Project>> GetProjectsForSettlement();
@@ -20,7 +19,7 @@ namespace ProConstructionsManagment.Desktop.Services
         Task<ObservableCollection<Project>> GetSettledProjects();
 
         Task<ObservableCollection<Project>> GetEndedProjects();
-        
+
         Task<ObservableCollection<Project>> GetProjectById(Guid projectId);
 
         Task<Project> AddEmployee(Project model);

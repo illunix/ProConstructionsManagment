@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ProConstructionsManagment.Desktop.Enums;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
@@ -28,9 +27,9 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
         private ViewModelBase _currentNavigationViewModel;
 
         private ViewModelBase _currentViewModel;
+        private bool _isLoadingData;
 
         private bool _noData;
-        private bool _isLoadingData;
 
         public ShellViewModel(IViewModelLocator viewModelLocator, IShellManager shellManager,
             IMessengerService messengerService)
@@ -82,7 +81,7 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
             {
                 case ViewTypes.Main:
                     var mainViewModel = _viewModelLocator.Get<MainViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = mainViewModel;
                     break;
                 case ViewTypes.MainNavigation:
@@ -91,12 +90,12 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
                     break;
                 case ViewTypes.Employee:
                     var employeeViewModel = _viewModelLocator.Get<EmployeeViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = employeeViewModel;
                     break;
                 case ViewTypes.Employees:
                     var employeesViewModel = _viewModelLocator.Get<EmployeesViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = employeesViewModel;
                     // _messengerService.Send(new CurrentViewModelMessage(CurrentViewModel));
                     break;
@@ -107,26 +106,25 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
 
                 case ViewTypes.EmployeesForHire:
                     var employeesForHireViewModel = _viewModelLocator.Get<EmployeesForHireViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = employeesForHireViewModel;
                     break;
-
                 case ViewTypes.HiredEmployees:
                     var hiredEmployeesViewModel = _viewModelLocator.Get<HiredEmployeesViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = hiredEmployeesViewModel;
                     // _messengerService.Send(new CurrentViewTypeMessage(ViewTypes.HiredEmployees));
                     break;
                 case ViewTypes.AddEmployee:
                     _shellManager.SetLoadingData(true);
                     var addEmployeeViewModel = _viewModelLocator.Get<AddEmployeeViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = addEmployeeViewModel;
                     _shellManager.SetLoadingData(false);
                     break;
                 case ViewTypes.Projects:
                     var projectViewModel = _viewModelLocator.Get<ProjectsViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = projectViewModel;
                     break;
                 case ViewTypes.ProjectsNavigation:
@@ -135,32 +133,32 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
                     break;
                 case ViewTypes.OpenedProjects:
                     var openedProjectsViewModel = _viewModelLocator.Get<OpenedProjectsViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = openedProjectsViewModel;
                     break;
                 case ViewTypes.ProjectsToStart:
                     var projectsToStartViewModel = _viewModelLocator.Get<ProjectsToStartViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = projectsToStartViewModel;
                     break;
                 case ViewTypes.ProjectSettlements:
                     var projectSettlementsViewModel = _viewModelLocator.Get<ProjectSettlementsViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = projectSettlementsViewModel;
                     break;
                 case ViewTypes.EndedProjects:
                     var endedProjectsViewModel = _viewModelLocator.Get<EndedProjectsViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = endedProjectsViewModel;
                     break;
                 case ViewTypes.Clients:
                     var clientsViewModel = _viewModelLocator.Get<ClientsViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentViewModel = clientsViewModel;
                     break;
                 case ViewTypes.ClientsNavigation:
                     var clientsNavigationViewModel = _viewModelLocator.Get<ClientsNavigationViewModel>();
-                    _messengerService.Send(new NoDataMessage(false));
+                    NoData = false;
                     CurrentNavigationViewModel = clientsNavigationViewModel;
                     break;
             }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ProConstructionsManagment.Core.Enums;
 using ProConstructionsManagment.Core.Interfaces;
 using ProConstructionsManagment.Infrastructure.Data.Entities;
 
@@ -50,7 +49,7 @@ namespace ProConstructionsManagment.Web.Controllers
 
                 return Ok(new
                 {
-                    data = result,
+                    data = result
                 });
             }
             catch

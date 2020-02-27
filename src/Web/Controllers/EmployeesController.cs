@@ -96,7 +96,7 @@ namespace ProConstructionsManagment.Web.Controllers
 
                 return Ok(new
                 {
-                    data = result,
+                    data = result
                 });
             }
             catch

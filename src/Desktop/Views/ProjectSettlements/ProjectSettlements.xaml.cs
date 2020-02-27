@@ -8,7 +8,7 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectSettlements
         public ProjectSettlements()
         {
             InitializeComponent();
-            
+
             var viewModel = ViewModelLocator.Get<ProjectSettlementsViewModel>();
 
             DataContext = viewModel;

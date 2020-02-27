@@ -13,16 +13,12 @@ namespace ProConstructionsManagment.Desktop.Services
 
         Task<ObservableCollection<Employee>> GetAllHiredEmployees();
 
-        Task<int> GetAllHiredEmployeesCount();
-
         Task<ObservableCollection<Employee>> GetAllEmployeesForHire();
 
-        Task<int> GetAllEmployeesForHireCount();
+        Task<Employee> GetEmployeeById(string employeeId);
 
-        Task<ObservableCollection<Employee>> GetEmployeeById(Guid employeeId);
+        RequestResult<Employee> AddEmployee(Employee model);
 
-        Task<Employee> AddEmployee(Employee model);
-
-        Task<Employee> UpdateEmployee(Employee model, string employeeId);
+        RequestResult<Employee> UpdateEmployee(Employee model, string employeeId);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Windows.Controls;
 using ProConstructionsManagment.Desktop.Views.Base;
-using ProConstructionsManagment.Desktop.Views.OpenedProjects;
 
 namespace ProConstructionsManagment.Desktop.Views.ProjectsToStart
 {
@@ -9,7 +8,7 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectsToStart
         public ProjectsToStart()
         {
             InitializeComponent();
-            
+
             var viewModel = ViewModelLocator.Get<ProjectsToStartViewModel>();
 
             DataContext = viewModel;

@@ -23,7 +23,8 @@ namespace ProConstructionsManagment.Infrastructure.Data
         public ClientContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<ClientContext>();
-            var connectionString = "Server=51.77.140.201;Initial Catalog=ProConstructions;Persist Security Info=False;User ID=SA;Password=jkdf@HUD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
+            var connectionString =
+                "Server=51.77.140.201;Initial Catalog=ProConstructions;Persist Security Info=False;User ID=SA;Password=jkdf@HUD;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;";
             builder.UseSqlServer(connectionString);
             return new ClientContext(builder.Options);
         }

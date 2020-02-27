@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace ProConstructionsManagment.Desktop.Services
 {
@@ -22,7 +22,7 @@ namespace ProConstructionsManagment.Desktop.Services
 
             var serialized = await response.Content.ReadAsStringAsync();
 
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
 
             var result = await Task.Run(() =>
                 JsonSerializer.Deserialize<TResult>(serialized, options));

@@ -7,33 +7,82 @@
              mc:Ignorable="d"
              d:DesignHeight="809" d:DesignWidth="1027"
              d:DataContext="{d:DesignInstance local:MainViewModel}">
-    <Grid x:Name="LayoutRoot">
-        <Image Source="/Resources/Assets/Images/Rectangle 2.png"
-               Margin="10,10,759,707" />
+    <Grid VerticalAlignment="Top"
+          Height="200">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Row="0"
+                   Grid.Column="0"
+                   Fill="White"
+                   Stroke="#131313"
+                   StrokeThickness="0.1"
+                   Margin="10" />
+        <StackPanel Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Aktualnie pracowników"
+                       FontSize="14" />
+            <TextBlock Text="{Binding EmployeeCount}"
+                       FontSize="23"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
+        <Rectangle Grid.Row="0"
+                   Grid.Column="1"
+                   Fill="White"
+                   Stroke="#131313"
+                   StrokeThickness="0.1"
+                   Margin="10" />
 
-        <Image Source="/Resources/Assets/Images/Rectangle 2.png"
-               Margin="310,10,459,707" />
+        <StackPanel Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TextBlock
+                Text="Aktualnie otwartych projektów"
+                FontSize="14" />
 
-        <Image Source="/Resources/Assets/Images/Rectangle 2.png"
-               Stretch="Fill"
-               Margin="610,10,159,707" />
-
-        <Image Source="/Resources/Assets/Images/Rectangle 2.png"
-               Stretch="Fill"
-               Margin="10,107,759,610" />
-
-        <Label Content="Aktualna liczba pracowników"
-               FontSize="14"
-               Foreground="#131313"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Margin="48,22,0,0" />
-
-        <Label Content="{Binding EmployeesCount}"
-               FontSize="23"
-               Foreground="#131313"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Margin="121,41,0,0" />
+            <TextBlock Text="{Binding StartedProjectsCount}"
+                       FontSize="23"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
+        <Rectangle Grid.Row="0"
+                   Grid.Column="2"
+                   Fill="White"
+                   Stroke="#131313"
+                   StrokeThickness="0.1"
+                   Margin="10" />
+        <StackPanel Grid.Row="0"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Procent realizacji"
+                       FontSize="14" />
+            <TextBlock Text="75%"
+                       FontSize="23"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
+        <Rectangle Grid.Row="1"
+                   Grid.Column="0"
+                   Fill="White"
+                   Stroke="#131313"
+                   StrokeThickness="0.1"
+                   Margin="10" />
+        <StackPanel Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <TextBlock Text="Aktualna ilość godzin"
+                       FontSize="14" />
+            <TextBlock Text="1530" FontSize="23"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
     </Grid>
 </UserControl>
