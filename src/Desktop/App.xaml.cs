@@ -1,11 +1,8 @@
-﻿using System.IO;
-using System.Windows;
+﻿using System.Windows;
 using ProConstructionsManagment.Desktop.Views.Base;
 using ProConstructionsManagment.Desktop.Views.Shell;
 using Serilog;
-using Serilog.Configuration;
 using Serilog.Core;
-using Serilog.Formatting.Json;
 using Serilog.Formatting.Raw;
 
 namespace Desktop
@@ -20,11 +17,11 @@ namespace Desktop
             base.OnStartup(e);
 
             Log.Logger = CreateLogger();
-            
+
             Log.Information("Initializing Pro Constructions Managment");
-            
+
             Log.Debug("Created logger");
-            
+
             var shell = ViewModelLocator.Get<Shell>();
 
             shell.Show();

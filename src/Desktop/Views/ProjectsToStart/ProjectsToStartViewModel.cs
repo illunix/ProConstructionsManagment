@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using ProConstructionsManagment.Desktop.Commands;
+using ProConstructionsManagment.Desktop.Enums;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
-using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
+using Serilog;
 
 namespace ProConstructionsManagment.Desktop.Views.ProjectsToStart
 {
@@ -39,19 +43,39 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectsToStart
             set => Set(ref _projectsToStart, value);
         }
 
+        public ICommand NavigateToProjectViewCommand => new AsyncRelayCommand<object>(NavigateToProjectView);
+
+        private async Task NavigateToProjectView(object obj)
+        {
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.Project));
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.ProjectNavigation));
+
+            if (obj is string projectId)
+            {
+                _messengerService.Send(new ProjectIdMessage(projectId));
+            }
+        }
+
         public async Task Initialize()
         {
             try
             {
                 _shellManager.SetLoadingData(true);
-            }
-            catch (Exception e)
-            {
+
                 ProjectsToStart = await _projectsService.GetProjectsForStart();
 
                 ProjectsToStartCount = $"Łącznie {ProjectsToStart.Count} rekordów";
 
-                if (ProjectsToStart.Count == 0) _messengerService.Send(new NoDataMessage(true));
+                if (ProjectsToStart.Count == 0)
+                {
+                    _messengerService.Send(new NoDataMessage(true));
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Failed loading projects to start view");
+
+                MessageBox.Show("Coś poszło nie tak podczas pobierania danych");
             }
             finally
             {

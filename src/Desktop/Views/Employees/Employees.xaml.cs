@@ -14,6 +14,8 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
             DataContext = viewModel;
 
             Loaded += async (sender, args) => await viewModel.Initialize();
+
+            Unloaded += (sender, args) => viewModel.Cleanup();
         }
     }
 }

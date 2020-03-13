@@ -8,112 +8,163 @@
              mc:Ignorable="d"
              d:DesignHeight="808.6" d:DesignWidth="1259"
              d:DataContext="{d:DesignInstance local:AddEmployeeViewModel}">
-
-       <UserControl.Resources>
-              <converters:VisibilityConverter x:Key="VisibilityConverter" />
-       </UserControl.Resources>
-       <Grid>
-        <TextBox HorizontalAlignment="Left"
-                 Height="35"
-                 Margin="31,67,0,0"
-                 Text="{Binding EmployeeName}"
-                 VerticalAlignment="Top"
-                 Width="254"
-                 Padding="2"
-                 BorderBrush="#131313"
-                 BorderThickness="1, 1, 1, 1"
-                 Foreground="Black"
-                 Background="{x:Null}"
-                 SelectionBrush="{x:Null}"/>
-
-        <Label Content="Imię" FontSize="15"
-               HorizontalAlignment="Left"
-               Margin="26,43,0,0"
-               VerticalAlignment="Top"
-               Width="254"/>
-
-        <TextBox HorizontalAlignment="Left"
-                 Height="35"
-                 Padding="2"
-                 Margin="354,67,0,0"
-                 Text="{Binding EmployeeLastName}"
-                 VerticalAlignment="Top"
-                 Width="254"
-                 BorderBrush="#131313"
-                 BorderThickness="1, 1, 1, 1"
-                 Foreground="Black"
-                 Background="{x:Null}"
-                 SelectionBrush="{x:Null}"/>
-        
-               <Label Content="Nazwisko"
-                      FontSize="15"
-                      HorizontalAlignment="Left"
-                      Margin="349,43,0,0"
-                      VerticalAlignment="Top"
-                      Width="254" />
-
-        <Label Content="Dane osobowe"
-               FontSize="25"
-               Foreground="#131313"
-               HorizontalAlignment="Left"
-               Margin="24,10,215,301"
-               VerticalAlignment="Top" />
-
-        <Button Content="Dodaj"
-                FontStyle="Normal"
-                HorizontalAlignment="Left"
-                Margin="31,366,0,0"
-                VerticalAlignment="Top"
-                Width="88"
-                Background="#FFECECEC"
-                Height="33"
-                BorderBrush="{x:Null}"
-                Foreground="#131313"
-                Command="{Binding EmployeeAddCommand}" />
-
-        <DatePicker HorizontalAlignment="Left"
-                    Margin="680,77,0,0"
-                    Padding="2"
+    <UserControl.Resources>
+        <converters:VisibilityConverter x:Key="VisibilityConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid VerticalAlignment="Top"
+              Height="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Imię"
+                           FontSize="14" />
+                <TextBox
+                    Height="35"
+                    TextWrapping="Wrap"
+                    Text="{Binding EmployeeName}"
+                    VerticalContentAlignment="Center"
                     VerticalAlignment="Top"
-                    BorderThickness="1, 1, 1, 1"
+
                     Width="254"
                     BorderBrush="#131313"
-                    Background="Transparent"
+                    BorderThickness="0, 0, 0, 1"
                     Foreground="Black"
-                    Text="{Binding EmployeeDateOfBirth}" />
+                    Background="{x:Null}"
+                    SelectionBrush="{x:Null}" />
+            </StackPanel>
 
-        <Label Content="Data urodzenia"
-               FontSize="15"
-               HorizontalAlignment="Left"
-               Margin="680,43,0,0"
-               VerticalAlignment="Top"
-               Width="254" />
+            <StackPanel Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Drugię imię"
+                           FontSize="14" />
+                <TextBox
+                    Height="35"
+                    TextWrapping="Wrap"
+                    Text="{Binding EmployeeSecondName}"
+                    VerticalContentAlignment="Center"
+                    VerticalAlignment="Top"
+                    Width="254"
+                    BorderBrush="#131313"
+                    BorderThickness="0, 0, 0, 1"
+                    Foreground="Black"
+                    Background="{x:Null}"
+                    SelectionBrush="{x:Null}" />
+            </StackPanel>
 
-        <Label Content="Kwalifikacje"
-               FontSize="25"
-               Foreground="#131313"
-               HorizontalAlignment="Left"
-               Margin="24,216,0,0"
-               VerticalAlignment="Top" />
+            <StackPanel Grid.Row="0"
+                        Grid.Column="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Nazwisko"
+                           FontSize="14" />
+                <TextBox
+                    Height="35"
+                    TextWrapping="Wrap"
+                    VerticalContentAlignment="Center"
+                    Text="{Binding EmployeeLastName}"
+                    VerticalAlignment="Top"
+                    Width="254"
+                    BorderBrush="#131313"
+                    BorderThickness="0, 0, 0, 1"
+                    Foreground="Black"
+                    Background="{x:Null}"
+                    SelectionBrush="{x:Null}" />
+            </StackPanel>
 
-        <CheckBox Content="Brygadzista"
-                  HorizontalAlignment="Left"
-                  Margin="29,247,0,0"
-                  Foreground="#131313"
-                  FontSize="15"
-                  VerticalAlignment="Top"
-                  Height="53"
-                  Width="193"
-                  IsChecked="{Binding EmployeeIsForeman}" />
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Data urodzenia"
+                           FontSize="14" />
 
-        <CheckBox Content="Czyta rysunki"
-                  HorizontalAlignment="Left"
-                  Margin="246,247,0,0"
-                  Foreground="#131313"
-                  FontSize="15"
-                  VerticalAlignment="Top"
-                  Height="53"
-                  IsChecked="{Binding EmployeeReadDrawings}"
-                  Width="193" />
+                <DatePicker SelectedDate="{Binding EmployeeDateOfBirth}"
+                            VerticalContentAlignment="Center"
+                            VerticalAlignment="Top"
+                            Height="35"
+                            Width="254"
+                            Style="{StaticResource DatePickerWithBorders}" />
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Narodowość"
+                           FontSize="14" />
+                <TextBox
+                    Height="35"
+                    VerticalContentAlignment="Center"
+                    TextWrapping="Wrap"
+                    Text="{Binding EmployeeNationality}"
+                    VerticalAlignment="Top"
+                    Width="254"
+                    BorderBrush="#131313"
+                    BorderThickness="0, 0, 0, 1"
+                    Foreground="Black"
+                    Background="{x:Null}"
+                    SelectionBrush="{x:Null}" />
+            </StackPanel>
+        </Grid>
+        <Grid Height="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+                <CheckBox Content="Brygadzista"
+                          FontSize="14"
+                          IsChecked="{Binding EmployeeIsForeman}" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+                <CheckBox Content="Czyta rysunki"
+                          FontSize="14"
+                          IsChecked="{Binding EmployeeReadDrawings}" />
+            </StackPanel>
+
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+                <Button Content="Dodaj"
+                        Background="#FFECECEC"
+                        BorderBrush="{x:Null}"
+                        Foreground="#131313"
+                        Command="{Binding AddEmployeeCommand}" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

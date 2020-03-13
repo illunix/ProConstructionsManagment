@@ -10,21 +10,27 @@
         xmlns:employeesForHire="clr-namespace:ProConstructionsManagment.Desktop.Views.EmployeesForHire"
         xmlns:hiredEmployees="clr-namespace:ProConstructionsManagment.Desktop.Views.HiredEmployees"
         xmlns:addEmployee="clr-namespace:ProConstructionsManagment.Desktop.Views.AddEmployee"
+        xmlns:project="clr-namespace:ProConstructionsManagment.Desktop.Views.Project"
+        xmlns:projectCosts="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectCosts"
         xmlns:projects="clr-namespace:ProConstructionsManagment.Desktop.Views.Projects"
         xmlns:openedProjects="clr-namespace:ProConstructionsManagment.Desktop.Views.OpenedProjects"
         xmlns:projectsToStart="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectsToStart"
         xmlns:projectSettlements="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectSettlements"
         xmlns:endedProjects="clr-namespace:ProConstructionsManagment.Desktop.Views.EndedProjects"
+        xmlns:addProject="clr-namespace:ProConstructionsManagment.Desktop.Views.AddProject"
+        xmlns:addProjectCost="clr-namespace:ProConstructionsManagment.Desktop.Views.AddProjectCost"
+        xmlns:client="clr-namespace:ProConstructionsManagment.Desktop.Views.Client"
         xmlns:clients="clr-namespace:ProConstructionsManagment.Desktop.Views.Clients"
+        xmlns:addClient="clr-namespace:ProConstructionsManagment.Desktop.Views.AddClient"
         xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.Shell"
         xmlns:converters="clr-namespace:ProConstructionsManagment.Desktop.Converters"
         mc:Ignorable="d"
         Title="ProConstructionsManagment"
-        Height="811" 
-        Width="1309" 
+        Height="811"
+        Width="1309"
         WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance local:ShellViewModel}">
-    
+
     <Window.Resources>
         <converters:VisibilityConverter x:Key="VisibilityConverter" />
         <DataTemplate DataType="{x:Type main:MainViewModel}">
@@ -35,6 +41,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type employee:EmployeeViewModel}">
             <employee:Employee />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type employee:EmployeeNavigationViewModel}">
+            <employee:EmployeeNavigation />
         </DataTemplate>
         <DataTemplate DataType="{x:Type employees:EmployeesViewModel}">
             <employees:Employees />
@@ -51,8 +60,20 @@
         <DataTemplate DataType="{x:Type addEmployee:AddEmployeeViewModel}">
             <addEmployee:AddEmployee />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type project:ProjectViewModel}">
+            <project:Project />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type projectCosts:ProjectCostsViewModel}">
+            <projectCosts:ProjectCosts />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type projects:ProjectsViewModel}">
             <projects:Projects />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type project:ProjectNavigationViewModel}">
+            <project:ProjectNavigation />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type projectCosts:ProjectCostsNavigationViewModel}">
+            <projectCosts:ProjectCostsNavigation />
         </DataTemplate>
         <DataTemplate DataType="{x:Type projects:ProjectsNavigationViewModel}">
             <projects:ProjectsNavigation />
@@ -69,11 +90,29 @@
         <DataTemplate DataType="{x:Type endedProjects:EndedProjectsViewModel}">
             <endedProjects:EndedProjects />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type addProject:AddProjectViewModel}">
+            <addProject:AddProject />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type addProjectCost:AddProjectCostViewModel}">
+            <addProjectCost:AddProjectCost />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type client:ClientViewModel}">
+            <client:Client />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type clients:ClientsViewModel}">
             <clients:Clients />
         </DataTemplate>
         <DataTemplate DataType="{x:Type clients:ClientsNavigationViewModel}">
             <clients:ClientsNavigation />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type addClient:AddClientViewModel}">
+            <addClient:AddClient />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type client:ClientNavigationViewModel}">
+            <client:ClientNavigation />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type addProjectCost:AddProjectCostNavigationViewModel}">
+            <addProjectCost:AddProjectCostNavigation />
         </DataTemplate>
     </Window.Resources>
     <Grid>

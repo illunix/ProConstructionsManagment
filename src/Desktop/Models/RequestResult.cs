@@ -6,7 +6,7 @@
         {
             IsSuccessful = isSuccessful;
         }
-        
-        public bool IsSuccessful  { get; }
+
+        public bool IsSuccessful { get; }
     }
 }

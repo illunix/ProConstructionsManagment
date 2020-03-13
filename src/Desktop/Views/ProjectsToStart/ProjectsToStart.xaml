@@ -9,7 +9,7 @@
              d:DesignHeight="808.6" d:DesignWidth="1259"
              d:DataContext="{d:DesignInstance local:ProjectsToStartViewModel}">
     <Grid>
-        <Label Content="Wszyscy pracownicy"
+        <Label Content="Projekty do rozpoczęcia"
                FontSize="25"
                Foreground="#131313"
                Margin="24,10,215,301" />
@@ -34,7 +34,7 @@
                                         Foreground="#131313"
                                         BorderBrush="{x:Null}"
                                         FontWeight="DemiBold"
-                                        Command="{Binding DataContext.NavigateProjectsToStartViewCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                        Command="{Binding DataContext.NavigateToProjectViewCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                         CommandParameter="{Binding Id}"
                                         Background="{x:Null}" />
                             </DataTemplate>

@@ -9,7 +9,7 @@
              d:DesignHeight="808.6" d:DesignWidth="1259"
              d:DataContext="{d:DesignInstance local:ProjectSettlementsViewModel}">
     <Grid>
-        <Label Content="Wszyscy pracownicy"
+        <Label Content="Projekty do rozliczenia"
                FontSize="25"
                Foreground="#131313"
                Margin="24,10,215,301" />

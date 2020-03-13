@@ -11,7 +11,7 @@
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
-                <ResourceDictionary 
+                <ResourceDictionary
                     Source="pack://application:,,,/ProConstructionsManagment.Desktop;component/Themes/MaterialDesignThemes.Overrides.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

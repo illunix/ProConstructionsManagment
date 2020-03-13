@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ProConstructionsManagment.Core.Entities;
 using ProConstructionsManagment.Core.Enums;
 using ProConstructionsManagment.Core.Interfaces;
-using ProConstructionsManagment.Infrastructure.Data.Entities;
 
 namespace ProConstructionsManagment.Web.Controllers
 {
@@ -21,120 +21,78 @@ namespace ProConstructionsManagment.Web.Controllers
         [Route("employees")]
         public async Task<IActionResult> GetEmployees()
         {
-            try
-            {
-                var result = await _asyncRepository.GetAll();
+            var result = await _asyncRepository.GetAll();
 
-                return Ok(new
-                {
-                    data = result,
-                    summaries = new
-                    {
-                        count = result.Count
-                    }
-                });
-            }
-            catch
+            return Ok(new
             {
-                return NotFound();
-            }
+                data = result,
+                summaries = new
+                {
+                    count = result.Count
+                }
+            });
         }
 
         [HttpGet]
         [Route("employees/hired")]
         public async Task<IActionResult> GetEmployeesHired()
         {
-            try
-            {
-                var result = await _asyncRepository.GetAllByStatus(EmployeeStatus.Hired);
+            var result = await _asyncRepository.GetAllByStatus(EmployeeStatus.Hired);
 
-                return Ok(new
-                {
-                    data = result,
-                    summaries = new
-                    {
-                        count = result.Count
-                    }
-                });
-            }
-            catch
+            return Ok(new
             {
-                return NotFound();
-            }
+                data = result,
+                summaries = new
+                {
+                    count = result.Count
+                }
+            });
         }
 
         [HttpGet]
         [Route("employees/hire")]
         public async Task<IActionResult> GetEmployeesForHire()
         {
-            try
-            {
-                var result = await _asyncRepository.GetAllByStatus(EmployeeStatus.WaitingForHire);
+            var result = await _asyncRepository.GetAllByStatus(EmployeeStatus.WaitingForHire);
 
-                return Ok(new
-                {
-                    data = result,
-                    summaries = new
-                    {
-                        count = result.Count
-                    }
-                });
-            }
-            catch
+            return Ok(new
             {
-                return NotFound();
-            }
+                data = result,
+                summaries = new
+                {
+                    count = result.Count
+                }
+            });
         }
 
         [HttpGet]
         [Route("employees/{employeeId}")]
         public async Task<IActionResult> GetEmployeeById(Guid employeeId)
         {
-            try
-            {
-                var result = await _asyncRepository.GetById(employeeId);
+            var result = await _asyncRepository.GetById(employeeId);
 
-                return Ok(new
-                {
-                    data = result
-                });
-            }
-            catch
+            return Ok(new
             {
-                return NotFound();
-            }
+                data = result
+            });
         }
 
         [HttpPost]
         [Route("employee/add")]
         public async Task<IActionResult> AddEmployee([FromBody] Employee entity)
         {
-            try
-            {
-                var result = await _asyncRepository.Add(entity);
+            var result = await _asyncRepository.Add(entity);
 
-                return Ok(result);
-            }
-            catch
-            {
-                return BadRequest();
-            }
+            return Ok(result);
         }
 
         [HttpPost]
         [Route("employees/{employeeId}/update")]
         public async Task<IActionResult> UpdateEmployee([FromBody] Employee entity, Guid employeeId)
         {
-            try
-            {
-                var result = await _asyncRepository.Update(entity, employeeId);
+            var result = await _asyncRepository.Update(entity, employeeId);
 
-                return Ok(result);
-            }
-            catch
-            {
-                return BadRequest();
-            }
+            return Ok(result);
         }
     }
 }

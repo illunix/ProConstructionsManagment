@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using ProConstructionsManagment.Desktop.Commands;
+using ProConstructionsManagment.Desktop.Enums;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
@@ -39,6 +43,19 @@ namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
             set => Set(ref _employeesForHire, value);
         }
 
+        public ICommand NavigateToEmployeeViewCommand => new AsyncRelayCommand<object>(NavigateToEmployeeView);
+
+        private async Task NavigateToEmployeeView(object obj)
+        {
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.Employee));
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.EmployeeNavigation));
+
+            if (obj is string employeeId)
+            {
+                _messengerService.Send(new EmployeeIdMessage(employeeId));
+            }
+        }
+
         public async Task Initialize()
         {
             try
@@ -54,6 +71,8 @@ namespace ProConstructionsManagment.Desktop.Views.EmployeesForHire
             catch (Exception e)
             {
                 Log.Error(e, "Failed loading employees for hire view");
+
+                MessageBox.Show("Coś poszło nie tak podczas pobierania danych");
             }
             finally
             {

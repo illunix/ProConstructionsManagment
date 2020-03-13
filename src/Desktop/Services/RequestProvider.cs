@@ -38,6 +38,8 @@ namespace ProConstructionsManagment.Desktop.Services
                 AddHeaderParameter(httpClient, header);
 
             var content = new StringContent(JsonSerializer.Serialize(data));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
             var response = await httpClient.PostAsync(uri, content);
 
             var serialized = await response.Content.ReadAsStringAsync();
@@ -51,6 +53,7 @@ namespace ProConstructionsManagment.Desktop.Services
         private HttpClient CreateHttpClient(string token)
         {
             var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             if (!string.IsNullOrEmpty(token))
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

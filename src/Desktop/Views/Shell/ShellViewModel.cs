@@ -3,8 +3,12 @@ using ProConstructionsManagment.Desktop.Enums;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
+using ProConstructionsManagment.Desktop.Views.AddClient;
 using ProConstructionsManagment.Desktop.Views.AddEmployee;
+using ProConstructionsManagment.Desktop.Views.AddProject;
+using ProConstructionsManagment.Desktop.Views.AddProjectCost;
 using ProConstructionsManagment.Desktop.Views.Base;
+using ProConstructionsManagment.Desktop.Views.Client;
 using ProConstructionsManagment.Desktop.Views.Clients;
 using ProConstructionsManagment.Desktop.Views.Employee;
 using ProConstructionsManagment.Desktop.Views.Employees;
@@ -13,6 +17,8 @@ using ProConstructionsManagment.Desktop.Views.EndedProjects;
 using ProConstructionsManagment.Desktop.Views.HiredEmployees;
 using ProConstructionsManagment.Desktop.Views.Main;
 using ProConstructionsManagment.Desktop.Views.OpenedProjects;
+using ProConstructionsManagment.Desktop.Views.Project;
+using ProConstructionsManagment.Desktop.Views.ProjectCosts;
 using ProConstructionsManagment.Desktop.Views.Projects;
 using ProConstructionsManagment.Desktop.Views.ProjectSettlements;
 using ProConstructionsManagment.Desktop.Views.ProjectsToStart;
@@ -25,11 +31,12 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
         private readonly IShellManager _shellManager;
         private readonly IViewModelLocator _viewModelLocator;
         private ViewModelBase _currentNavigationViewModel;
-
         private ViewModelBase _currentViewModel;
         private bool _isLoadingData;
 
         private bool _noData;
+
+        private ViewModelBase _previousViewModel;
 
         public ShellViewModel(IViewModelLocator viewModelLocator, IShellManager shellManager,
             IMessengerService messengerService)
@@ -55,11 +62,18 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
             set => Set(ref _isLoadingData, value);
         }
 
+        public ViewModelBase PreviousViewModel
+        {
+            get => _previousViewModel;
+            set => Set(ref _previousViewModel, value);
+        }
+
         public ViewModelBase CurrentViewModel
         {
             get => _currentViewModel;
             set
             {
+                _previousViewModel = _currentViewModel;
                 _currentViewModel?.Cleanup();
                 Set(ref _currentViewModel, value);
             }
@@ -95,15 +109,18 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
                     break;
                 case ViewTypes.Employees:
                     var employeesViewModel = _viewModelLocator.Get<EmployeesViewModel>();
-                    NoData = false;
+                    // NoData = false;
                     CurrentViewModel = employeesViewModel;
                     // _messengerService.Send(new CurrentViewModelMessage(CurrentViewModel));
+                    break;
+                case ViewTypes.EmployeeNavigation:
+                    var employeeNavigationViewModel = _viewModelLocator.Get<Employee.EmployeeNavigationViewModel>();
+                    CurrentNavigationViewModel = employeeNavigationViewModel;
                     break;
                 case ViewTypes.EmployeesNavigation:
                     var employeesNavigationViewModel = _viewModelLocator.Get<EmployeesNavigationViewModel>();
                     CurrentNavigationViewModel = employeesNavigationViewModel;
                     break;
-
                 case ViewTypes.EmployeesForHire:
                     var employeesForHireViewModel = _viewModelLocator.Get<EmployeesForHireViewModel>();
                     NoData = false;
@@ -122,14 +139,31 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
                     CurrentViewModel = addEmployeeViewModel;
                     _shellManager.SetLoadingData(false);
                     break;
-                case ViewTypes.Projects:
-                    var projectViewModel = _viewModelLocator.Get<ProjectsViewModel>();
+                case ViewTypes.Project:
+                    var projectViewModel = _viewModelLocator.Get<ProjectViewModel>();
                     NoData = false;
                     CurrentViewModel = projectViewModel;
                     break;
-                case ViewTypes.ProjectsNavigation:
-                    var projectNavigationViewModel = _viewModelLocator.Get<ProjectsNavigationViewModel>();
+                case ViewTypes.ProjectCosts:
+                    var projectCostsViewModel = _viewModelLocator.Get<ProjectCostsViewModel>();
+                    CurrentViewModel = projectCostsViewModel;
+                    break;
+                case ViewTypes.Projects:
+                    var projectsViewModel = _viewModelLocator.Get<ProjectsViewModel>();
+                    NoData = false;
+                    CurrentViewModel = projectsViewModel;
+                    break;
+                case ViewTypes.ProjectNavigation:
+                    var projectNavigationViewModel = _viewModelLocator.Get<ProjectNavigationViewModel>();
                     CurrentNavigationViewModel = projectNavigationViewModel;
+                    break;
+                case ViewTypes.ProjectCostsNavigation:
+                    var projectCostsNavigationViewModel = _viewModelLocator.Get<ProjectCostsNavigationViewModel>();
+                    CurrentNavigationViewModel = projectCostsNavigationViewModel;
+                    break;
+                case ViewTypes.ProjectsNavigation:
+                    var projectsNavigationViewModel = _viewModelLocator.Get<ProjectsNavigationViewModel>();
+                    CurrentNavigationViewModel = projectsNavigationViewModel;
                     break;
                 case ViewTypes.OpenedProjects:
                     var openedProjectsViewModel = _viewModelLocator.Get<OpenedProjectsViewModel>();
@@ -151,6 +185,23 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
                     NoData = false;
                     CurrentViewModel = endedProjectsViewModel;
                     break;
+                case ViewTypes.AddProject:
+                    var addProjectViewModel = _viewModelLocator.Get<AddProjectViewModel>();
+                    NoData = false;
+                    CurrentViewModel = addProjectViewModel;
+                    break;
+                case ViewTypes.AddProjectCost:
+                    var addProjectCostViewModel = _viewModelLocator.Get<AddProjectCostViewModel>();
+                    CurrentViewModel = addProjectCostViewModel;
+                    break;
+                case ViewTypes.Client:
+                    var clientViewModel = _viewModelLocator.Get<ClientViewModel>();
+                    CurrentViewModel = clientViewModel;
+                    break;
+                case ViewTypes.ClientNavigation:
+                    var clientNavigationViewModel = _viewModelLocator.Get<ClientViewModel>();
+                    CurrentNavigationViewModel = clientNavigationViewModel;
+                    break;
                 case ViewTypes.Clients:
                     var clientsViewModel = _viewModelLocator.Get<ClientsViewModel>();
                     NoData = false;
@@ -160,6 +211,14 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
                     var clientsNavigationViewModel = _viewModelLocator.Get<ClientsNavigationViewModel>();
                     NoData = false;
                     CurrentNavigationViewModel = clientsNavigationViewModel;
+                    break;
+                case ViewTypes.AddClient:
+                    var addClientViewModel = _viewModelLocator.Get<AddClientViewModel>();
+                    CurrentViewModel = addClientViewModel;
+                    break;
+                case ViewTypes.AddProjectCostNavigation:
+                    var addProjectCostNavigation = _viewModelLocator.Get<AddProjectCostNavigationViewModel>();
+                    CurrentNavigationViewModel = addProjectCostNavigation;
                     break;
             }
         }

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using Autofac;
-using MahApps.Metro.Controls;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Module = Autofac.Module;
 

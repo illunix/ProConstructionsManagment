@@ -36,7 +36,7 @@ namespace ProConstructionsManagment.Desktop.Services
         public async Task<int> GetStartedProjectsCount()
         {
             var uri = $"{Config.ApiUrlBase}/projects/started";
-            
+
             var json = await _requestProvider.GetAsync<RootMultiple<Project>>(uri);
 
             return json.Summaries.Count;
@@ -78,27 +78,72 @@ namespace ProConstructionsManagment.Desktop.Services
             return json.Data;
         }
 
-        public async Task<ObservableCollection<Project>> GetProjectById(Guid projectId)
+        public async Task<Project> GetProjectById(string projectId)
         {
             var uri = $"{Config.ApiUrlBase}/projects/{projectId}";
 
-            var json = await _requestProvider.GetAsync<RootMultiple<Project>>(uri);
+            var json = await _requestProvider.GetAsync<RootSingle<Project>>(uri);
 
             return json.Data;
         }
 
-        public async Task<Project> AddEmployee(Project model)
+        public RequestResult<Project> AddProject(Project model)
         {
-            var uri = $"{Config.ApiUrlBase}/project/add";
+            try
+            {
+                var uri = $"{Config.ApiUrlBase}/project/add";
 
-            return await _requestProvider.PostAsync(uri, model);
+                _requestProvider.PostAsync(uri, model);
+            }
+            catch
+            {
+                return new RequestResult<Project>(false);
+            }
+
+            return new RequestResult<Project>(true);
         }
 
-        public async Task<Project> UpdateEmployee(Project model, Guid projectId)
+        public RequestResult<Project> UpdateProject(Project model, string projectId)
         {
-            var uri = $"{Config.ApiUrlBase}/projects/{projectId}/update";
+            try
+            {
+                var uri = $"{Config.ApiUrlBase}/projects/{projectId}/update";
 
-            return await _requestProvider.PostAsync(uri, model);
+                _requestProvider.PostAsync(uri, model);
+            }
+            catch
+            {
+                return new RequestResult<Project>(false);
+            }
+
+            return new RequestResult<Project>(true);
+        }
+
+        public RequestResult<ProjectCost> AddProjectCost(ProjectCost model, string projectId)
+        {
+            try
+            {
+                var uri = $"{Config.ApiUrlBase}/projects/{projectId}/costs/add";
+
+                _requestProvider.PostAsync(uri, model);
+            }
+            catch
+            {
+                return new RequestResult<ProjectCost>(false);
+
+            }
+
+            return new RequestResult<ProjectCost>(true);
+
+        }
+
+        public async Task<ObservableCollection<ProjectCost>> GetProjectCosts(string projectId)
+        {
+            var uri = $"{Config.ApiUrlBase}/projects/{projectId}/costs";
+
+            var json = await _requestProvider.GetAsync<RootMultiple<ProjectCost>>(uri);
+
+            return json.Data;
         }
     }
 }

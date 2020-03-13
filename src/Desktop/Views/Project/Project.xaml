@@ -20,94 +20,111 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                <TextBlock Text="Imię"
-                       FontSize="14" />
-                <TextBox 
-                 Height="35" 
-                 TextWrapping="Wrap"
-                 Text="{Binding EmployeeName}"
-                 VerticalAlignment="Top"
-                 Width="254"
-                 BorderBrush="#131313"
-                 BorderThickness="1, 1, 1, 1"
-                 Foreground="Black"
-                 Background="{x:Null}"
-                 SelectionBrush="{x:Null}" />
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Nazwa"
+                           FontSize="14" />
+                <TextBox
+                    Height="35"
+                    TextWrapping="Wrap"
+                    Text="{Binding ProjectName}"
+                    VerticalAlignment="Top"
+                    Width="254"
+                    BorderBrush="#131313"
+                    BorderThickness="1, 1, 1, 1"
+                    Foreground="Black"
+                    Background="{x:Null}"
+                    SelectionBrush="{x:Null}" />
             </StackPanel>
 
             <StackPanel Grid.Row="0"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                <TextBlock Text="Drugię imię"
-                       FontSize="14" />
-                <TextBox 
-                 Height="35" 
-                 TextWrapping="Wrap"
-                 Text="{Binding EmployeeSecondName}"
-                 VerticalAlignment="Top"
-                 Width="254"
-                 BorderBrush="#131313"
-                 BorderThickness="1, 1, 1, 1"
-                 Foreground="Black"
-                 Background="{x:Null}"
-                 SelectionBrush="{x:Null}" />
-            </StackPanel>
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Data rozpoczęcia"
+                           FontSize="14" />
 
-            <StackPanel Grid.Row="0"
-                    Grid.Column="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                <TextBlock Text="Nazwisko"
-                       FontSize="14" />
-                <TextBox 
-                 Height="35" 
-                 TextWrapping="Wrap"
-                 Text="{Binding EmployeeLastName}"
-                 VerticalAlignment="Top"
-                 Width="254"
-                 BorderBrush="#131313"
-                 BorderThickness="1, 1, 1, 1"
-                 Foreground="Black"
-                 Background="{x:Null}"
-                 SelectionBrush="{x:Null}" />
-            </StackPanel>
-
-            <StackPanel Grid.Row="1"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                <TextBlock Text="Data urodzenia"
-                       FontSize="14" />
-
-                <DatePicker Text="{Binding EmployeeDateOfBirth}"
-                            Height="35" 
+                <DatePicker SelectedDate="{Binding ProjectStartDate}"
+                            Height="35"
                             Width="254"
-                            Style="{StaticResource DatePickerWithBorders}"/>
+                            Style="{StaticResource DatePickerWithBorders}" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="0"
+                        Grid.Column="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Data zakończenia"
+                           FontSize="14" />
+                <DatePicker SelectedDate="{Binding ProjectEndDate}"
+                            Height="35"
+                            Width="254"
+                            Style="{StaticResource DatePickerWithBorders}" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+                <TextBlock Text="Miejsce wykonania"
+                           FontSize="14" />
+
+                <TextBox
+                    Height="35"
+                    TextWrapping="Wrap"
+                    Text="{Binding ProjectPlaceOfPerformance}"
+                    VerticalAlignment="Top"
+                    Width="254"
+                    BorderBrush="#131313"
+                    BorderThickness="1, 1, 1, 1"
+                    Foreground="Black"
+                    Background="{x:Null}"
+                    SelectionBrush="{x:Null}" />
 
             </StackPanel>
 
             <StackPanel Grid.Row="1"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-                <TextBlock Text="Narodowość"
-                       FontSize="14" />
-                <TextBox 
-                 Height="35" 
-                 TextWrapping="Wrap"
-                 Text="{Binding EmployeeNationality}"
-                 VerticalAlignment="Top"
-                 Width="254"
-                 BorderBrush="#131313"
-                 BorderThickness="1, 1, 1, 1"
-                 Foreground="Black"
-                 Background="{x:Null}"
-                 SelectionBrush="{x:Null}" />
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Wymagana liczba pracowników"
+                           FontSize="14" />
+
+                <TextBox
+                    Height="35"
+                    TextWrapping="Wrap"
+                    Text="{Binding ProjectRequiredNumberOfEmployees}"
+                    VerticalAlignment="Top"
+                    Width="254"
+                    BorderBrush="#131313"
+                    BorderThickness="1, 1, 1, 1"
+                    Foreground="Black"
+                    Background="{x:Null}"
+                    SelectionBrush="{x:Null}" />
             </StackPanel>
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Klient"
+                           FontSize="14" />
+                <ComboBox
+                    Height="35"
+                    ItemsSource="{Binding Clients}"
+                    Text="{Binding Client}"
+                    DisplayMemberPath="CompanyName"
+                    IsEditable="True"
+                    VerticalAlignment="Top"
+                    Width="254"
+                    BorderBrush="#131313"
+                    BorderThickness="1, 1, 1, 1"
+                    Foreground="Black"
+                    Background="{x:Null}" />
+            </StackPanel>
+
         </Grid>
         <Grid Height="200">
             <Grid.ColumnDefinitions>
@@ -123,36 +140,31 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
 
-                <CheckBox Content="Brygadzista"
+                <CheckBox Content="Umowa"
                           FontSize="14"
-                          IsChecked="{Binding EmployeeIsForeman}"/>
+                          IsChecked="{Binding ProjectAgreement}" />
             </StackPanel>
 
             <StackPanel Grid.Row="0"
-                    Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-                <CheckBox Content="Czyta rysunki"
-                          FontSize="14"
-                          IsChecked="{Binding EmployeeReadDrawings}"/>
-            </StackPanel>
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
 
 
             <StackPanel Grid.Row="1"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
 
-                <Button Content="Zapisz zmiany" 
+                <Button Content="Zapisz zmiany"
                         Background="#FFECECEC"
                         BorderBrush="{x:Null}"
                         Foreground="#131313"
-                        Command="{Binding EmployeeUpdate}"/>
+                        Command="{Binding UpdateProjectCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

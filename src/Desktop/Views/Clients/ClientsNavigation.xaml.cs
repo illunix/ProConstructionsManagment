@@ -1,4 +1,6 @@
 ﻿using System.Windows.Controls;
+using ProConstructionsManagment.Desktop.Views.AddClient;
+using ProConstructionsManagment.Desktop.Views.Base;
 
 namespace ProConstructionsManagment.Desktop.Views.Clients
 {
@@ -7,6 +9,10 @@ namespace ProConstructionsManagment.Desktop.Views.Clients
         public ClientsNavigation()
         {
             InitializeComponent();
+
+            var viewModel = ViewModelLocator.Get<AddClientViewModel>();
+
+            Unloaded += (sender, args) => viewModel.Cleanup();
         }
     }
 }

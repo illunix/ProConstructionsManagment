@@ -1,9 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Windows.Controls;
-using Microsoft.Win32.SafeHandles;
-using ProConstructionsManagment.Desktop.Services;
+﻿using System.Windows.Controls;
 using ProConstructionsManagment.Desktop.Views.Base;
 
 namespace ProConstructionsManagment.Desktop.Views.Project
@@ -17,11 +12,9 @@ namespace ProConstructionsManagment.Desktop.Views.Project
         {
             InitializeComponent();
 
-            var viewModel = ViewModelLocator.Get<ProjectViewModel>();
+            Loaded += async (sender, args) => await (DataContext as ProjectViewModel).Initialize();
 
-            DataContext = viewModel;
-
-            Loaded += async (sender, args) => await viewModel.Initialize();
+            Unloaded += (sender, args) => (DataContext as ViewModelBase)?.Cleanup();
         }
     }
 }

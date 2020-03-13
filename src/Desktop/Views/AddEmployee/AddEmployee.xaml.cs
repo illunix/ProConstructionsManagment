@@ -11,10 +11,12 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
         public AddEmployee()
         {
             InitializeComponent();
-            
+
             var viewModel = ViewModelLocator.Get<AddEmployeeViewModel>();
 
             DataContext = viewModel;
+
+            Unloaded += (sender, args) => viewModel.Cleanup();
         }
     }
 }

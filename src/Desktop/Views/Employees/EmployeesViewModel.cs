@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Enums;
@@ -21,6 +24,8 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
 
         private string _employeeCount;
 
+        private string _filterEmployee;
+
         private ObservableCollection<Models.Employee> _employees;
 
         public EmployeesViewModel(IEmployeesService employeesService, IShellManager shellManager,
@@ -31,12 +36,22 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
             _messengerService = messengerService;
         }
 
-        public string EmployeeName { get; set; }
-
         public string EmployeeCount
         {
             get => _employeeCount;
             set => Set(ref _employeeCount, value);
+        }
+
+        public string FilterEmployee
+        {
+            get => _filterEmployee;
+            set
+            {
+                Set(ref _filterEmployee, value);
+                CollectionViewSource.GetDefaultView(Employees).Refresh();
+                CollectionViewSource.GetDefaultView(Employees).Filter += o =>
+                    String.IsNullOrEmpty(_filterEmployee) || ((string)o).Contains(_filterEmployee);
+            }
         }
 
         public ObservableCollection<Models.Employee> Employees
@@ -50,7 +65,8 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
         private async Task NavigateToEmployeeView(object obj)
         {
             _messengerService.Send(new ChangeViewMessage(ViewTypes.Employee));
-            
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.EmployeeNavigation));
+
             if (obj is string employeeId)
             {
                 _messengerService.Send(new EmployeeIdMessage(employeeId));
@@ -62,7 +78,7 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
             try
             {
                 _shellManager.SetLoadingData(true);
-                
+
                 Employees = await _employeesService.GetAllEmployees();
 
                 EmployeeCount = $"Łącznie {Employees.Count} rekordów";
@@ -70,6 +86,8 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
             catch (Exception e)
             {
                 Log.Error(e, "Failed loading employees view");
+
+                MessageBox.Show("Coś poszło nie tak podczas pobierania danych");
             }
             finally
             {

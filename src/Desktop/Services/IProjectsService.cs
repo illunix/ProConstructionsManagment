@@ -12,6 +12,7 @@ namespace ProConstructionsManagment.Desktop.Services
         Task<ObservableCollection<Project>> GetStartedProjects();
 
         Task<int> GetStartedProjectsCount();
+        
         Task<ObservableCollection<Project>> GetProjectsForStart();
 
         Task<ObservableCollection<Project>> GetProjectsForSettlement();
@@ -20,10 +21,14 @@ namespace ProConstructionsManagment.Desktop.Services
 
         Task<ObservableCollection<Project>> GetEndedProjects();
 
-        Task<ObservableCollection<Project>> GetProjectById(Guid projectId);
+        Task<Project> GetProjectById(string projectId);
 
-        Task<Project> AddEmployee(Project model);
+        RequestResult<Project> AddProject(Project model);
 
-        Task<Project> UpdateEmployee(Project model, Guid projectId);
+        RequestResult<Project> UpdateProject(Project model, string projectId);
+
+        RequestResult<ProjectCost> AddProjectCost(ProjectCost model, string projectId);
+
+        Task<ObservableCollection<ProjectCost>> GetProjectCosts(string projectId);
     }
 }

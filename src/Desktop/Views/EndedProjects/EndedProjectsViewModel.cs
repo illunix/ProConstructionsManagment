@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
-using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
@@ -50,12 +50,16 @@ namespace ProConstructionsManagment.Desktop.Views.EndedProjects
 
                 EndedProjectCount = $"Łącznie {EndedProjects.Count} rekordów";
 
-                if (EndedProjects.Count == 0) _messengerService.Send(new NoDataMessage(true));
-
+                if (EndedProjects.Count == 0)
+                {
+                    _messengerService.Send(new NoDataMessage(true));
+                }
             }
             catch (Exception e)
             {
                 Log.Error(e, "Failed loading ended projects view");
+
+                MessageBox.Show("Coś poszło nie tak podczas pobierania danych");
             }
             finally
             {

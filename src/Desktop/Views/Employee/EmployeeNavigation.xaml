@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="ProConstructionsManagment.Desktop.Views.Employee.EmployeeNavigation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.Employee"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="809" d:DesignWidth="240">
+    <Grid>
+        <StackPanel>
+            <ListView FontSize="12">
+                <ListViewItem Padding="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavigateToEmployeesViewCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ArrowLeft" Margin="10" />
+                        <TextBlock Text="Cofnij" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <TextBlock Text="Akcje" Margin="15" FontWeight="DemiBold" />
+            <ListView FontSize="15">
+                <ListViewItem Padding="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding HireEmployeeCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal" Width="229">
+                        <materialDesign:PackIcon Kind="AccountPlus" Margin="15" />
+                        <TextBlock Text="Zatrudnij" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</UserControl>

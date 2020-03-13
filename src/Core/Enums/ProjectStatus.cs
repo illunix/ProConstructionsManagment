@@ -2,7 +2,7 @@
 {
     public enum ProjectStatus
     {
-        WaitingForStart,
+        WaitingToStart,
         Started,
         ForSettlement,
         Settled,

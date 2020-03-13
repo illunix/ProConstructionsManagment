@@ -15,11 +15,16 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
     {
         private readonly IEmployeesService _employeesService;
         private readonly IShellManager _shellManager;
+
+        private string _employeeDateOfBirth;
+
+        private bool _employeeIsForeman;
         private string _employeeLastName;
 
         private string _employeeName;
+        private string _employeeNationality;
         private bool _employeeReadDrawings;
-        private bool _showEmployeeLastNameHighlighted;
+        private string _employeeSecondName;
 
         public AddEmployeeViewModel(IEmployeesService employeesService, IShellManager shellManager)
         {
@@ -33,15 +38,35 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
             set => Set(ref _employeeName, value);
         }
 
+        public string EmployeeSecondName
+        {
+            get => _employeeSecondName;
+            set => Set(ref _employeeSecondName, value);
+        }
+
         public string EmployeeLastName
         {
             get => _employeeLastName;
             set => Set(ref _employeeLastName, value);
         }
 
-        public string EmployeeDateOfBirth { get; set; }
+        public string EmployeeDateOfBirth
+        {
+            get => _employeeDateOfBirth;
+            set => Set(ref _employeeDateOfBirth, value);
+        }
 
-        public bool EmployeeIsForeman { get; set; }
+        public string EmployeeNationality
+        {
+            get => _employeeNationality;
+            set => Set(ref _employeeNationality, value);
+        }
+
+        public bool EmployeeIsForeman
+        {
+            get => _employeeIsForeman;
+            set => Set(ref _employeeIsForeman, value);
+        }
 
         public bool EmployeeReadDrawings
         {
@@ -49,30 +74,18 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
             set => Set(ref _employeeReadDrawings, value);
         }
 
-        public bool ShowEmployeeLastNameHighlighted
-        {
-            get => _showEmployeeLastNameHighlighted; 
-            set => Set(ref _showEmployeeLastNameHighlighted, value);
-        }
-        
-        public ICommand EmployeeAddCommand => new AsyncRelayCommand(EmployeeAdd);
-        
         private ValidationResult BuildValidation()
         {
-            if (string.IsNullOrWhiteSpace(EmployeeLastName))
-            {
-                ShowEmployeeLastNameHighlighted = true;
-            }
+            if (string.IsNullOrWhiteSpace(EmployeeName) || string.IsNullOrWhiteSpace(EmployeeLastName) ||
+                string.IsNullOrWhiteSpace(EmployeeDateOfBirth) ||
+                string.IsNullOrWhiteSpace(EmployeeDateOfBirth)) return new ValidationResult(false);
 
-            if (string.IsNullOrWhiteSpace(EmployeeName) || string.IsNullOrWhiteSpace(EmployeeLastName) || string.IsNullOrWhiteSpace(EmployeeDateOfBirth) || string.IsNullOrWhiteSpace(EmployeeDateOfBirth))
-            {
-                return new ValidationResult(false);
-            }
-            
             return new ValidationResult(true);
         }
 
-        private async Task EmployeeAdd()
+        public ICommand AddEmployeeCommand => new AsyncRelayCommand(AddEmployee);
+
+        private async Task AddEmployee()
         {
             if (BuildValidation().IsSuccessful)
             {
@@ -82,16 +95,22 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
 
                     var data = new Models.Employee
                     {
+                        Id = Guid.NewGuid().ToString(),
                         Name = EmployeeName,
+                        SecondName = EmployeeSecondName,
+                        LastName =  EmployeeLastName,
                         DateOfBirth = EmployeeDateOfBirth,
-                        LastName = EmployeeLastName,
+                        Nationality = EmployeeNationality,
                         IsForeman = EmployeeIsForeman,
-                        ReadDrawings = EmployeeReadDrawings
+                        ReadDrawings = EmployeeReadDrawings,
+                        Status = 0
                     };
 
-                    var result = _employeesService.AddEmployee(data);
+                    var result = await Task.Run(() => _employeesService.AddEmployee(data));
                     if (result.IsSuccessful)
                     {
+                        Log.Information($"Successfully added new employee ({data.Id})");
+                        
                         MessageBox.Show("Pomyślnie dodano pracownika");
                     }
                 }
@@ -99,7 +118,8 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
                 {
                     Log.Error(e, "Failed adding new employee");
 
-                    MessageBox.Show("Coś poszło nie tak podczas zapisywania zmian, proszę spróbować jeszcze raz. Jeśli problem nadal występuje, skontakuj się z administratorem oprogramowania");
+                    MessageBox.Show(
+                        "Coś poszło nie tak podczas dodawania pracownika, proszę spróbować jeszcze raz. Jeśli problem nadal występuje, skontakuj się z administratorem oprogramowania");
                 }
                 finally
                 {

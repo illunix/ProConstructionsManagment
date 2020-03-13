@@ -7,7 +7,7 @@ namespace ProConstructionsManagment.Desktop.Models
         public ObservableCollection<T> Data { get; set; }
         public Summaries Summaries { get; set; }
     }
-    
+
     public class RootSingle<T> where T : class
     {
         public T Data { get; set; }

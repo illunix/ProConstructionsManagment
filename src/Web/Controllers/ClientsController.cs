@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ProConstructionsManagment.Core.Entities;
 using ProConstructionsManagment.Core.Interfaces;
-using ProConstructionsManagment.Infrastructure.Data.Entities;
 
 namespace ProConstructionsManagment.Web.Controllers
 {
@@ -20,74 +20,46 @@ namespace ProConstructionsManagment.Web.Controllers
         [Route("clients")]
         public async Task<IActionResult> GetClients()
         {
-            try
-            {
-                var result = await _asyncRepository.GetAll();
+            var result = await _asyncRepository.GetAll();
 
-                return Ok(new
-                {
-                    data = result,
-                    summaries = new
-                    {
-                        count = result.Count
-                    }
-                });
-            }
-            catch
+            return Ok(new
             {
-                return NotFound();
-            }
+                data = result,
+                summaries = new
+                {
+                    count = result.Count
+                }
+            });
         }
 
         [HttpGet]
         [Route("clients/{clientId}")]
         public async Task<IActionResult> GetEmployeeById(Guid clientId)
         {
-            try
-            {
-                var result = await _asyncRepository.GetById(clientId);
+            var result = await _asyncRepository.GetById(clientId);
 
-                return Ok(new
-                {
-                    data = result
-                });
-            }
-            catch
+            return Ok(new
             {
-                return NotFound();
-            }
+                data = result
+            });
         }
 
         [HttpPost]
         [Route("client/add")]
         public async Task<IActionResult> AddClient([FromBody] Client entity)
         {
-            try
-            {
-                var result = await _asyncRepository.Add(entity);
+            var result = await _asyncRepository.Add(entity);
 
-                return Ok(result);
-            }
-            catch
-            {
-                return BadRequest();
-            }
+            return Ok(result);
         }
 
         [HttpPost]
         [Route("clients/{clientId}/update")]
         public async Task<IActionResult> UpdateClient([FromBody] Client entity, Guid clientId)
         {
-            try
-            {
-                var result = await _asyncRepository.Update(entity, clientId);
+            var result = await _asyncRepository.Update(entity, clientId);
 
-                return Ok(result);
-            }
-            catch
-            {
-                return BadRequest();
-            }
+            return Ok(result);
         }
     }
 }

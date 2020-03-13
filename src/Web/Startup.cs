@@ -4,13 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProConstructionsManagment.Core.Entities;
 using ProConstructionsManagment.Core.Enums;
 using ProConstructionsManagment.Core.Interfaces;
 using ProConstructionsManagment.Infrastructure.Data;
-using ProConstructionsManagment.Infrastructure.Data.Entities;
 using ProConstructionsManagment.Infrastructure.Data.Repositories;
+using ProConstructionsManagment.Infrastructure.Errors;
+using ProConstructionsManagment.Infrastructure.Repositories;
 
-namespace Web
+namespace ProConstructionsManagment.Web
 {
     public class Startup
     {
@@ -21,28 +23,22 @@ namespace Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<EmployeeContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionString"]));
 
-            services.AddDbContext<ProjectContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionString"]));
+            services.AddScoped<IAsyncRepository<Project, ProjectStatus>, AsyncRepository<Project, ProjectStatus>>();
+            services.AddScoped<IAsyncRepository<ProjectCost>, AsyncRepository<ProjectCost>>();
+            services.AddScoped<IProjectsRepository, ProjectsRepository>();
 
-            services.AddDbContext<ClientContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionString"]));
+            services.AddScoped<IAsyncRepository<Employee, EmployeeStatus>, AsyncRepository<Employee, EmployeeStatus>>();
 
-            services.AddScoped<IAsyncRepository<Project, ProjectStatus>, ProjectsRepository>();
-
-            services.AddScoped<IAsyncRepository<Client>, ClientsRepository>();
-
-            services.AddScoped<IAsyncRepository<Employee, EmployeeStatus>, EmployeesRepository>();
+            services.AddScoped<IAsyncRepository<Client>, AsyncRepository<Client>>();
 
             services.AddControllers();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
@@ -52,6 +48,8 @@ namespace Web
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

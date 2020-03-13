@@ -8,6 +8,8 @@ namespace ProConstructionsManagment.Desktop.Services
     public interface IClientsService
     {
         Task<ObservableCollection<Client>> GetAllClients();
-        Task<ObservableCollection<Client>> GetClientById(Guid clientId);
+        Task<Client> GetClientById(string clientId);
+        RequestResult<Client> AddClient(Client model);
+        RequestResult<Client> UpdateClient(Client model, string clientId);
     }
 }

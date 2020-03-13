@@ -33,7 +33,7 @@
                     </i:Interaction.Triggers>
                     <StackPanel Orientation="Horizontal" Width="229">
                         <materialDesign:PackIcon Kind="AccountMultiple" Margin="15" />
-                        <TextBlock Text="Wszyscy pracownicy" VerticalAlignment="Center" />
+                        <TextBlock Text="Wszyscy klienci" VerticalAlignment="Center" />
                     </StackPanel>
                 </ListViewItem>
             </ListView>
@@ -42,23 +42,12 @@
                 <ListViewItem Padding="1">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding NavigateToAddEmployeeViewCommand}" />
+                            <i:InvokeCommandAction Command="{Binding NavigateToAddClientViewCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <StackPanel Orientation="Horizontal" Width="229">
                         <materialDesign:PackIcon Kind="AccountPlus" Margin="15" />
-                        <TextBlock Text="Dodaj pracownika" VerticalAlignment="Center" />
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem Padding="1">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding ReloadEmployeesViewCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <StackPanel Orientation="Horizontal" Width="229">
-                        <materialDesign:PackIcon Kind="Reload" Margin="15" />
-                        <TextBlock Text="Odśwież" VerticalAlignment="Center" />
+                        <TextBlock Text="Dodaj klienta" VerticalAlignment="Center" />
                     </StackPanel>
                 </ListViewItem>
             </ListView>

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using ProConstructionsManagment.Desktop.Commands;
+using ProConstructionsManagment.Desktop.Enums;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
@@ -19,8 +22,9 @@ namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
 
         private ObservableCollection<Models.Employee> _hiredEmployees;
 
-        public HiredEmployeesViewModel(IEmployeesService employeesService, IShellManager shellManager)
+        public HiredEmployeesViewModel(IMessengerService messengerService, IEmployeesService employeesService, IShellManager shellManager)
         {
+            _messengerService = messengerService;
             _employeesService = employeesService;
             _shellManager = shellManager;
         }
@@ -37,12 +41,24 @@ namespace ProConstructionsManagment.Desktop.Views.HiredEmployees
             set => Set(ref _hiredEmployees, value);
         }
 
+        public ICommand NavigateToEmployeeViewCommand => new AsyncRelayCommand<object>(NavigateToEmployeeView);
+
+        private async Task NavigateToEmployeeView(object obj)
+        {
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.Employee));
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.EmployeeNavigation));
+
+            if (obj is string employeeId)
+            {
+                _messengerService.Send(new EmployeeIdMessage(employeeId));
+            }
+        }
         public async Task Initialize()
         {
             try
             {
                 _shellManager.SetLoadingData(true);
-                
+
                 HiredEmployees = await _employeesService.GetAllHiredEmployees();
 
                 HiredEmployeeCount = $"Łącznie {HiredEmployees.Count}";

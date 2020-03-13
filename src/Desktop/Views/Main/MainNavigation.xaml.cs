@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using ProConstructionsManagment.Desktop.Views.Base;
 
 namespace ProConstructionsManagment.Desktop.Views.Main
 {
@@ -7,6 +8,10 @@ namespace ProConstructionsManagment.Desktop.Views.Main
         public MainNavigation()
         {
             InitializeComponent();
+
+            var viewModel = ViewModelLocator.Get<MainNavigationViewModel>();
+
+            Unloaded += (sender, args) => viewModel.Cleanup();
         }
     }
 }

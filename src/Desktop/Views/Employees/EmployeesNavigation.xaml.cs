@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using ProConstructionsManagment.Desktop.Views.Base;
 
 namespace ProConstructionsManagment.Desktop.Views.Employees
 {
@@ -7,6 +8,10 @@ namespace ProConstructionsManagment.Desktop.Views.Employees
         public EmployeesNavigation()
         {
             InitializeComponent();
+
+            var viewModel = ViewModelLocator.Get<EmployeesNavigationViewModel>();
+
+            Unloaded += (sender, args) => viewModel.Cleanup();
         }
     }
 }

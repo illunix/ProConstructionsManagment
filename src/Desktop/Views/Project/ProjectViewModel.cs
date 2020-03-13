@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Messaging;
 using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
+using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
@@ -14,103 +15,122 @@ namespace ProConstructionsManagment.Desktop.Views.Project
 {
     public class ProjectViewModel : ViewModelBase
     {
-        private readonly IEmployeesService _employeesService;
-        private readonly IShellManager _shellManager;
+        private readonly IProjectsService _projectsService;
+        private readonly IClientsService _clientsService;
         private readonly IMessengerService _messengerService;
+        private readonly IShellManager _shellManager;
 
-        private string _employeeId;
-        private string _employeeName;
-        private string _employeeSecondName;
-        private string _employeeLastName;
-        private string _employeeDateOfBirth;
-        private string _employeeNationality;
-        private bool _employeeIsForeman;
-        private bool _employeeReadDrawings;
+        private string _projectId;
+        
+        private string _client;
+        private ObservableCollection<Models.Client> _clients;
 
-        public bool isRegistered;
-        public ProjectViewModel(IEmployeesService employeesService, IShellManager shellManager, IMessengerService messengerService)
+        private bool _projectAgreement;
+        private string _projectEndDate;
+
+        private string _projectName;
+        private string _projectPlaceOfPerformance;
+        private int _projectRequiredNumberOfEmployees;
+        private string _projectStartDate;        
+
+        public ProjectViewModel(IProjectsService projectsService, IClientsService clientsService, IShellManager shellManager,
+            IMessengerService messengerService)
         {
-            _employeesService = employeesService;
+            _projectsService = projectsService;
+            _clientsService = clientsService;
             _shellManager = shellManager;
             _messengerService = messengerService;
 
-            messengerService.Register<EmployeeIdMessage>(this, EmployeeIdMessageNotify);
-
-            GC.Collect();
+            messengerService.Register<ProjectIdMessage>(this, msg => ProjectId = msg.ProjectId);
         }
 
-        public void EmployeeIdMessageNotify(EmployeeIdMessage obj)
+        public string ProjectId
         {
-            EmployeeId = obj.EmployeeId;
+            get => _projectId;
+            set => Set(ref _projectId, value);
         }
-
-        public string EmployeeId
+        
+        public string ProjectName
         {
-            get => _employeeId;
-            set => Set(ref _employeeId, value);
+            get => _projectName;
+            set => Set(ref _projectName, value);
         }
 
-        public string EmployeeName
+        public string ProjectStartDate
         {
-            get => _employeeName;
-            set => Set(ref _employeeName, value);
+            get => _projectStartDate;
+            set => Set(ref _projectStartDate, value);
         }
 
-        public string EmployeeSecondName
+        public string ProjectEndDate
         {
-            get => _employeeSecondName;
-            set => Set(ref _employeeSecondName, value);
+            get => _projectEndDate;
+            set => Set(ref _projectEndDate, value);
         }
 
-        public string EmployeeLastName
+        public string ProjectPlaceOfPerformance
         {
-            get => _employeeLastName;
-            set => Set(ref _employeeLastName, value);
+            get => _projectPlaceOfPerformance;
+            set => Set(ref _projectPlaceOfPerformance, value);
         }
 
-        public string EmployeeDateOfBirth
+        public int ProjectRequiredNumberOfEmployees
         {
-            get => _employeeDateOfBirth;
-            set => Set(ref _employeeDateOfBirth, value);
+            get => _projectRequiredNumberOfEmployees;
+            set => Set(ref _projectRequiredNumberOfEmployees, value);
         }
 
-        public string EmployeeNationality
+        public bool ProjectAgreement
         {
-            get => _employeeNationality;
-            set => Set(ref _employeeNationality, value);
+            get => _projectAgreement;
+            set => Set(ref _projectAgreement, value);
         }
-
-        public bool EmployeeIsForeman
+        
+        public string Client
         {
-            get => _employeeIsForeman;
-            set => Set(ref _employeeIsForeman, value);
+            get => _client;
+            set => Set(ref _client, value);
         }
 
-        public bool EmployeeReadDrawings
+        public ObservableCollection<Models.Client> Clients
         {
-            get => _employeeReadDrawings;
-            set => Set(ref _employeeReadDrawings, value);
+            get => _clients;
+            set => Set(ref _clients, value);
         }
 
+        
+        private ValidationResult BuildValidation()
+        {
+            if (string.IsNullOrWhiteSpace(ProjectName) || string.IsNullOrWhiteSpace(ProjectStartDate) ||
+                string.IsNullOrWhiteSpace(ProjectEndDate) ||
+                string.IsNullOrWhiteSpace(ProjectPlaceOfPerformance))
+            {
+                return new ValidationResult(false);
+            }
+
+            return new ValidationResult(true);
+        }
+        
         public async Task Initialize()
         {
             try
             {
                 _shellManager.SetLoadingData(true);
-                
-                var employee = await _employeesService.GetEmployeeById(EmployeeId);
-                
-                EmployeeName = employee.Name;
-                EmployeeSecondName = employee.SecondName;
-                EmployeeLastName = employee.LastName;
-                EmployeeDateOfBirth = employee.DateOfBirth;
-                EmployeeNationality = employee.Nationality;
-                EmployeeIsForeman = employee.IsForeman;
-                EmployeeReadDrawings = employee.ReadDrawings;
+
+                Clients = await _clientsService.GetAllClients();
+
+                var project = await _projectsService.GetProjectById(ProjectId);
+
+                ProjectName = project.Name;
+                ProjectStartDate = project.StartDate;
+                ProjectEndDate = project.EndDate;
+                ProjectPlaceOfPerformance = project.PlaceOfPerformance;
+                ProjectRequiredNumberOfEmployees = project.RequiredNumberOfEmployees;
+                ProjectAgreement = project.Agreement;
             }
             catch (Exception e)
             {
-                Log.Error(e, "Failed loading employee view");
+                Log.Error(e, "Failed loading project view");
             }
             finally
             {
@@ -118,33 +138,51 @@ namespace ProConstructionsManagment.Desktop.Views.Project
             }
         }
         
-        public ICommand UpdateEmployeeCommand => new AsyncRelayCommand(UpdateEmployee);
+        public ICommand UpdateProjectCommand => new AsyncRelayCommand(UpdateProject);
 
-        private async Task UpdateEmployee()
+        private async Task UpdateProject()
         {
-            try
+            if (BuildValidation().IsSuccessful)
             {
-                _shellManager.SetLoadingData(true);
-
-                var data = new Models.Employee
+                try
                 {
-                    Name = EmployeeName,
-                    DateOfBirth = EmployeeDateOfBirth,
-                    LastName = EmployeeLastName,
-                    IsForeman = EmployeeIsForeman,
-                    ReadDrawings = EmployeeReadDrawings
-                };
-                
-            }
-            catch (Exception e)
-            {
-                Log.Error(e, "Failed updating employee");
+                    _shellManager.SetLoadingData(true);
 
-                MessageBox.Show("Coś poszło nie tak podczas dodawania pracownika, proszę spróbować jeszcze raz. Jeśli problem nadal występuje, skontakuj się z administratorem oprogramowania");
+                    var data = new Models.Project
+                    {
+                        Id = ProjectId,
+                        Name = ProjectName,
+                        StartDate = ProjectStartDate,
+                        EndDate = ProjectEndDate,
+                        PlaceOfPerformance = ProjectPlaceOfPerformance,
+                        RequiredNumberOfEmployees = ProjectRequiredNumberOfEmployees,
+                        Agreement = ProjectAgreement,
+                        Status = 0
+                    };
+
+                    var result = await Task.Run(() => _projectsService.UpdateProject(data, ProjectId));
+                    if (result.IsSuccessful)
+                    {
+                        Log.Information($"Successfully edited project ({data.Id})");
+
+                        MessageBox.Show("Pomyślnie zapisano projekt");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e, "Failed adding new project");
+
+                    MessageBox.Show(
+                        "Coś poszło nie tak podczas dodawania projektu, proszę spróbować jeszcze raz. Jeśli problem nadal występuje, skontakuj się z administratorem oprogramowania");
+                }
+                finally
+                {
+                    _shellManager.SetLoadingData(false);
+                }
             }
-            finally
+            else
             {
-                _shellManager.SetLoadingData(false);
+                MessageBox.Show("Uzupełnij wymagane pola");
             }
         }
     }

@@ -14,6 +14,8 @@ namespace ProConstructionsManagment.Desktop.Views.Main
             DataContext = viewModel;
 
             Loaded += async (sender, args) => await viewModel.InitializeAsync();
+
+            Unloaded += (sender, args) => viewModel.Cleanup();
         }
     }
 }

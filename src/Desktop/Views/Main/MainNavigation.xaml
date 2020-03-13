@@ -20,7 +20,7 @@
                     </i:Interaction.Triggers>
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Home" Margin="15" />
-                        <TextBlock Text="Home" VerticalAlignment="Center" />
+                        <TextBlock Text="Dashboard" VerticalAlignment="Center" />
                     </StackPanel>
                 </ListViewItem>
             </ListView>

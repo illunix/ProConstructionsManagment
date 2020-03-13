@@ -8,7 +8,7 @@ namespace ProConstructionsManagment.Desktop.Services
 {
     public class EmployeesService : IEmployeesService
     {
-        public readonly IRequestProvider _requestProvider;
+        private readonly IRequestProvider _requestProvider;
 
         public EmployeesService(IRequestProvider requestProvider)
         {
@@ -50,7 +50,7 @@ namespace ProConstructionsManagment.Desktop.Services
 
             return json.Data;
         }
-        
+
 
         public async Task<Employee> GetEmployeeById(string employeeId)
         {
@@ -63,6 +63,17 @@ namespace ProConstructionsManagment.Desktop.Services
 
         public RequestResult<Employee> AddEmployee(Employee model)
         {
+            if (string.IsNullOrWhiteSpace(model.Name)) throw new ArgumentNullException(nameof(model.Name));
+
+            if (string.IsNullOrWhiteSpace(model.LastName)) throw new ArgumentNullException(nameof(model.LastName));
+
+            /*
+            if (string.IsNullOrWhiteSpace(model.DateOfBirth))
+                throw new ArgumentNullException(nameof(model.DateOfBirth));
+                */
+
+            if (string.IsNullOrWhiteSpace(model.Nationality))
+                throw new ArgumentNullException(nameof(model.Nationality));
 
             try
             {
@@ -70,35 +81,25 @@ namespace ProConstructionsManagment.Desktop.Services
 
                 _requestProvider.PostAsync(uri, model);
             }
-            catch 
+            catch
             {
                 return new RequestResult<Employee>(false);
             }
-            
+
             return new RequestResult<Employee>(true);
         }
 
         public RequestResult<Employee> UpdateEmployee(Employee model, string employeeId)
         {
-            if (string.IsNullOrWhiteSpace(model.Name))
-            {
-                throw new ArgumentNullException(nameof(model.Name));
-            }
-            
-            if (string.IsNullOrWhiteSpace(model.Name))
-            {
-                throw new ArgumentNullException(nameof(model.SecondName));
-            }
-            
+            if (string.IsNullOrWhiteSpace(model.Name)) throw new ArgumentNullException(nameof(model.Name));
+
+            if (string.IsNullOrWhiteSpace(model.LastName)) throw new ArgumentNullException(nameof(model.LastName));
+
             if (string.IsNullOrWhiteSpace(model.DateOfBirth))
-            {
                 throw new ArgumentNullException(nameof(model.DateOfBirth));
-            }
-            
+
             if (string.IsNullOrWhiteSpace(model.Nationality))
-            {
                 throw new ArgumentNullException(nameof(model.Nationality));
-            }
 
             try
             {
@@ -106,11 +107,11 @@ namespace ProConstructionsManagment.Desktop.Services
 
                 _requestProvider.PostAsync(uri, model);
             }
-            catch 
+            catch
             {
                 return new RequestResult<Employee>(false);
             }
-            
+
             return new RequestResult<Employee>(true);
         }
     }

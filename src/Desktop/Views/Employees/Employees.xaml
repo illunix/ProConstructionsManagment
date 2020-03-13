@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.Employees"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="808.6" d:DesignWidth="1259"
              d:DataContext="{d:DesignInstance local:EmployeesViewModel}">
@@ -103,5 +105,15 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <!--
+        <TextBox materialDesign:HintAssist.Hint="Szukaj"
+                 HorizontalAlignment="Left"
+                 Height="24" 
+                 Margin="785,25,0,0"
+                 TextWrapping="Wrap" 
+                 Text="{Binding FilterEmployee}" 
+                 VerticalAlignment="Top" 
+                 Width="210"/> 
+        -->
     </Grid>
 </UserControl>

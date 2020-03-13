@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using ProConstructionsManagment.Desktop.Views.Base;
 
 namespace ProConstructionsManagment.Desktop.Views.Projects
 {
@@ -7,6 +8,10 @@ namespace ProConstructionsManagment.Desktop.Views.Projects
         public ProjectsNavigation()
         {
             InitializeComponent();
+
+            var viewModel = ViewModelLocator.Get<ProjectsNavigationViewModel>();
+
+            Unloaded += (sender, args) => viewModel.Cleanup();
         }
     }
 }

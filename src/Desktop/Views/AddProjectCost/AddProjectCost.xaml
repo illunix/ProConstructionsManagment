@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="ProConstructionsManagment.Desktop.Views.AddProjectCost.AddProjectCost"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.AddProjectCost"
+             mc:Ignorable="d" 
+             d:DesignHeight="808.6" d:DesignWidth="1259"
+             d:DataContext="{d:DesignInstance local:AddProjectCostViewModel}">
+    <Grid>
+        <Grid VerticalAlignment="Top"
+              Height="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Kwota brutto"
+                           FontSize="14" />
+                <TextBox
+                    Height="35"
+                    TextWrapping="Wrap"
+                    Text="{Binding ProjectCostGrossAmount}"
+                    VerticalAlignment="Top"
+                    Width="254"
+                    BorderBrush="#131313"
+                    BorderThickness="1, 1, 1, 1"
+                    Foreground="Black"
+                    Background="{x:Null}"
+                    SelectionBrush="{x:Null}" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Opis kosztów"
+                           FontSize="14" />
+                <TextBox
+                    Height="35"
+                    TextWrapping="Wrap"
+                    Text="{Binding ProjectCostDescription}"
+                    VerticalAlignment="Top"
+                    Width="254"
+                    BorderBrush="#131313"
+                    BorderThickness="1, 1, 1, 1"
+                    Foreground="Black"
+                    Background="{x:Null}"
+                    SelectionBrush="{x:Null}" />
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="0"
+                        Grid.Column="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+
+        </Grid>
+        <Grid Height="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+                <Button Content="Dodaj"
+                        Background="#FFECECEC"
+                        BorderBrush="{x:Null}"
+                        Foreground="#131313"
+                        Command="{Binding AddProjectCostCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

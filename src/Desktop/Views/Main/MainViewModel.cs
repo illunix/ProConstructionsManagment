@@ -16,13 +16,14 @@ namespace ProConstructionsManagment.Desktop.Views.Main
         private int _employeeCount;
         private int _startedProjectsCount;
 
-        public MainViewModel(IEmployeesService employeesService, IProjectsService projectsService, IShellManager shellManager)
+        public MainViewModel(IEmployeesService employeesService, IProjectsService projectsService,
+            IShellManager shellManager)
         {
             _employeesService = employeesService;
             _projectsService = projectsService;
             _shellManager = shellManager;
         }
-        
+
         public int EmployeeCount
         {
             get => _employeeCount;
@@ -52,7 +53,6 @@ namespace ProConstructionsManagment.Desktop.Views.Main
             finally
             {
                 _shellManager.SetLoadingData(false);
-        
             }
         }
     }

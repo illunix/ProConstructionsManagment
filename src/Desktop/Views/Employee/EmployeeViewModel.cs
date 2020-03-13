@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
+using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
@@ -15,43 +15,29 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
     public class EmployeeViewModel : ViewModelBase
     {
         private readonly IEmployeesService _employeesService;
-        private readonly IShellManager _shellManager;
         private readonly IMessengerService _messengerService;
-
-        private bool _employeeNameHighlight;
-        private string _employeeId;
-        private string _employeeName;
-        private string _employeeSecondName;
-        private string _employeeLastName;
-        private string _employeeDateOfBirth;
-        private string _employeeNationality;
-        private bool _employeeIsForeman;
-        private bool _employeeReadDrawings;
-
-        public bool isRegistered;
+        private readonly IShellManager _shellManager;
         
-        public EmployeeViewModel(IEmployeesService employeesService, IShellManager shellManager, IMessengerService messengerService)
+        private string _employeeDateOfBirth;
+        private string _employeeId;
+        private bool _employeeIsForeman;
+        private string _employeeLastName;
+        private string _employeeName;
+
+        private string _employeeNationality;
+        private bool _employeeReadDrawings;
+        private string _employeeSecondName;
+
+        public EmployeeViewModel(IEmployeesService employeesService, IShellManager shellManager,
+            IMessengerService messengerService)
         {
             _employeesService = employeesService;
             _shellManager = shellManager;
             _messengerService = messengerService;
 
-            messengerService.Register<EmployeeIdMessage>(this, EmployeeIdMessageNotify);
-
-            GC.Collect();
+            messengerService.Register<EmployeeIdMessage>(this, msg => EmployeeId = msg.EmployeeId);
         }
-
-        public void EmployeeIdMessageNotify(EmployeeIdMessage obj)
-        {
-            EmployeeId = obj.EmployeeId;
-        }
-
-        public bool EmployeeNameHighlight
-        {
-            get => _employeeNameHighlight;
-            set => Set(ref _employeeNameHighlight, value);
-        }
-
+        
         public string EmployeeId
         {
             get => _employeeId;
@@ -99,13 +85,21 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
             get => _employeeReadDrawings;
             set => Set(ref _employeeReadDrawings, value);
         }
-        
-        private async Task BuildValidation()
+
+        public ICommand UpdateEmployeeCommand => new AsyncRelayCommand(UpdateEmployee);
+
+        private ValidationResult BuildValidation()
         {
-            if (string.IsNullOrWhiteSpace(EmployeeName) || string.IsNullOrWhiteSpace(EmployeeLastName) || string.IsNullOrWhiteSpace(EmployeeDateOfBirth) || string.IsNullOrWhiteSpace(EmployeeDateOfBirth))
+            if (string.IsNullOrWhiteSpace(EmployeeName) || string.IsNullOrWhiteSpace(EmployeeLastName) ||
+                string.IsNullOrWhiteSpace(EmployeeDateOfBirth) ||
+                string.IsNullOrWhiteSpace(EmployeeNationality))
             {
                 MessageBox.Show("Uzupełnij wymagane pola");
+
+                return new ValidationResult(false);
             }
+            
+            return new ValidationResult(true);
         }
 
         public async Task Initialize()
@@ -115,7 +109,7 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
                 _shellManager.SetLoadingData(true);
 
                 var employee = await _employeesService.GetEmployeeById(EmployeeId);
-                
+
                 EmployeeName = employee.Name;
                 EmployeeSecondName = employee.SecondName;
                 EmployeeLastName = employee.LastName;
@@ -133,41 +127,49 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
                 _shellManager.SetLoadingData(false);
             }
         }
-        
-        public ICommand UpdateEmployeeCommand => new AsyncRelayCommand(UpdateEmployee);
 
         private async Task UpdateEmployee()
         {
-            BuildValidation();
-
-            try
+            if (BuildValidation().IsSuccessful)
             {
-                _shellManager.SetLoadingData(true);
-
-                var data = new Models.Employee
+                try
                 {
-                    Name = EmployeeName,
-                    DateOfBirth = EmployeeDateOfBirth,
-                    LastName = EmployeeLastName,
-                    IsForeman = EmployeeIsForeman,
-                    ReadDrawings = EmployeeReadDrawings
-                };
+                    _shellManager.SetLoadingData(true);
 
-                var result = _employeesService.UpdateEmployee(data, EmployeeId);
-                if (result.IsSuccessful)
-                {
-                    MessageBox.Show("Pomyślnie zapisano zmiany");
+                    var employee = await _employeesService.GetEmployeeById(EmployeeId);
+
+                    var data = new Models.Employee
+                    {
+                        Id = EmployeeId,
+                        Name = EmployeeName,
+                        SecondName = EmployeeSecondName,
+                        LastName = EmployeeLastName,
+                        DateOfBirth = EmployeeDateOfBirth,
+                        Nationality = EmployeeNationality,
+                        IsForeman = EmployeeIsForeman,
+                        ReadDrawings = EmployeeReadDrawings,
+                        Status = employee.Status
+                    };
+
+                    var result = _employeesService.UpdateEmployee(data, EmployeeId);
+                    if (result.IsSuccessful)
+                    {
+                        Log.Information($"Successfully updated employee ({data.Id})");
+
+                        MessageBox.Show("Pomyślnie zapisano zmiany");
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                Log.Error(e, "Failed updating employee");
+                catch (Exception e)
+                {
+                    Log.Error(e, "Failed updating employee");
 
-                MessageBox.Show("Coś poszło nie tak podczas dodawania pracownika, proszę spróbować jeszcze raz. Jeśli problem nadal występuje, skontakuj się z administratorem oprogramowania");
-            }
-            finally
-            {
-                _shellManager.SetLoadingData(false);
+                    MessageBox.Show(
+                        "Coś poszło nie tak podczas zapisywania zmian, proszę spróbować jeszcze raz. Jeśli problem nadal występuje, skontakuj się z administratorem oprogramowania");
+                }
+                finally
+                {
+                    _shellManager.SetLoadingData(false);
+                }
             }
         }
     }

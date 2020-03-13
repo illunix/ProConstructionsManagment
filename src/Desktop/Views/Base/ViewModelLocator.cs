@@ -45,7 +45,7 @@ namespace ProConstructionsManagment.Desktop.Views.Base
         {
             return Resolve<T>();
         }
-        
+
         private static T Resolve<T>()
         {
             if (_container == null)
