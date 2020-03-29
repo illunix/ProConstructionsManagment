@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -15,9 +17,14 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
     public class EmployeeViewModel : ViewModelBase
     {
         private readonly IEmployeesService _employeesService;
+        private readonly IPositionsService _positionsService;
         private readonly IMessengerService _messengerService;
         private readonly IShellManager _shellManager;
-        
+
+        private string _positionId;
+        private int _position;
+        private ObservableCollection<Models.Position> _positions;
+
         private string _employeeDateOfBirth;
         private string _employeeId;
         private bool _employeeIsForeman;
@@ -28,16 +35,34 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
         private bool _employeeReadDrawings;
         private string _employeeSecondName;
 
-        public EmployeeViewModel(IEmployeesService employeesService, IShellManager shellManager,
-            IMessengerService messengerService)
+        public EmployeeViewModel(IEmployeesService employeesService, IPositionsService positionsService, IShellManager shellManager, IMessengerService messengerService)
         {
             _employeesService = employeesService;
+            _positionsService = positionsService;
             _shellManager = shellManager;
             _messengerService = messengerService;
 
             messengerService.Register<EmployeeIdMessage>(this, msg => EmployeeId = msg.EmployeeId);
         }
-        
+
+        public string PositionId
+        {
+            get => _positionId;
+            set => Set(ref _positionId, value);
+        }
+
+        public int Position
+        {
+            get => _position;
+            set => Set(ref _position, value);
+        }
+
+        public ObservableCollection<Models.Position> Positions
+        {
+            get => _positions;
+            set => Set(ref _positions, value);
+        }
+
         public string EmployeeId
         {
             get => _employeeId;
@@ -110,6 +135,14 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
 
                 var employee = await _employeesService.GetEmployeeById(EmployeeId);
 
+                Positions = await _positionsService.GetAllPositions();
+
+                var positionIndex = Positions
+                    .ToList()
+                    .FindIndex(x => x.Id == employee.PositionId);
+
+                Position = positionIndex;
+
                 EmployeeName = employee.Name;
                 EmployeeSecondName = employee.SecondName;
                 EmployeeLastName = employee.LastName;
@@ -121,6 +154,8 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
             catch (Exception e)
             {
                 Log.Error(e, "Failed loading employee view");
+
+                MessageBox.Show("Coś poszło nie tak podczas pobierania danych");
             }
             finally
             {
@@ -141,6 +176,7 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
                     var data = new Models.Employee
                     {
                         Id = EmployeeId,
+                        PositionId = PositionId,
                         Name = EmployeeName,
                         SecondName = EmployeeSecondName,
                         LastName = EmployeeLastName,

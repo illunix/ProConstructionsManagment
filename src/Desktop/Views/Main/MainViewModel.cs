@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
@@ -49,6 +50,8 @@ namespace ProConstructionsManagment.Desktop.Views.Main
             catch (Exception e)
             {
                 Log.Error(e, "Failed loading main view");
+
+                MessageBox.Show("Coś poszło nie tak podczas pobierania danych");
             }
             finally
             {

@@ -21,6 +21,8 @@ namespace ProConstructionsManagment.Desktop.Views.AddProject
 
         private ObservableCollection<Models.Client> _clients;
 
+        private string _clientId;
+
         private bool _projectAgreement;
         private string _projectEndDate;
 
@@ -79,6 +81,12 @@ namespace ProConstructionsManagment.Desktop.Views.AddProject
             set => Set(ref _clients, value);
         }
 
+        public string ClientId
+        {
+            get => _clientId;
+            set => Set(ref _clientId, value);
+        }
+
         public bool ProjectAgreement
         {
             get => _projectAgreement;
@@ -113,6 +121,7 @@ namespace ProConstructionsManagment.Desktop.Views.AddProject
                     {
                         Id = Guid.NewGuid().ToString(),
                         Name = ProjectName,
+                        ClientId = ClientId,
                         StartDate = ProjectStartDate,
                         EndDate = ProjectEndDate,
                         PlaceOfPerformance = ProjectPlaceOfPerformance,

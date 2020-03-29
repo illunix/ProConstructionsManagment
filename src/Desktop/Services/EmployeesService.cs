@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Desktop.Configuration;
+using ProConstructionsManagment.Desktop.Configuration;
 using ProConstructionsManagment.Desktop.Models;
 
 namespace ProConstructionsManagment.Desktop.Services
@@ -57,6 +57,24 @@ namespace ProConstructionsManagment.Desktop.Services
             var uri = $"{Config.ApiUrlBase}/employees/{employeeId}";
 
             var json = await _requestProvider.GetAsync<RootSingle<Employee>>(uri);
+
+            return json.Data;
+        }
+
+        public async Task<ObservableCollection<Employee>> GetAllEmployeesByPositionAbleToRecruit(string positionId)
+        {
+            var uri = $"{Config.ApiUrlBase}/employees/recruitment/positions/{positionId}";
+
+            var json = await _requestProvider.GetAsync<RootMultiple<Employee>>(uri);
+
+            return json.Data;
+        }
+
+        public async Task<ObservableCollection<Employee>> GetAllEmployeesByProjectIdAndPositionId(string projectId, string positionId)
+        {
+            var uri = $"{Config.ApiUrlBase}/employees/recruitment/projects/{projectId}/positions/{positionId}";
+
+            var json = await _requestProvider.GetAsync<RootMultiple<Employee>>(uri);
 
             return json.Data;
         }

@@ -35,7 +35,6 @@ namespace ProConstructionsManagment.Desktop.Views.Project
             set => Set(ref _projectId, value);
         }
 
-
         public ICommand NavigateToProjectsViewCommand => new AsyncRelayCommand(NavigateToProjectsView);
 
         private async Task NavigateToProjectsView()
@@ -54,13 +53,32 @@ namespace ProConstructionsManagment.Desktop.Views.Project
             _messengerService.Send(new ProjectIdMessage(ProjectId));
         }
 
+        public ICommand NavigateToProjectRecruitmentCommand => new AsyncRelayCommand(NavigateToProjectRecruitmentView);
+
+        private async Task NavigateToProjectRecruitmentView()
+        {
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.ProjectRecruitments));
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.ProjectRecruitmentsNavigation));
+
+            _messengerService.Send(new ProjectIdMessage(ProjectId));
+        }
+
+        public ICommand NavigateToAddProjectRecruitmentCommand => new AsyncRelayCommand(NavigateToAddProjectRecruitment);
+
+        private async Task NavigateToAddProjectRecruitment()
+        {
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.AddProjectRecruitment));
+
+            _messengerService.Send(new ProjectIdMessage(ProjectId));
+        }
+
         public ICommand EndProjectCommand => new AsyncRelayCommand(EndProject);
 
         private async Task EndProject()
         {
             try
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show("Czy jesteś pewien że chcesz zakończyć ten projekt?", "", MessageBoxButton.YesNo);
+                MessageBoxResult messageBoxResult = MessageBox.Show("Czy jesteś pewien/pewna że chcesz zakończyć ten projekt?", "", MessageBoxButton.YesNo);
 
                 switch (messageBoxResult)
                 {

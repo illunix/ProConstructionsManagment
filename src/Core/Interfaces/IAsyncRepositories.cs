@@ -9,11 +9,13 @@ namespace ProConstructionsManagment.Core.Interfaces
     {
         Task<IReadOnlyCollection<TEntity>> GetAll();
 
-        Task<TEntity> GetById(Guid Id);
+        Task<TEntity> GetById(Guid entityId);
 
         Task<TEntity> Add(TEntity entity);
 
-        Task<TEntity> Update(TEntity entity, Guid Id);
+        Task<TEntity> Update(TEntity entity, Guid entityId);
+
+        Task<TEntity> Remove(Guid entityId);
     }
 
     public interface IAsyncRepository<TEntity, TEnum> : IAsyncRepository<TEntity>

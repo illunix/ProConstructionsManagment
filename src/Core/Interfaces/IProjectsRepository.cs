@@ -8,8 +8,9 @@ namespace ProConstructionsManagment.Core.Interfaces
 {
     public interface IProjectsRepository
     {
-        Task<IEnumerable<ProjectCost>> GetAll();
-        Task<IEnumerable<ProjectCost>> GetAllByProjectId(Guid projectId);
-        Task<ProjectCost> GetById(Guid projectId);
+        Task<IEnumerable<ProjectCost>> GetAllProjectCosts(Guid projectId);
+        Task<ProjectCost> GetProjectCost(Guid projectCostId);
+        Task<IEnumerable<ProjectRecruitment>> GetProjectRecruitments(Guid projectId);
+        Task<ProjectRecruitment> GetProjectRecruitment(Guid projectRecruitmentId);
     }
 }

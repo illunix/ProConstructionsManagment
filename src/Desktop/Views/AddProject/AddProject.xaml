@@ -47,8 +47,7 @@
 
                 <DatePicker SelectedDate="{Binding ProjectStartDate}"
                             Height="35"
-                            Width="254"
-                            Style="{StaticResource DatePickerWithBorders}" />
+                            Width="254" />
             </StackPanel>
 
             <StackPanel Grid.Row="0"
@@ -59,8 +58,7 @@
                            FontSize="14" />
                 <DatePicker SelectedDate="{Binding ProjectEndDate}"
                             Height="35"
-                            Width="254"
-                            Style="{StaticResource DatePickerWithBorders}" />
+                            Width="254" />
             </StackPanel>
 
             <StackPanel Grid.Row="1"
@@ -116,6 +114,8 @@
                     ItemsSource="{Binding Clients}"
                     Text="{Binding Client}"
                     DisplayMemberPath="CompanyName"
+                    SelectedValuePath="Id"
+                    SelectedValue="{Binding ClientId}"
                     IsEditable="True"
                     VerticalAlignment="Top"
                     Width="254"

@@ -25,7 +25,7 @@
                 <GridView>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Content="Imię"
+                            <GridViewColumnHeader Content="Nazwa firmy"
                                                   Foreground="#131313" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
@@ -42,31 +42,7 @@
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Content="Osoba kontaktowa"
-                                                  Foreground="#131313" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding ContactPerson}"
-                                       Foreground="#131313" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn>
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Content="Numer telefonu"
-                                                  Foreground="#131313" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding ContactPhoneNumber}"
-                                       Foreground="#131313" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn>
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Content="Email"
+                            <GridViewColumnHeader Content="Kontakowy email"
                                                   Foreground="#131313" />
                         </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>

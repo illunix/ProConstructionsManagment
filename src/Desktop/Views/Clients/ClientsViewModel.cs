@@ -50,7 +50,7 @@ namespace ProConstructionsManagment.Desktop.Views.Clients
         private async Task NavigateToClientView(object obj)
         {
             _messengerService.Send(new ChangeViewMessage(ViewTypes.Client));
-            // _messengerService.Send(new ChangeViewMessage(ViewTypes.ClientNavigation));
+            _messengerService.Send(new ChangeViewMessage(ViewTypes.ClientNavigation));
 
             if (obj is string clientId)
             {

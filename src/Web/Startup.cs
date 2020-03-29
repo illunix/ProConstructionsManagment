@@ -1,3 +1,4 @@
+using System.Xml;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,12 @@ namespace ProConstructionsManagment.Web
             services.AddScoped<IAsyncRepository<Employee, EmployeeStatus>, AsyncRepository<Employee, EmployeeStatus>>();
 
             services.AddScoped<IAsyncRepository<Client>, AsyncRepository<Client>>();
+
+            services.AddScoped<IAsyncRepository<Position>, AsyncRepository<Position>>();
+
+            services.AddScoped<IAsyncRepository<ProjectRecruitment>, AsyncRepository<ProjectRecruitment>>();
+
+            services.AddScoped<IEmployeesService, EmployeesRepository>();
 
             services.AddControllers();
         }

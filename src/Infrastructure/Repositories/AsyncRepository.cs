@@ -53,6 +53,19 @@ namespace ProConstructionsManagment.Infrastructure.Data.Repositories
 
             return entity;
         }
+
+        public async Task<TEntity> Remove(Guid entityId)
+        {
+            var entity = await _context.Set<TEntity>()
+                .FindAsync(entityId);
+
+            _context.Set<TEntity>()
+                .Remove(entity);
+
+            await _context.SaveChangesAsync();
+
+            return entity;
+        }
     }
 
     public class AsyncRepository<TEntity, TEnum> : AsyncRepository<TEntity>, IAsyncRepository<TEntity, TEnum>

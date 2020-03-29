@@ -17,6 +17,15 @@
         ProjectNavigation,
         ProjectCostsNavigation,
         ProjectsNavigation,
+        ProjectRecruitment,
+        ProjectRecruitmentNavigation,
+        ProjectRecruitments,
+        ProjectRecruitmentsNavigation,
+        AddProjectRecruitment,
+        AddProjectRecruitmentNavigation,
+        AddEmployeesToProjectRecruitment,
+        AddEmployeesToProjectRecruitmentNavigation,
+        RecruitedEmployeesWithPosition,
         OpenedProjects,
         ProjectsToStart,
         ProjectSettlements,
@@ -28,6 +37,11 @@
         ClientsNavigation,
         AddClient,
         ClientNavigation,
-        AddProjectCostNavigation
+        AddProjectCostNavigation,
+        Position,
+        PositionNavigation,
+        Positions,
+        PositionsNavigation,
+        AddPosition,
     }
 }

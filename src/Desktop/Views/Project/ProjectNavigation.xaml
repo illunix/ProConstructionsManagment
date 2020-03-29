@@ -37,6 +37,19 @@
                     </StackPanel>
                 </ListViewItem>
             </ListView>
+            <ListView FontSize="15">
+                <ListViewItem Padding="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavigateToProjectRecruitmentCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal" Width="229">
+                        <materialDesign:PackIcon Kind="Worker" Margin="15" />
+                        <TextBlock Text="Rekrutacja" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
             <TextBlock Text="Akcje" Margin="15" FontWeight="DemiBold" />
             <ListView FontSize="15">
                 <ListViewItem Padding="1">

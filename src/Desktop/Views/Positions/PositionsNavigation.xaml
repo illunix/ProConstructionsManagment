@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="ProConstructionsManagment.Desktop.Views.Positions.PositionsNavigation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.Positions"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="809" d:DesignWidth="240">
+    <Grid>
+        <StackPanel>
+            <ListView FontSize="12">
+                <ListViewItem Padding="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavigateToMainViewCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ArrowLeft" Margin="10" />
+                        <TextBlock Text="Cofnij" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <TextBlock Text="Widoki" Margin="15" FontWeight="DemiBold" />
+            <ListView FontSize="15">
+                <ListViewItem Padding="1" IsSelected="True">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavigateToPositionsViewCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal" Width="229">
+                        <materialDesign:PackIcon Kind="AccountMultiple" Margin="15" />
+                        <TextBlock Text="Wszystkie stanowiska" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <TextBlock Text="Akcje" Margin="15" FontWeight="DemiBold" />
+            <ListView FontSize="15">
+                <ListViewItem Padding="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavigateToAddPositionViewCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal" Width="229">
+                        <materialDesign:PackIcon Kind="Plus" Margin="15" />
+                        <TextBlock Text="Dodaj stanowisko" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</UserControl>

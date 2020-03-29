@@ -5,6 +5,8 @@ using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.AddClient;
 using ProConstructionsManagment.Desktop.Views.AddEmployee;
+using ProConstructionsManagment.Desktop.Views.AddEmployeesToProjectRecruitment;
+using ProConstructionsManagment.Desktop.Views.AddPosition;
 using ProConstructionsManagment.Desktop.Views.AddProject;
 using ProConstructionsManagment.Desktop.Views.AddProjectCost;
 using ProConstructionsManagment.Desktop.Views.Base;
@@ -17,11 +19,17 @@ using ProConstructionsManagment.Desktop.Views.EndedProjects;
 using ProConstructionsManagment.Desktop.Views.HiredEmployees;
 using ProConstructionsManagment.Desktop.Views.Main;
 using ProConstructionsManagment.Desktop.Views.OpenedProjects;
+using ProConstructionsManagment.Desktop.Views.Position;
+using ProConstructionsManagment.Desktop.Views.Positions;
 using ProConstructionsManagment.Desktop.Views.Project;
 using ProConstructionsManagment.Desktop.Views.ProjectCosts;
+using ProConstructionsManagment.Desktop.Views.AddProjectRecruitment;
+using ProConstructionsManagment.Desktop.Views.ProjectRecruitment;
+using ProConstructionsManagment.Desktop.Views.ProjectRecruitments;
 using ProConstructionsManagment.Desktop.Views.Projects;
 using ProConstructionsManagment.Desktop.Views.ProjectSettlements;
 using ProConstructionsManagment.Desktop.Views.ProjectsToStart;
+using ProConstructionsManagment.Desktop.Views.RecruitedEmployeesWithPosition;
 
 namespace ProConstructionsManagment.Desktop.Views.Shell
 {
@@ -180,6 +188,42 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
                     NoData = false;
                     CurrentViewModel = projectSettlementsViewModel;
                     break;
+                case ViewTypes.ProjectRecruitment:
+                    var projectRecruitmentViewModel = _viewModelLocator.Get<ProjectRecruitmentViewModel>();
+                    CurrentViewModel = projectRecruitmentViewModel;
+                    break;
+                case ViewTypes.ProjectRecruitmentNavigation:
+                    var projectRecruitmentNavigationViewModel = _viewModelLocator.Get<ProjectRecruitmentNavigationViewModel>();
+                    CurrentNavigationViewModel = projectRecruitmentNavigationViewModel;
+                    break;
+                case ViewTypes.ProjectRecruitments:
+                    var projectRecruitmentsViewModel = _viewModelLocator.Get<ProjectRecruitmentsViewModel>();
+                    CurrentViewModel = projectRecruitmentsViewModel;
+                    break;
+                case ViewTypes.ProjectRecruitmentsNavigation:
+                    var projectRecruitmentsNavigationViewModel = _viewModelLocator.Get<ProjectRecruitmentsNavigationViewModel>();
+                    CurrentNavigationViewModel = projectRecruitmentsNavigationViewModel;
+                    break;
+                case ViewTypes.AddProjectRecruitment:
+                    var addProjectRecruitmentViewModel = _viewModelLocator.Get<AddProjectRecruitmentViewModel>();
+                    CurrentViewModel = addProjectRecruitmentViewModel;
+                    break;
+                case ViewTypes.AddProjectRecruitmentNavigation:
+                    var addProjectRecruitmentNavigationViewModel = _viewModelLocator.Get<AddProjectRecruitmentNavigationViewModel>();
+                    CurrentNavigationViewModel = addProjectRecruitmentNavigationViewModel;
+                    break;
+                case ViewTypes.AddEmployeesToProjectRecruitment:
+                    var addEmployeesToProjectRecruitmentViewModel = _viewModelLocator.Get<AddEmployeesToProjectRecruitmentViewModel>();
+                    CurrentViewModel = addEmployeesToProjectRecruitmentViewModel;
+                    break;
+                case ViewTypes.AddEmployeesToProjectRecruitmentNavigation:
+                    var addEmployeesToProjectRecruitmentNavigationViewModel = _viewModelLocator.Get<AddEmployeesToProjectRecruitmentNavigationViewModel>();
+                    CurrentNavigationViewModel = addEmployeesToProjectRecruitmentNavigationViewModel;
+                    break;
+                case ViewTypes.RecruitedEmployeesWithPosition:
+                    var recruitedEmployeesWithPositionViewModel = _viewModelLocator.Get<RecruitedEmployeesWithPositionViewModel>();
+                    CurrentViewModel = recruitedEmployeesWithPositionViewModel;
+                    break;
                 case ViewTypes.EndedProjects:
                     var endedProjectsViewModel = _viewModelLocator.Get<EndedProjectsViewModel>();
                     NoData = false;
@@ -199,7 +243,7 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
                     CurrentViewModel = clientViewModel;
                     break;
                 case ViewTypes.ClientNavigation:
-                    var clientNavigationViewModel = _viewModelLocator.Get<ClientViewModel>();
+                    var clientNavigationViewModel = _viewModelLocator.Get<ClientNavigationViewModel>();
                     CurrentNavigationViewModel = clientNavigationViewModel;
                     break;
                 case ViewTypes.Clients:
@@ -219,6 +263,26 @@ namespace ProConstructionsManagment.Desktop.Views.Shell
                 case ViewTypes.AddProjectCostNavigation:
                     var addProjectCostNavigation = _viewModelLocator.Get<AddProjectCostNavigationViewModel>();
                     CurrentNavigationViewModel = addProjectCostNavigation;
+                    break;
+                case ViewTypes.Position:
+                    var positionViewModel = _viewModelLocator.Get<PositionViewModel>();
+                    CurrentViewModel = positionViewModel;
+                    break;
+                case ViewTypes.PositionNavigation:
+                    var positionNavigationViewModel = _viewModelLocator.Get<PositionNavigationViewModel>();
+                    CurrentNavigationViewModel = positionNavigationViewModel;
+                    break;
+                case ViewTypes.Positions:
+                    var positionsViewModel = _viewModelLocator.Get<PositionsViewModel>();
+                    CurrentViewModel = positionsViewModel;
+                    break;
+                case ViewTypes.PositionsNavigation:
+                    var positionsNavigationViewModel = _viewModelLocator.Get<PositionsNavigationViewModel>();
+                    CurrentNavigationViewModel = positionsNavigationViewModel;
+                    break;
+                case ViewTypes.AddPosition:
+                    var addPositionViewModel = _viewModelLocator.Get<AddPositionViewModel>();
+                    CurrentViewModel = addPositionViewModel;
                     break;
             }
         }

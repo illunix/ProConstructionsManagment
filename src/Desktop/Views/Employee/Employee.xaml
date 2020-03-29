@@ -85,8 +85,7 @@
 
                 <DatePicker SelectedDate="{Binding EmployeeDateOfBirth}"
                             Height="35"
-                            Width="254"
-                            Style="{StaticResource DatePickerWithBorders}" />
+                            Width="254" />
 
             </StackPanel>
 
@@ -107,6 +106,28 @@
                     Foreground="Black"
                     Background="{x:Null}"
                     SelectionBrush="{x:Null}" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"
+                        Grid.Column="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Stanowisko"
+                           FontSize="14" />
+                <ComboBox
+                    Height="35"
+                    ItemsSource="{Binding Positions}"
+                    DisplayMemberPath="Name"
+                    SelectedValuePath="Id"
+                    SelectedIndex="{Binding Position}"
+                    SelectedValue="{Binding PositionId}"
+                    IsEditable="True"
+                    VerticalAlignment="Top"
+                    Width="254"
+                    BorderBrush="#131313"
+                    BorderThickness="1, 1, 1, 1"
+                    Foreground="Black"
+                    Background="{x:Null}" />
             </StackPanel>
         </Grid>
         <Grid Height="200">

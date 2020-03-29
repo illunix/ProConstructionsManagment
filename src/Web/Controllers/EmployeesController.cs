@@ -11,10 +11,12 @@ namespace ProConstructionsManagment.Web.Controllers
     public class EmployeesController : Controller
     {
         private readonly IAsyncRepository<Employee, EmployeeStatus> _asyncRepository;
+        private readonly IEmployeesService _employeesService;
 
-        public EmployeesController(IAsyncRepository<Employee, EmployeeStatus> asyncRepository)
+        public EmployeesController(IAsyncRepository<Employee, EmployeeStatus> asyncRepository, IEmployeesService employeesService)
         {
             _asyncRepository = asyncRepository;
+            _employeesService = employeesService;
         }
 
         [HttpGet]
@@ -93,6 +95,70 @@ namespace ProConstructionsManagment.Web.Controllers
             var result = await _asyncRepository.Update(entity, employeeId);
 
             return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("employees/recruitment")]
+        public async Task<IActionResult> GetAllEmployeesAbleToRecruit()
+        {
+            var result = await _employeesService.GetAllEmployeesAbleToRecruit();
+
+            return Ok(new
+            {
+                data = result,
+                summaries = new
+                {
+                    count = result.Count
+                }
+            });
+        }
+
+        [HttpGet]
+        [Route("employees/positions/{positionId}")]
+        public async Task<IActionResult> GetAllEmployeesByPosition(Guid positionId)
+        {
+            var result = await _employeesService.GetAllEmployeesByPosition(positionId);
+
+            return Ok(new
+            {
+                data = result,
+                summaries = new
+                {
+                    count = result.Count
+                }
+            });
+        }
+
+        [HttpGet]
+        [Route("employees/recruitment/positions/{positionId}")]
+        public async Task<IActionResult> GetAllEmployeesByPositionAbleToRecruit(Guid positionId)
+        {
+            var result = await _employeesService.GetAllEmployeesByPositionAbleToRecruit(positionId);
+
+            return Ok(new
+            {
+                data = result,
+                summaries = new
+                {
+                    count = result.Count
+                }
+            });
+        }
+
+        [HttpGet]
+        [Route("employees/recruitment/projects/{projectId}/positions/{positionId}")]
+        public async Task<IActionResult> GetAllEmployeesByPositionAbleToRecruit(Guid projectId, Guid positionId)
+        {
+            var result = await _employeesService.GetAllEmployeesByProjectIdAndPositionId(projectId, positionId);
+
+            return Ok(new
+            {
+                data = result,
+                summaries = new
+                {
+                    count = result.Count
+                }
+            });
         }
     }
 }

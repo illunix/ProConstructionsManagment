@@ -4,6 +4,7 @@ namespace ProConstructionsManagment.Desktop.Models
 {
     public class Project : BaseModel
     {
+        public string ClientId { get; set; }
         public string Name { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }

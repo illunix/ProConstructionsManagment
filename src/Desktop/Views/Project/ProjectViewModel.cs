@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -21,8 +22,9 @@ namespace ProConstructionsManagment.Desktop.Views.Project
         private readonly IShellManager _shellManager;
 
         private string _projectId;
-        
-        private string _client;
+
+        private string _clientId;
+        private int _client;
         private ObservableCollection<Models.Client> _clients;
 
         private bool _projectAgreement;
@@ -85,8 +87,13 @@ namespace ProConstructionsManagment.Desktop.Views.Project
             get => _projectAgreement;
             set => Set(ref _projectAgreement, value);
         }
-        
-        public string Client
+
+        public string ClientId
+        {
+            get => _clientId;
+            set => Set(ref _clientId, value);
+        }
+        public int Client
         {
             get => _client;
             set => Set(ref _client, value);
@@ -97,7 +104,6 @@ namespace ProConstructionsManagment.Desktop.Views.Project
             get => _clients;
             set => Set(ref _clients, value);
         }
-
         
         private ValidationResult BuildValidation()
         {
@@ -121,6 +127,12 @@ namespace ProConstructionsManagment.Desktop.Views.Project
 
                 var project = await _projectsService.GetProjectById(ProjectId);
 
+                var clientIndex = Clients
+                    .ToList()
+                    .FindIndex(x => x.Id == project.ClientId);
+
+                Client = clientIndex;
+
                 ProjectName = project.Name;
                 ProjectStartDate = project.StartDate;
                 ProjectEndDate = project.EndDate;
@@ -131,6 +143,8 @@ namespace ProConstructionsManagment.Desktop.Views.Project
             catch (Exception e)
             {
                 Log.Error(e, "Failed loading project view");
+
+                MessageBox.Show("Coś poszło nie tak podczas pobierania danych");
             }
             finally
             {
@@ -151,6 +165,7 @@ namespace ProConstructionsManagment.Desktop.Views.Project
                     var data = new Models.Project
                     {
                         Id = ProjectId,
+                        ClientId = ClientId,
                         Name = ProjectName,
                         StartDate = ProjectStartDate,
                         EndDate = ProjectEndDate,
@@ -170,7 +185,7 @@ namespace ProConstructionsManagment.Desktop.Views.Project
                 }
                 catch (Exception e)
                 {
-                    Log.Error(e, "Failed adding new project");
+                    Log.Error(e, "Failed editing project");
 
                     MessageBox.Show(
                         "Coś poszło nie tak podczas dodawania projektu, proszę spróbować jeszcze raz. Jeśli problem nadal występuje, skontakuj się z administratorem oprogramowania");

@@ -13,12 +13,14 @@ namespace ProConstructionsManagment.Web.Controllers
         private readonly IAsyncRepository<Project, ProjectStatus> _asyncRepository;
         private readonly IAsyncRepository<ProjectCost> _repo;
         private readonly IProjectsRepository _projectsRepository;
+        private readonly IAsyncRepository<ProjectRecruitment> _projectRecruitmentRepository;
 
-        public ProjectsController(IAsyncRepository<Project, ProjectStatus> asyncRepository, IAsyncRepository<ProjectCost> repo, IProjectsRepository projectsRepository)
+        public ProjectsController(IAsyncRepository<Project, ProjectStatus> asyncRepository, IAsyncRepository<ProjectCost> repo, IProjectsRepository projectsRepository, IAsyncRepository<ProjectRecruitment> projectRecruitmentRepository)
         {
             _asyncRepository = asyncRepository;
             _repo = repo;
             _projectsRepository = projectsRepository;
+            _projectRecruitmentRepository = projectRecruitmentRepository;
         }
 
         [HttpGet]
@@ -26,6 +28,22 @@ namespace ProConstructionsManagment.Web.Controllers
         public async Task<IActionResult> GetProjects()
         {
             var result = await _asyncRepository.GetAll();
+
+            return Ok(new
+            {
+                data = result,
+                summaries = new
+                {
+                    count = result.Count
+                }
+            });
+        }
+
+        [HttpGet]
+        [Route("projects/recruitments")]
+        public async Task<IActionResult> GetProjectsRecruitments()
+        {
+            var result = await _projectRecruitmentRepository.GetAll();
 
             return Ok(new
             {
@@ -129,6 +147,47 @@ namespace ProConstructionsManagment.Web.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("projects/{projectId}/recruitments")]
+        public async Task<IActionResult> GetProjectRecruitments(Guid projectId)
+        {
+            var result = await _projectsRepository.GetProjectRecruitments(projectId);
+
+            return Ok(new
+            {
+                data = result
+            });
+        }
+
+        [HttpGet]
+        [Route("projects/recruitments/{projectRecruitmentId}")]
+        public async Task<IActionResult> GetProjectRecruitmentById(Guid projectRecruitmentId)
+        {
+            var result = await _projectsRepository.GetProjectRecruitment(projectRecruitmentId);
+
+            return Ok(new
+            {
+                data = result
+            });
+        }
+
+        [HttpPost]
+        [Route("projects/{projectId}/recruitment/add")]
+        public async Task<IActionResult> AddProjectRecruitment([FromBody] ProjectRecruitment entity, Guid projectId)
+        {
+            var data = new ProjectRecruitment
+            {
+                Id = entity.Id,
+                ProjectId = projectId,
+                PositionId = entity.PositionId,
+                RequiredNumberOfEmployees = entity.RequiredNumberOfEmployees
+            };
+
+            var result = await _projectRecruitmentRepository.Add(data);
+
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("project/add")]
         public async Task<IActionResult> AddProject([FromBody] Project entity)
@@ -147,23 +206,20 @@ namespace ProConstructionsManagment.Web.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("projects/costs")]
-        public async Task<IActionResult> GetProjectCosts()
+        [HttpPost]
+        [Route("projects/{projectId}/recruitment/update")]
+        public async Task<IActionResult> UpdateAddProjectRecruitment([FromBody] ProjectRecruitment entity, Guid projectId)
         {
-            var result = await _projectsRepository.GetAll();
+            var result = await _projectRecruitmentRepository.Update(entity, projectId);
 
-            return Ok(new
-            {
-                data = result
-            });
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("projects/{projectId}/costs")]
         public async Task<IActionResult> GetProjectCosts(Guid projectId)
         {
-            var result = await _projectsRepository.GetAllByProjectId(projectId);
+            var result = await _projectsRepository.GetAllProjectCosts(projectId);
 
             return Ok(new
             {
@@ -175,7 +231,7 @@ namespace ProConstructionsManagment.Web.Controllers
         [Route("projects/{projectCostId}/cost")]
         public async Task<IActionResult> GetProjectCostById(Guid projectCostId)
         {
-            var result = await _projectsRepository.GetById(projectCostId);
+            var result = await _projectsRepository.GetProjectCost(projectCostId);
 
             return Ok(new
             {

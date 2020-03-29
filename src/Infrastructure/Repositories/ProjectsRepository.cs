@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -19,23 +20,31 @@ namespace ProConstructionsManagment.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<ProjectCost>> GetAll()
-        {
-            return await _context.ProjectCosts
-                .ToArrayAsync();
-        }
-
-        public async Task<IEnumerable<ProjectCost>> GetAllByProjectId(Guid projectId)
+        public async Task<IEnumerable<ProjectCost>> GetAllProjectCosts(Guid projectId)
         {
             return await _context.ProjectCosts
                 .Where(projectCost => projectCost.ProjectId == projectId)
                 .ToArrayAsync();
         }
 
-        public async Task<ProjectCost> GetById(Guid projectCostId)
+        public async Task<ProjectCost> GetProjectCost(Guid projectCostId)
         {
             return await _context.ProjectCosts
                 .Where(projectCost => projectCost.Id == projectCostId)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<ProjectRecruitment>> GetProjectRecruitments(Guid projectId)
+        {
+            return await _context.ProjectsRecruitments
+                .Where(projectRecruitment => projectRecruitment.ProjectId == projectId)
+                .ToArrayAsync();
+        }
+
+        public async Task<ProjectRecruitment> GetProjectRecruitment(Guid projectRecruitmentId)
+        {
+            return await _context.ProjectsRecruitments
+                .Where(projectRecruitment => projectRecruitment.Id == projectRecruitmentId)
                 .FirstOrDefaultAsync();
         }
     }

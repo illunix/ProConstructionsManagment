@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -14,7 +15,11 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
     public class AddEmployeeViewModel : ViewModelBase
     {
         private readonly IEmployeesService _employeesService;
+        private readonly IPositionsService _positionsService;
         private readonly IShellManager _shellManager;
+
+        private ObservableCollection<Models.Position> _positions;
+        private string _positionId;
 
         private string _employeeDateOfBirth;
 
@@ -26,9 +31,10 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
         private bool _employeeReadDrawings;
         private string _employeeSecondName;
 
-        public AddEmployeeViewModel(IEmployeesService employeesService, IShellManager shellManager)
+        public AddEmployeeViewModel(IEmployeesService employeesService, IPositionsService positionsService, IShellManager shellManager)
         {
             _employeesService = employeesService;
+            _positionsService = positionsService;
             _shellManager = shellManager;
         }
 
@@ -74,6 +80,18 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
             set => Set(ref _employeeReadDrawings, value);
         }
 
+        public ObservableCollection<Models.Position> Positions
+        {
+            get => _positions;
+            set => Set(ref _positions, value);
+        }
+
+        public string PositionId
+        {
+            get => _positionId;
+            set => Set(ref _positionId, value);
+        }
+
         private ValidationResult BuildValidation()
         {
             if (string.IsNullOrWhiteSpace(EmployeeName) || string.IsNullOrWhiteSpace(EmployeeLastName) ||
@@ -81,6 +99,11 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
                 string.IsNullOrWhiteSpace(EmployeeDateOfBirth)) return new ValidationResult(false);
 
             return new ValidationResult(true);
+        }
+
+        public async Task Initialize()
+        {
+            Positions = await _positionsService.GetAllPositions();
         }
 
         public ICommand AddEmployeeCommand => new AsyncRelayCommand(AddEmployee);
@@ -96,6 +119,7 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
                     var data = new Models.Employee
                     {
                         Id = Guid.NewGuid().ToString(),
+                        PositionId = PositionId,
                         Name = EmployeeName,
                         SecondName = EmployeeSecondName,
                         LastName =  EmployeeLastName,

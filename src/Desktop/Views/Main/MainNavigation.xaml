@@ -33,7 +33,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Clipboard" Margin="15" />
+                        <materialDesign:PackIcon Kind="Work" Margin="15" />
                         <TextBlock Text="Projekty" VerticalAlignment="Center" />
                     </StackPanel>
                 </ListViewItem>
@@ -57,6 +57,19 @@
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="AccountGroup" Margin="15" />
                         <TextBlock Text="Pracownicy" VerticalAlignment="Center" />
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+            <ListView FontSize="15">
+                <ListViewItem Padding="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding NavigateToPositionsViewCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Worker" Margin="15" />
+                        <TextBlock Text="Stanowiska" VerticalAlignment="Center" />
                     </StackPanel>
                 </ListViewItem>
             </ListView>

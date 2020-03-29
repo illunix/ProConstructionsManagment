@@ -113,6 +113,8 @@ namespace ProConstructionsManagment.Desktop.Views.Client
             catch (Exception e)
             {
                 Log.Error(e, "Failed loading client view");
+
+                MessageBox.Show("Coś poszło nie tak podczas pobierania danych");
             }
             finally
             {
@@ -141,12 +143,10 @@ namespace ProConstructionsManagment.Desktop.Views.Client
                 {
                     _shellManager.SetLoadingData(true);
 
-                    var client = await _clientsService.GetClientById(ClientId);
-
                     var data = new Models.Client
                     {
                         Id = ClientId,
-                        CompanyName = ClientNIP,
+                        CompanyName = ClientCompanyName,
                         NIP = ClientNIP,
                         Website = ClientWebsite,
                         Address = ClientAddress,

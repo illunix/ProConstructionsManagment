@@ -16,6 +16,10 @@ namespace ProConstructionsManagment.Desktop.Services
 
         Task<Employee> GetEmployeeById(string employeeId);
 
+        Task<ObservableCollection<Employee>> GetAllEmployeesByPositionAbleToRecruit(string positionId);
+
+        Task<ObservableCollection<Employee>> GetAllEmployeesByProjectIdAndPositionId(string projectId, string positionId);
+
         RequestResult<Employee> AddEmployee(Employee model);
 
         RequestResult<Employee> UpdateEmployee(Employee model, string employeeId);

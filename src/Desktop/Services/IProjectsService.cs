@@ -30,5 +30,13 @@ namespace ProConstructionsManagment.Desktop.Services
         RequestResult<ProjectCost> AddProjectCost(ProjectCost model, string projectId);
 
         Task<ObservableCollection<ProjectCost>> GetProjectCosts(string projectId);
+
+        Task<ProjectRecruitment> GetProjectRecruitmentById(string projectRecruitmentId);
+
+        Task<ObservableCollection<ProjectRecruitment>> GetProjectRecruitmentsById(string projectId);
+
+        RequestResult<ProjectRecruitment> AddProjectRecruitment(ProjectRecruitment model, string projectId);
+
+        RequestResult<ProjectRecruitment> UpdateProjectRecruitment(ProjectRecruitment model, string projectRecruitmentId);
     }
 }

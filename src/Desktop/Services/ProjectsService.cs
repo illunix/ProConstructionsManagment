@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Desktop.Configuration;
+using ProConstructionsManagment.Desktop.Configuration;
 using ProConstructionsManagment.Desktop.Models;
 
 namespace ProConstructionsManagment.Desktop.Services
@@ -144,6 +144,59 @@ namespace ProConstructionsManagment.Desktop.Services
             var json = await _requestProvider.GetAsync<RootMultiple<ProjectCost>>(uri);
 
             return json.Data;
+        }
+
+
+        public async Task<ProjectRecruitment> GetProjectRecruitmentById(string projectRecruitmentId)
+        {
+            var uri = $"{Config.ApiUrlBase}/projects/recruitments/{projectRecruitmentId}";
+
+            var json = await _requestProvider.GetAsync<RootSingle<ProjectRecruitment>>(uri);
+
+            return json.Data;
+        }
+
+        public async Task<ObservableCollection<ProjectRecruitment>> GetProjectRecruitmentsById(string projectId)
+        {
+            var uri = $"{Config.ApiUrlBase}/projects/{projectId}/recruitments";
+
+            var json = await _requestProvider.GetAsync<RootMultiple<ProjectRecruitment>>(uri);
+
+            return json.Data;
+        }
+
+        public RequestResult<ProjectRecruitment> AddProjectRecruitment(ProjectRecruitment model, string projectId)
+        {
+            try
+            {
+                var uri = $"{Config.ApiUrlBase}/projects/{projectId}/recruitment/add";
+
+                _requestProvider.PostAsync(uri, model);
+            }
+            catch
+            {
+                return new RequestResult<ProjectRecruitment>(false);
+
+            }
+
+            return new RequestResult<ProjectRecruitment>(true);
+        }
+
+        public RequestResult<ProjectRecruitment> UpdateProjectRecruitment(ProjectRecruitment model, string projectId)
+        {
+            try
+            {
+                var uri = $"{Config.ApiUrlBase}/projects/{projectId}/recruitment/update";
+
+                _requestProvider.PostAsync(uri, model);
+            }
+            catch
+            {
+                return new RequestResult<ProjectRecruitment>(false);
+
+            }
+
+            return new RequestResult<ProjectRecruitment>(true);
         }
     }
 }

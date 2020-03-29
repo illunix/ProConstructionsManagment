@@ -16,12 +16,20 @@
         xmlns:openedProjects="clr-namespace:ProConstructionsManagment.Desktop.Views.OpenedProjects"
         xmlns:projectsToStart="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectsToStart"
         xmlns:projectSettlements="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectSettlements"
+        xmlns:projectRecruitments="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectRecruitments"
         xmlns:endedProjects="clr-namespace:ProConstructionsManagment.Desktop.Views.EndedProjects"
+        xmlns:addProjectRecruitment="clr-namespace:ProConstructionsManagment.Desktop.Views.AddProjectRecruitment"
+        xmlns:addEmployeesToProjectRecruitment="clr-namespace:ProConstructionsManagment.Desktop.Views.AddEmployeesToProjectRecruitment"
+        xmlns:projectRecruitment="clr-namespace:ProConstructionsManagment.Desktop.Views.ProjectRecruitment"
         xmlns:addProject="clr-namespace:ProConstructionsManagment.Desktop.Views.AddProject"
+        xmlns:recruitedEmployeesWithPosition="clr-namespace:ProConstructionsManagment.Desktop.Views.RecruitedEmployeesWithPosition"
         xmlns:addProjectCost="clr-namespace:ProConstructionsManagment.Desktop.Views.AddProjectCost"
         xmlns:client="clr-namespace:ProConstructionsManagment.Desktop.Views.Client"
         xmlns:clients="clr-namespace:ProConstructionsManagment.Desktop.Views.Clients"
         xmlns:addClient="clr-namespace:ProConstructionsManagment.Desktop.Views.AddClient"
+        xmlns:position="clr-namespace:ProConstructionsManagment.Desktop.Views.Position"
+        xmlns:positions="clr-namespace:ProConstructionsManagment.Desktop.Views.Positions"
+        xmlns:addPosition="clr-namespace:ProConstructionsManagment.Desktop.Views.AddPosition"
         xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.Shell"
         xmlns:converters="clr-namespace:ProConstructionsManagment.Desktop.Converters"
         mc:Ignorable="d"
@@ -90,6 +98,33 @@
         <DataTemplate DataType="{x:Type endedProjects:EndedProjectsViewModel}">
             <endedProjects:EndedProjects />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type projectRecruitments:ProjectRecruitmentsViewModel}">
+            <projectRecruitments:ProjectRecruitments />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type projectRecruitments:ProjectRecruitmentsNavigationViewModel}">
+            <projectRecruitments:ProjectRecruitmentsNavigation />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type addProjectRecruitment:AddProjectRecruitmentViewModel}">
+            <addProjectRecruitment:AddProjectRecruitment />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type recruitedEmployeesWithPosition:RecruitedEmployeesWithPositionViewModel}">
+            <recruitedEmployeesWithPosition:RecruitedEmployeesWithPosition />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type addProjectRecruitment:AddProjectRecruitmentNavigationViewModel}">
+            <addProjectRecruitment:AddProjectRecruitmentNavigation />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type addEmployeesToProjectRecruitment:AddEmployeesToProjectRecruitmentViewModel}">
+            <addEmployeesToProjectRecruitment:AddEmployeesToProjectRecruitment />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type addEmployeesToProjectRecruitment:AddEmployeesToProjectRecruitmentNavigationViewModel}">
+            <addEmployeesToProjectRecruitment:AddEmployeesToProjectRecruitmentNavigation />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type projectRecruitment:ProjectRecruitmentViewModel}">
+            <projectRecruitment:ProjectRecruitment />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type projectRecruitment:ProjectRecruitmentNavigationViewModel}">
+            <projectRecruitment:ProjectRecruitmentNavigation />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type addProject:AddProjectViewModel}">
             <addProject:AddProject />
         </DataTemplate>
@@ -113,6 +148,21 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type addProjectCost:AddProjectCostNavigationViewModel}">
             <addProjectCost:AddProjectCostNavigation />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type position:PositionViewModel}">
+            <position:Position />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type position:PositionNavigationViewModel}">
+            <position:PositionNavigation />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type positions:PositionsViewModel}">
+            <positions:Positions />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type positions:PositionsNavigationViewModel}">
+            <positions:PositionsNavigation />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type addPosition:AddPositionViewModel}">
+            <addPosition:AddPosition />
         </DataTemplate>
     </Window.Resources>
     <Grid>

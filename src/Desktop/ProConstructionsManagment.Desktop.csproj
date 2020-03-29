@@ -7,7 +7,7 @@
     <ProjectGuid>{C9F2F904-E3BD-473E-9605-94735C678008}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ProConstructionsManagment.Desktop</RootNamespace>
-    <AssemblyName>ProConstructionsManagment.Desktop</AssemblyName>
+    <AssemblyName>ProConstructionsManagment</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,6 +35,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>ProConstructionsManamgnet.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=5.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -206,12 +212,16 @@
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Messages\ClientIdMessage.cs" />
     <Compile Include="Messages\NoDataMessage.cs" />
+    <Compile Include="Messages\PositionIdMessage.cs" />
     <Compile Include="Messages\ProjectIdMessage.cs" />
+    <Compile Include="Messages\ProjectRecruitmentIdMessage.cs" />
     <Compile Include="Models\Base\BaseModel.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectCost.cs" />
+    <Compile Include="Models\ProjectRecruitment.cs" />
     <Compile Include="Models\RequestResult.cs" />
     <Compile Include="Models\Root.cs" />
     <Compile Include="Models\Summaries.cs" />
@@ -221,19 +231,33 @@
     <Compile Include="Services\IClientsService.cs" />
     <Compile Include="Services\IEmployeesService.cs" />
     <Compile Include="Services\IMessengerService.cs" />
+    <Compile Include="Services\IPositionsService.cs" />
     <Compile Include="Services\IProjectsService.cs" />
     <Compile Include="Services\IRequestProvider.cs" />
     <Compile Include="Services\MessengerService.cs" />
+    <Compile Include="Services\PositionsService.cs" />
     <Compile Include="Services\ProjectsService.cs" />
     <Compile Include="Services\RequestProvider.cs" />
     <Compile Include="Views\AddClient\AddClient.xaml.cs">
       <DependentUpon>AddClient.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddClient\AddClientViewModel.cs" />
+    <Compile Include="Views\AddEmployeesToProjectRecruitment\AddEmployeesToProjectRecruitment.xaml.cs">
+      <DependentUpon>AddEmployeesToProjectRecruitment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEmployeesToProjectRecruitment\AddEmployeesToProjectRecruitmentNavigation.xaml.cs">
+      <DependentUpon>AddEmployeesToProjectRecruitmentNavigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEmployeesToProjectRecruitment\AddEmployeesToProjectRecruitmentNavigationViewModel.cs" />
+    <Compile Include="Views\AddEmployeesToProjectRecruitment\AddEmployeesToProjectRecruitmentViewModel.cs" />
     <Compile Include="Views\AddEmployee\AddEmployee.xaml.cs">
       <DependentUpon>AddEmployee.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddEmployee\AddEmployeeViewModel.cs" />
+    <Compile Include="Views\AddPosition\AddPosition.xaml.cs">
+      <DependentUpon>AddPosition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddPosition\AddPositionViewModel.cs" />
     <Compile Include="Views\AddProjectCost\AddProjectCost.xaml.cs">
       <DependentUpon>AddProjectCost.xaml</DependentUpon>
     </Compile>
@@ -242,6 +266,13 @@
     </Compile>
     <Compile Include="Views\AddProjectCost\AddProjectCostNavigationViewModel.cs" />
     <Compile Include="Views\AddProjectCost\AddProjectCostViewModel.cs" />
+    <Compile Include="Views\AddProjectRecruitment\AddProjectRecruitment.xaml.cs">
+      <DependentUpon>AddProjectRecruitment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddProjectRecruitment\AddProjectRecruitmentNavigation.xaml.cs">
+      <DependentUpon>AddProjectRecruitmentNavigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddProjectRecruitment\AddProjectRecruitmentNavigationViewModel.cs" />
     <Compile Include="Views\AddProject\AddProject.xaml.cs">
       <DependentUpon>AddProject.xaml</DependentUpon>
     </Compile>
@@ -308,6 +339,22 @@
       <DependentUpon>OpenedProjects.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OpenedProjects\OpenedProjectsViewModel.cs" />
+    <Compile Include="Views\Positions\Positions.xaml.cs">
+      <DependentUpon>Positions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Positions\PositionsNavigation.xaml.cs">
+      <DependentUpon>PositionsNavigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Positions\PositionsNavigationViewModel.cs" />
+    <Compile Include="Views\Positions\PositionsViewModel.cs" />
+    <Compile Include="Views\Position\Position.xaml.cs">
+      <DependentUpon>Position.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Position\PositionNavigation.xaml.cs">
+      <DependentUpon>PositionNavigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Position\PositionNavigationViewModel.cs" />
+    <Compile Include="Views\Position\PositionViewModel.cs" />
     <Compile Include="Views\ProjectCosts\ProjectCosts.xaml.cs">
       <DependentUpon>ProjectCosts.xaml</DependentUpon>
     </Compile>
@@ -316,6 +363,23 @@
     </Compile>
     <Compile Include="Views\ProjectCosts\ProjectCostsNavigationViewModel.cs" />
     <Compile Include="Views\ProjectCosts\ProjectCostsViewModel.cs" />
+    <Compile Include="Views\AddProjectRecruitment\ProjectRecruitmentViewModel.cs" />
+    <Compile Include="Views\ProjectRecruitments\ProjectRecruitments.xaml.cs">
+      <DependentUpon>ProjectRecruitments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectRecruitments\ProjectRecruitmentsNavigation.xaml.cs">
+      <DependentUpon>ProjectRecruitmentsNavigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectRecruitments\ProjectRecruitmentsNavigationViewModel.cs" />
+    <Compile Include="Views\ProjectRecruitments\ProjectRecruitmentsViewModel.cs" />
+    <Compile Include="Views\ProjectRecruitment\ProjectRecruitment.xaml.cs">
+      <DependentUpon>ProjectRecruitment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectRecruitment\ProjectRecruitmentNavigation.xaml.cs">
+      <DependentUpon>ProjectRecruitmentNavigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectRecruitment\ProjectRecruitmentNavigationViewModel.cs" />
+    <Compile Include="Views\ProjectRecruitment\ProjectRecruitmentViewModel.cs" />
     <Compile Include="Views\ProjectSettlements\ProjectSettlements.xaml.cs">
       <DependentUpon>ProjectSettlements.xaml</DependentUpon>
     </Compile>
@@ -340,6 +404,10 @@
     </Compile>
     <Compile Include="Views\Project\ProjectNavigationViewModel.cs" />
     <Compile Include="Views\Project\ProjectViewModel.cs" />
+    <Compile Include="Views\RecruitedEmployeesWithPosition\RecruitedEmployeesWithPosition.xaml.cs">
+      <DependentUpon>RecruitedEmployeesWithPosition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecruitedEmployeesWithPosition\RecruitedEmployeesWithPositionViewModel.cs" />
     <Compile Include="Views\Shell\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -352,11 +420,15 @@
     <Compile Include="Commands\AsyncRelayCommandGeneric.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="Enums\ViewTypes.cs" />
-    <Page Include="Themes\MaterialDesignThemes.Overrides.xaml">
+    <Page Include="Views\AddClient\AddClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddClient\AddClient.xaml">
+    <Page Include="Views\AddEmployeesToProjectRecruitment\AddEmployeesToProjectRecruitment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddEmployeesToProjectRecruitment\AddEmployeesToProjectRecruitmentNavigation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -364,11 +436,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\AddPosition\AddPosition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddProjectCost\AddProjectCost.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddProjectCost\AddProjectCostNavigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddProjectRecruitment\AddProjectRecruitment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddProjectRecruitment\AddProjectRecruitmentNavigation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -424,11 +508,43 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\OpenedProjects\OpenedProjects.xaml" />
+    <Page Include="Views\Positions\Positions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Positions\PositionsNavigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Position\Position.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Position\PositionNavigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProjectCosts\ProjectCosts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProjectCosts\ProjectCostsNavigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectRecruitments\ProjectRecruitments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectRecruitments\ProjectRecruitmentsNavigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectRecruitment\ProjectRecruitment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProjectRecruitment\ProjectRecruitmentNavigation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -441,6 +557,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Project\ProjectNavigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecruitedEmployeesWithPosition\RecruitedEmployeesWithPosition.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -475,6 +595,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="ProConstructionsManamgnet.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

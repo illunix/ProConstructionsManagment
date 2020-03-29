@@ -50,6 +50,12 @@ namespace ProConstructionsManagment.Desktop.Services
             return result;
         }
 
+        public async Task DeleteAsync(string uri, string token = "")
+        {
+            HttpClient httpClient = CreateHttpClient(token);
+            await httpClient.DeleteAsync(uri);
+        }
+
         private HttpClient CreateHttpClient(string token)
         {
             var client = _httpClientFactory.CreateClient();
