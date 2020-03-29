@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
-using ProConstructionsManagment.Desktop.Views.AddClient;
+﻿using ProConstructionsManagment.Desktop.Views.AddClient;
 using ProConstructionsManagment.Desktop.Views.Base;
+using System.Windows.Controls;
 
 namespace ProConstructionsManagment.Desktop.Views.Clients
 {

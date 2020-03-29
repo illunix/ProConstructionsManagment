@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProConstructionsManagment.Desktop.Configuration;
+﻿using ProConstructionsManagment.Desktop.Configuration;
 using ProConstructionsManagment.Desktop.Models;
+using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace ProConstructionsManagment.Desktop.Services
 {

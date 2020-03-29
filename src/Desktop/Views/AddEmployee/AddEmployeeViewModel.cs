@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using ProConstructionsManagment.Desktop.Commands;
+﻿using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
+using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ProConstructionsManagment.Desktop.Views.AddEmployee
 {
@@ -122,7 +122,7 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
                         PositionId = PositionId,
                         Name = EmployeeName,
                         SecondName = EmployeeSecondName,
-                        LastName =  EmployeeLastName,
+                        LastName = EmployeeLastName,
                         DateOfBirth = EmployeeDateOfBirth,
                         Nationality = EmployeeNationality,
                         IsForeman = EmployeeIsForeman,
@@ -134,7 +134,7 @@ namespace ProConstructionsManagment.Desktop.Views.AddEmployee
                     if (result.IsSuccessful)
                     {
                         Log.Information($"Successfully added new employee ({data.Id})");
-                        
+
                         MessageBox.Show("Pomyślnie dodano pracownika");
                     }
                 }

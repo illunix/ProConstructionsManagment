@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProConstructionsManagment.Core.Entities;
-using ProConstructionsManagment.Core.Interfaces;
 
 namespace ProConstructionsManagment.Infrastructure.Data
 {

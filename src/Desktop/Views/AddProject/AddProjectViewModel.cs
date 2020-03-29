@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using ProConstructionsManagment.Desktop.Commands;
+﻿using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
+using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ProConstructionsManagment.Desktop.Views.AddProject
 {
@@ -92,7 +92,7 @@ namespace ProConstructionsManagment.Desktop.Views.AddProject
             get => _projectAgreement;
             set => Set(ref _projectAgreement, value);
         }
-        
+
         private ValidationResult BuildValidation()
         {
             if (string.IsNullOrWhiteSpace(ProjectName) || string.IsNullOrWhiteSpace(ProjectStartDate) ||
@@ -106,7 +106,7 @@ namespace ProConstructionsManagment.Desktop.Views.AddProject
         {
             Clients = await _clientsService.GetAllClients();
         }
-        
+
         public ICommand AddProjectCommand => new AsyncRelayCommand(AddProject);
 
         private async Task AddProject()

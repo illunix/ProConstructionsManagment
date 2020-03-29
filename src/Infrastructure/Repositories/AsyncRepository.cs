@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using ProConstructionsManagment.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using ProConstructionsManagment.Core.Interfaces;
 
 namespace ProConstructionsManagment.Infrastructure.Data.Repositories
 {
@@ -17,7 +16,6 @@ namespace ProConstructionsManagment.Infrastructure.Data.Repositories
         {
             _context = context;
         }
-        
 
         public async Task<IReadOnlyCollection<TEntity>> GetAll()
         {
@@ -46,9 +44,9 @@ namespace ProConstructionsManagment.Infrastructure.Data.Repositories
         {
             var entityToUpdate = await _context.Set<TEntity>()
                 .FindAsync(entityId);
-            
+
             _context.Entry(entityToUpdate).CurrentValues.SetValues(entity);
-            
+
             await _context.SaveChangesAsync();
 
             return entity;

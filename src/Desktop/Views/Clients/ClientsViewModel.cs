@@ -1,17 +1,15 @@
-﻿using System;
+﻿using ProConstructionsManagment.Desktop.Commands;
+using ProConstructionsManagment.Desktop.Enums;
+using ProConstructionsManagment.Desktop.Managers;
+using ProConstructionsManagment.Desktop.Messages;
+using ProConstructionsManagment.Desktop.Services;
+using ProConstructionsManagment.Desktop.Views.Base;
+using Serilog;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Helpers;
-using ProConstructionsManagment.Desktop.Commands;
-using ProConstructionsManagment.Desktop.Enums;
-using ProConstructionsManagment.Desktop.Managers;
-using ProConstructionsManagment.Desktop.Messages;
-using ProConstructionsManagment.Desktop.Models;
-using ProConstructionsManagment.Desktop.Services;
-using ProConstructionsManagment.Desktop.Views.Base;
-using Serilog;
 
 namespace ProConstructionsManagment.Desktop.Views.Clients
 {

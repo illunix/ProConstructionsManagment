@@ -1,5 +1,5 @@
-﻿using System;
-using GalaSoft.MvvmLight.Messaging;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 
 namespace ProConstructionsManagment.Desktop.Services
 {

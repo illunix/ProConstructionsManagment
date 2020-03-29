@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using ProConstructionsManagment.Desktop.Commands;
+﻿using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ProConstructionsManagment.Desktop.Views.Employee
 {
@@ -123,7 +123,7 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
 
                 return new ValidationResult(false);
             }
-            
+
             return new ValidationResult(true);
         }
 

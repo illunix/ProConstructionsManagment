@@ -96,7 +96,6 @@
                             VerticalAlignment="Top"
                             Height="35"
                             Width="254" />
-
             </StackPanel>
 
             <StackPanel Grid.Row="1"
@@ -173,7 +172,6 @@
                           FontSize="14"
                           IsChecked="{Binding EmployeeReadDrawings}" />
             </StackPanel>
-
 
             <StackPanel Grid.Row="1"
                         Grid.Column="0"

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows;
-using ProConstructionsManagment.Desktop.Managers;
+﻿using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
+using System;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProConstructionsManagment.Desktop.Views.Main
 {

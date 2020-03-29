@@ -1,10 +1,10 @@
 ﻿<UserControl x:Class="ProConstructionsManagment.Desktop.Views.AddClient.AddClient"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.AddClient"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="808.6" d:DesignWidth="1259"
              d:DataContext="{d:DesignInstance local:AddClientViewModel}">
         <Grid>
@@ -19,7 +19,6 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
-
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0"
                         Grid.Column="0"
@@ -101,7 +100,6 @@
                     Foreground="Black"
                     Background="{x:Null}"
                     SelectionBrush="{x:Null}" />
-
             </StackPanel>
 
             <StackPanel Grid.Row="1"
@@ -198,13 +196,12 @@
             <StackPanel Grid.Row="0"
                         Grid.Column="0"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
 
             <StackPanel Grid.Row="0"
                         Grid.Column="1"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
-
+                        VerticalAlignment="Center" />
 
             <StackPanel Grid.Row="1"
                         Grid.Column="0"

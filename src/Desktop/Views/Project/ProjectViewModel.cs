@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using ProConstructionsManagment.Desktop.Commands;
+﻿using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ProConstructionsManagment.Desktop.Views.Project
 {
@@ -33,7 +33,7 @@ namespace ProConstructionsManagment.Desktop.Views.Project
         private string _projectName;
         private string _projectPlaceOfPerformance;
         private int _projectRequiredNumberOfEmployees;
-        private string _projectStartDate;        
+        private string _projectStartDate;
 
         public ProjectViewModel(IProjectsService projectsService, IClientsService clientsService, IShellManager shellManager,
             IMessengerService messengerService)
@@ -51,7 +51,7 @@ namespace ProConstructionsManagment.Desktop.Views.Project
             get => _projectId;
             set => Set(ref _projectId, value);
         }
-        
+
         public string ProjectName
         {
             get => _projectName;
@@ -93,6 +93,7 @@ namespace ProConstructionsManagment.Desktop.Views.Project
             get => _clientId;
             set => Set(ref _clientId, value);
         }
+
         public int Client
         {
             get => _client;
@@ -104,7 +105,7 @@ namespace ProConstructionsManagment.Desktop.Views.Project
             get => _clients;
             set => Set(ref _clients, value);
         }
-        
+
         private ValidationResult BuildValidation()
         {
             if (string.IsNullOrWhiteSpace(ProjectName) || string.IsNullOrWhiteSpace(ProjectStartDate) ||
@@ -116,7 +117,7 @@ namespace ProConstructionsManagment.Desktop.Views.Project
 
             return new ValidationResult(true);
         }
-        
+
         public async Task Initialize()
         {
             try
@@ -151,7 +152,7 @@ namespace ProConstructionsManagment.Desktop.Views.Project
                 _shellManager.SetLoadingData(false);
             }
         }
-        
+
         public ICommand UpdateProjectCommand => new AsyncRelayCommand(UpdateProject);
 
         private async Task UpdateProject()

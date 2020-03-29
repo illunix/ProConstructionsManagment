@@ -1,10 +1,10 @@
-﻿using System;
-using System.Net.Http;
-using Autofac;
+﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Modules;
+using System;
+using System.Net.Http;
 
 namespace ProConstructionsManagment.Desktop.Views.Base
 {

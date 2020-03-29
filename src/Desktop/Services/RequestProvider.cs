@@ -22,7 +22,7 @@ namespace ProConstructionsManagment.Desktop.Services
 
             var serialized = await response.Content.ReadAsStringAsync();
 
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
             var result = await Task.Run(() =>
                 JsonSerializer.Deserialize<TResult>(serialized, options));

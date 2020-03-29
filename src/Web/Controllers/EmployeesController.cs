@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProConstructionsManagment.Core.Entities;
 using ProConstructionsManagment.Core.Enums;
 using ProConstructionsManagment.Core.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace ProConstructionsManagment.Web.Controllers
 {

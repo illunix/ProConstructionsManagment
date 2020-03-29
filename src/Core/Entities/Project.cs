@@ -1,7 +1,7 @@
-﻿using System;
-using ProConstructionsManagment.Core.Entities.Base;
+﻿using ProConstructionsManagment.Core.Entities.Base;
 using ProConstructionsManagment.Core.Enums;
 using ProConstructionsManagment.Core.Interfaces;
+using System;
 
 namespace ProConstructionsManagment.Core.Entities
 {

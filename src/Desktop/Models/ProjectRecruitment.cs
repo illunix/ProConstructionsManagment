@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProConstructionsManagment.Desktop.Models.Base;
+﻿using ProConstructionsManagment.Desktop.Models.Base;
 
 namespace ProConstructionsManagment.Desktop.Models
 {

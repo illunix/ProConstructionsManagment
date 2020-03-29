@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ProConstructionsManagment.Core.Entities;
-using ProConstructionsManagment.Core.Enums;
 using ProConstructionsManagment.Core.Interfaces;
 using ProConstructionsManagment.Infrastructure.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProConstructionsManagment.Infrastructure.Repositories
 {

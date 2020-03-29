@@ -33,7 +33,7 @@ namespace ProConstructionsManagment.Desktop.Commands
 
                 SetCanExecute(false);
 
-                await _action((T) val);
+                await _action((T)val);
             }
             finally
             {

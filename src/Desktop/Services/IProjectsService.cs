@@ -1,7 +1,6 @@
-﻿using System;
+﻿using ProConstructionsManagment.Desktop.Models;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using ProConstructionsManagment.Desktop.Models;
 
 namespace ProConstructionsManagment.Desktop.Services
 {
@@ -12,7 +11,7 @@ namespace ProConstructionsManagment.Desktop.Services
         Task<ObservableCollection<Project>> GetStartedProjects();
 
         Task<int> GetStartedProjectsCount();
-        
+
         Task<ObservableCollection<Project>> GetProjectsForStart();
 
         Task<ObservableCollection<Project>> GetProjectsForSettlement();

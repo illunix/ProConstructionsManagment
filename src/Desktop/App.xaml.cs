@@ -1,9 +1,9 @@
-﻿using System.Windows;
-using ProConstructionsManagment.Desktop.Views.Base;
+﻿using ProConstructionsManagment.Desktop.Views.Base;
 using ProConstructionsManagment.Desktop.Views.Shell;
 using Serilog;
 using Serilog.Core;
 using Serilog.Formatting.Raw;
+using System.Windows;
 
 namespace Desktop
 {

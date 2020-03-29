@@ -80,7 +80,6 @@
                     Foreground="Black"
                     Background="{x:Null}"
                     SelectionBrush="{x:Null}" />
-
             </StackPanel>
 
             <StackPanel Grid.Row="1"
@@ -124,7 +123,6 @@
                     Foreground="Black"
                     Background="{x:Null}" />
             </StackPanel>
-
         </Grid>
         <Grid Height="200">
             <Grid.ColumnDefinitions>
@@ -153,7 +151,6 @@
                         Grid.Column="1"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center" />
-
 
             <StackPanel Grid.Row="1"
                         Grid.Column="0"

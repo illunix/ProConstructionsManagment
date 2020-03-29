@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ProConstructionsManagment.Core.Entities.Base;
-using ProConstructionsManagment.Core.Enums;
-using ProConstructionsManagment.Core.Interfaces;
+﻿using ProConstructionsManagment.Core.Entities.Base;
+using System;
 
 namespace ProConstructionsManagment.Core.Entities
 {

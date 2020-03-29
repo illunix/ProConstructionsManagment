@@ -1,10 +1,10 @@
 ﻿<UserControl x:Class="ProConstructionsManagment.Desktop.Views.AddProjectRecruitment.AddProjectRecruitment"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ProConstructionsManagment.Desktop.Views.AddProjectRecruitment"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="808.6" d:DesignWidth="1259">
     <Grid>
         <Grid VerticalAlignment="Top"
@@ -60,7 +60,6 @@
                     Foreground="Black"
                     Background="{x:Null}"
                     SelectionBrush="{x:Null}" />
-
             </StackPanel>
         </Grid>
         <Grid Height="200">
@@ -79,13 +78,12 @@
             <StackPanel Grid.Row="0"
                         Grid.Column="0"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
 
             <StackPanel Grid.Row="0"
                         Grid.Column="1"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center" />
-
 
             <StackPanel Grid.Row="1"
                         Grid.Column="0"

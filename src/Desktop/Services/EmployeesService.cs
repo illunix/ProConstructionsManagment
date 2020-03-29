@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ProConstructionsManagment.Desktop.Configuration;
+using ProConstructionsManagment.Desktop.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using ProConstructionsManagment.Desktop.Configuration;
-using ProConstructionsManagment.Desktop.Models;
 
 namespace ProConstructionsManagment.Desktop.Services
 {
@@ -50,7 +50,6 @@ namespace ProConstructionsManagment.Desktop.Services
 
             return json.Data;
         }
-
 
         public async Task<Employee> GetEmployeeById(string employeeId)
         {

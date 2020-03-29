@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ProConstructionsManagment.Desktop.Configuration;
+using ProConstructionsManagment.Desktop.Models;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using ProConstructionsManagment.Desktop.Configuration;
-using ProConstructionsManagment.Desktop.Models;
 
 namespace ProConstructionsManagment.Desktop.Services
 {
@@ -130,11 +129,9 @@ namespace ProConstructionsManagment.Desktop.Services
             catch
             {
                 return new RequestResult<ProjectCost>(false);
-
             }
 
             return new RequestResult<ProjectCost>(true);
-
         }
 
         public async Task<ObservableCollection<ProjectCost>> GetProjectCosts(string projectId)
@@ -145,7 +142,6 @@ namespace ProConstructionsManagment.Desktop.Services
 
             return json.Data;
         }
-
 
         public async Task<ProjectRecruitment> GetProjectRecruitmentById(string projectRecruitmentId)
         {
@@ -176,7 +172,6 @@ namespace ProConstructionsManagment.Desktop.Services
             catch
             {
                 return new RequestResult<ProjectRecruitment>(false);
-
             }
 
             return new RequestResult<ProjectRecruitment>(true);
@@ -193,7 +188,6 @@ namespace ProConstructionsManagment.Desktop.Services
             catch
             {
                 return new RequestResult<ProjectRecruitment>(false);
-
             }
 
             return new RequestResult<ProjectRecruitment>(true);

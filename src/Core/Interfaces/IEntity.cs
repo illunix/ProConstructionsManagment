@@ -1,5 +1,4 @@
 ﻿using System;
-using ProConstructionsManagment.Core.Entities;
 
 namespace ProConstructionsManagment.Core.Interfaces
 {

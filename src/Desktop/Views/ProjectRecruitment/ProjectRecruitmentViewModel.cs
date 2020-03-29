@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using ProConstructionsManagment.Desktop.Commands;
+﻿using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Models;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ProConstructionsManagment.Desktop.Views.ProjectRecruitment
 {
@@ -30,6 +28,7 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectRecruitment
         private int _requiredNumberOfEmployees;
 
         private ObservableCollection<Models.Position> _positions;
+
         public ProjectRecruitmentViewModel(IProjectsService projectsService, IPositionsService positionsService, IMessengerService messengerService, IShellManager shellManager)
         {
             _projectsService = projectsService;
@@ -46,7 +45,6 @@ namespace ProConstructionsManagment.Desktop.Views.ProjectRecruitment
             get => _projectId;
             set => Set(ref _projectId, value);
         }
-
 
         public string ProjectRecruitmentId
         {

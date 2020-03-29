@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace ProConstructionsManagment.Infrastructure.Errors
 {
@@ -35,11 +35,12 @@ namespace ProConstructionsManagment.Infrastructure.Errors
             var result = JsonSerializer.Serialize(new
             {
                 error_type = ex.GetType().Name,
-                code, error_message = ex.Message
+                code,
+                error_message = ex.Message
             });
 
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int) code;
+            context.Response.StatusCode = (int)code;
 
             return context.Response.WriteAsync(result);
         }

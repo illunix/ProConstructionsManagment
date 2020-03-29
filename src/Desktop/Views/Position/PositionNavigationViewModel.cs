@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using ProConstructionsManagment.Desktop.Commands;
+﻿using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Enums;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
+using System;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ProConstructionsManagment.Desktop.Views.Position
 {
@@ -27,7 +24,7 @@ namespace ProConstructionsManagment.Desktop.Views.Position
         {
             _positionsService = positionsService;
             _messengerService = messengerService;
-            _shellManager = shellManager;   
+            _shellManager = shellManager;
 
             messengerService.Register<PositionIdMessage>(this, msg => PositionId = msg.PositionId);
         }
@@ -71,6 +68,7 @@ namespace ProConstructionsManagment.Desktop.Views.Position
                             _shellManager.SetLoadingData(false);
                         }
                         break;
+
                     case MessageBoxResult.No:
                         return;
                 }

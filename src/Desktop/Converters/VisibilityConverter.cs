@@ -19,7 +19,7 @@ namespace ProConstructionsManagment.Desktop.Converters
             if (targetType != typeof(Visibility))
                 throw new InvalidOperationException("The target must be a Visibility.");
 
-            var bValue = (bool?) value;
+            var bValue = (bool?)value;
 
             if (parameter != null && parameter as string == Invert)
                 bValue = !bValue;

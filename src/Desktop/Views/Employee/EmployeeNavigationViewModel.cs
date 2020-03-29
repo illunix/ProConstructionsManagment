@@ -1,14 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using ProConstructionsManagment.Desktop.Commands;
+﻿using ProConstructionsManagment.Desktop.Commands;
 using ProConstructionsManagment.Desktop.Enums;
 using ProConstructionsManagment.Desktop.Managers;
 using ProConstructionsManagment.Desktop.Messages;
 using ProConstructionsManagment.Desktop.Services;
 using ProConstructionsManagment.Desktop.Views.Base;
 using Serilog;
+using System;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ProConstructionsManagment.Desktop.Views.Employee
 {
@@ -79,6 +79,7 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
                             MessageBox.Show("Pomyślnie zatrudniono pracownika");
                         }
                         break;
+
                     case MessageBoxResult.No:
                         return;
                 }
@@ -95,6 +96,5 @@ namespace ProConstructionsManagment.Desktop.Views.Employee
                 _shellManager.SetLoadingData(false);
             }
         }
-
     }
 }

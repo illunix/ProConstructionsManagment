@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using ProConstructionsManagment.Desktop.Models;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using ProConstructionsManagment.Desktop.Models;
 
 namespace ProConstructionsManagment.Desktop.Services
 {

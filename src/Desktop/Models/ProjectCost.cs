@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ProConstructionsManagment.Desktop.Models.Base;
+﻿using ProConstructionsManagment.Desktop.Models.Base;
+using System;
 
 namespace ProConstructionsManagment.Desktop.Models
 {

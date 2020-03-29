@@ -1,5 +1,5 @@
-﻿using System;
-using ProConstructionsManagment.Core.Interfaces;
+﻿using ProConstructionsManagment.Core.Interfaces;
+using System;
 
 namespace ProConstructionsManagment.Core.Entities.Base
 {

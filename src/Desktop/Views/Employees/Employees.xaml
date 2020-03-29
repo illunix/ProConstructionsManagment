@@ -108,12 +108,12 @@
         <!--
         <TextBox materialDesign:HintAssist.Hint="Szukaj"
                  HorizontalAlignment="Left"
-                 Height="24" 
+                 Height="24"
                  Margin="785,25,0,0"
-                 TextWrapping="Wrap" 
-                 Text="{Binding FilterEmployee}" 
-                 VerticalAlignment="Top" 
-                 Width="210"/> 
+                 TextWrapping="Wrap"
+                 Text="{Binding FilterEmployee}"
+                 VerticalAlignment="Top"
+                 Width="210" />
         -->
     </Grid>
 </UserControl>
